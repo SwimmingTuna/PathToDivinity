@@ -443,7 +443,7 @@
 [10Nov2024 00:23:40.342] [main/DEBUG] [net.minecraftforge.fml.javafmlmod.FMLJavaModLanguageProvider/LOADING]: Loading FMLModContainer from classloader cpw.mods.modlauncher.TransformingClassLoader@59bbb974 - got cpw.mods.cl.ModuleClassLoader@41f35f7c
 [10Nov2024 00:23:40.342] [main/DEBUG] [net.minecraftforge.fml.javafmlmod.FMLModContainer/LOADING]: Creating FMLModContainer instance for net.minecraftforge.common.ForgeMod
 [10Nov2024 00:23:40.345] [main/DEBUG] [net.minecraftforge.fml.javafmlmod.FMLJavaModLanguageProvider/LOADING]: Loading FMLModContainer from classloader cpw.mods.modlauncher.TransformingClassLoader@59bbb974 - got cpw.mods.cl.ModuleClassLoader@41f35f7c
-[10Nov2024 00:23:40.345] [main/DEBUG] [net.minecraftforge.fml.javafmlmod.FMLModContainer/LOADING]: Creating FMLModContainer instance for net.swimmingtuna.lotm.LOTM
+[10Nov2024 00:23:40.345] [main/DEBUG] [net.minecraftforge.fml.javafmlmod.FMLModContainer/LOADING]: Creating FMLModContainer instance for net.swimmingtuna.pathtodivinity.PTD
 [10Nov2024 00:23:40.387] [modloading-worker-0/DEBUG] [mixin/]: Mixing pehkui.compat.ScaleTypeMixin from pehkui.mixins.json into virtuoel.pehkui.api.ScaleType
 [10Nov2024 00:23:40.445] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Attempting to inject @EventBusSubscriber classes into the eventbus for mixinextras
 [10Nov2024 00:23:40.471] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.config.ConfigTracker/CONFIG]: Config file pehkui-client.toml for pehkui tracking
@@ -544,21 +544,21 @@ java.lang.IllegalAccessException: class io.netty.util.internal.PlatformDependent
 [10Nov2024 00:23:40.892] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.minecraftforge.client.ClientForgeMod to MOD
 [10Nov2024 00:23:41.123] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.config.ConfigTracker/CONFIG]: Config file lotm-client.toml for lotm tracking
 [10Nov2024 00:23:41.129] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Attempting to inject @EventBusSubscriber classes into the eventbus for lotm
-[10Nov2024 00:23:41.130] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.lotm.caps.BeyonderHolder to FORGE
-[10Nov2024 00:23:41.131] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.lotm.datagen.DataGenerators to MOD
-[10Nov2024 00:23:41.134] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.lotm.events.AttributeAdder to MOD
-[10Nov2024 00:23:41.138] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.lotm.events.ClientEvents to FORGE
-[10Nov2024 00:23:41.139] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.lotm.events.ClientEvents2 to MOD
-[10Nov2024 00:23:41.175] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.lotm.events.ClientEventsEntity to MOD
-[10Nov2024 00:23:41.179] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.lotm.events.KeyClientEvents$ClientForgeEvents to FORGE
-[10Nov2024 00:23:41.185] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.lotm.events.KeyClientEvents$ClientModBusEvents to MOD
-[10Nov2024 00:23:41.194] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.lotm.events.ModEvents$SpawnHandler to FORGE
-[10Nov2024 00:23:41.214] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.lotm.events.ModEvents to FORGE
-[10Nov2024 00:23:41.249] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.lotm.events.ServerEvents to FORGE
-[10Nov2024 00:23:41.254] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.lotm.item.BeyonderAbilities.Spectator.FinishedItems.ProphesizeDemise to FORGE
-[10Nov2024 00:23:41.263] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.lotm.LOTM$ClientModEvents to MOD
-[10Nov2024 00:23:41.269] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.lotm.LOTM to MOD
-[10Nov2024 00:23:41.272] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.lotm.spirituality.AttributeAdder to MOD
+[10Nov2024 00:23:41.130] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.pathtodivinity.caps.BeyonderHolder to FORGE
+[10Nov2024 00:23:41.131] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.pathtodivinity.datagen.DataGenerators to MOD
+[10Nov2024 00:23:41.134] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.pathtodivinity.events.AttributeAdder to MOD
+[10Nov2024 00:23:41.138] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.pathtodivinity.events.ClientEvents to FORGE
+[10Nov2024 00:23:41.139] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.pathtodivinity.events.ClientEvents2 to MOD
+[10Nov2024 00:23:41.175] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.pathtodivinity.events.ClientEventsEntity to MOD
+[10Nov2024 00:23:41.179] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.pathtodivinity.events.KeyClientEvents$ClientForgeEvents to FORGE
+[10Nov2024 00:23:41.185] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.pathtodivinity.events.KeyClientEvents$ClientModBusEvents to MOD
+[10Nov2024 00:23:41.194] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.pathtodivinity.events.ModEvents$SpawnHandler to FORGE
+[10Nov2024 00:23:41.214] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.pathtodivinity.events.ModEvents to FORGE
+[10Nov2024 00:23:41.249] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.pathtodivinity.events.ServerEvents to FORGE
+[10Nov2024 00:23:41.254] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.pathtodivinity.item.BeyonderAbilities.Spectator.FinishedItems.ProphesizeDemise to FORGE
+[10Nov2024 00:23:41.263] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.pathtodivinity.PTD$ClientModEvents to MOD
+[10Nov2024 00:23:41.269] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.pathtodivinity.PTD to MOD
+[10Nov2024 00:23:41.272] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.swimmingtuna.pathtodivinity.spirituality.AttributeAdder to MOD
 [10Nov2024 00:23:41.306] [main/DEBUG] [net.minecraftforge.registries.ObjectHolderRegistry/REGISTRIES]: Processing ObjectHolder annotations
 [10Nov2024 00:23:41.348] [main/DEBUG] [net.minecraftforge.registries.ObjectHolderRegistry/REGISTRIES]: Found 4248 ObjectHolder annotations
 [10Nov2024 00:23:41.349] [main/DEBUG] [net.minecraftforge.common.capabilities.CapabilityManager/CAPABILITIES]: Attempting to automatically register: Lnet/minecraftforge/energy/IEnergyStorage;

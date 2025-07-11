@@ -14,6 +14,12 @@ base {
     archivesName = mod_id
 }
 
+mixin {
+    add sourceSets.main, "${mod_id}.refmap.json"
+    config "${mod_id}.mixins.json"
+    debug.export = true
+}
+
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
@@ -67,9 +73,6 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
     maven {
-        url = "https://jitpack.io"
-    }
-    maven {
         name = 'GeckoLib'
         url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
         content {
@@ -81,6 +84,12 @@ repositories {
         name = "SmartBrainLib (SBL) Maven Repo"
         url = "https://dl.cloudsmith.io/public/tslat/sbl/maven/"
     }
+    maven {
+        url = "https://jitpack.io"
+    }
+    maven {
+        url = "https://cursemaven.com"
+    }
 }
 
 dependencies {
@@ -88,12 +97,89 @@ dependencies {
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.4.1")) {
         jarJar.ranged(it, "[0.4.1,)")
     }
+    //Pehkui
     implementation fg.deobf("com.github.Virtuoel:Pehkui:${pehkui_version}")
-    implementation fg.deobf("net.tslat.smartbrainlib:SmartBrainLib-forge-${project.minecraft_version}:${project.sbl_version}")
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    //Gecko Lib
     implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
-    implementation("com.eliotlash.mclib:mclib:20")
+    //Brain Lib
+    implementation fg.deobf("net.tslat.smartbrainlib:SmartBrainLib-forge-${project.minecraft_version}:${project.sbl_version}")
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    //LOTMC
+    implementation fg.deobf("curse.maven:lord-of-the-mysteries-craft-1095869:6754439")
+    //Ice and Fire
+    implementation fg.deobf("curse.maven:iceandfire-264231:5633453")
+    //Legendary Monsters
+    implementation fg.deobf("curse.maven:legendarymonsters-944035:6649937")
+    //Arphex
+    implementation fg.deobf("curse.maven:arphex-967672:6701116")
+    //Alex's Caves
+    implementation fg.deobf("curse.maven:alexscaves-924854:5848216")
+    //Terramity
+    implementation fg.deobf("curse.maven:terramity-1084134:6054971")
+    //Mutant Monsters
+    implementation fg.deobf("curse.maven:mutantmonsters-852665:5107399")
+    //Macabre
+    implementation fg.deobf("curse.maven:macabre-933001:6442644")
+    //Illage and Spillage
+    implementation fg.deobf("curse.maven:illageandspillage-1079714:6156035")
+    //Marium's Soulslike Weaponry
+    implementation fg.deobf("curse.maven:soulsweapons-632066:6509913")
+    //Cataclysm
+    implementation fg.deobf("curse.maven:cataclysm-551586:6729683")
+    //Mowzie's Mobs
+    implementation fg.deobf("curse.maven:mowziesmobs-250498:6586086")
+    //Aquamirae
+    implementation fg.deobf("curse.maven:aquamirae-536254:4616373")
+    //Born in Chaos
+    implementation fg.deobf("curse.maven:borninchaos-686437:6474407")
+    //EEEAB's Mobs
+    implementation fg.deobf("curse.maven:eeeabmobs-921600:6095880")
+    //Curios API
+    implementation fg.deobf("curse.maven:curiosapi-309927:6418456")
+    //Better Combat
+    implementation fg.deobf("curse.maven:bettercombat-639842:5625757")
+    //Obscure API
+    implementation fg.deobf("curse.maven:obscureapi-638417:4616364")
+    //Lionfish API
+    implementation fg.deobf("curse.maven:lionfishapi-1001614:5922047")
+    //AttributeFix
+    implementation fg.deobf("curse.maven:attributefix-280510:4911084")
+    //PuzzlesLib
+    implementation fg.deobf("curse.maven:puzzleslib-495476:6387081")
+    //Patchouli
+    implementation fg.deobf("curse.maven:patchouli-306770:6164575")
+    //Caelus API
+    implementation fg.deobf("curse.maven:caelusapi-308989:5281700")
+    //Cloth Config
+    implementation fg.deobf("curse.maven:clothconfig-348521:5729105")
+    //Citadel
+    implementation fg.deobf("curse.maven:citadel-331936:6702068")
+    //Projectile Damage
+    implementation fg.deobf("curse.maven:projectiledamage-643780:4597791")
+    //Player Animator
+    implementation fg.deobf("curse.maven:bettercombat-658587:4587214")
+    //Terrablender
+    implementation fg.deobf("curse.maven:terrablender-563928:6290448")
+    //Celestisynth
+    implementation fg.deobf("curse.maven:celestisynth-872712:5776930")
+    //Zoniex
+    implementation fg.deobf("curse.maven:zoniex-1171163:6276844")
+    //Sleepy Hollows
+    implementation fg.deobf("curse.maven:sleepyhollows-1124163:5897782")
+    //Alex's Mobs
+    implementation fg.deobf("curse.maven:alexsmobs-426558:5698791")
+    //Deeper Darker
+    implementation fg.deobf("curse.maven:deeperdarker-659011:5906086")
+    //Aether
+    implementation fg.deobf("curse.maven:aether-255308:6134920")
+    //Bosses of Mass Destruction
+    implementation fg.deobf("curse.maven:bomd-438365:4993305")
+    //Awakened Bosses
+    implementation fg.deobf("curse.maven:awakenedbosses-548167:5057212")
+    //AME's Mobs Renew
+    implementation fg.deobf("curse.maven:amemobs-1080087:5773065")
+
 }
 
 tasks.named('processResources', ProcessResources).configure {
@@ -111,14 +197,7 @@ tasks.named('processResources', ProcessResources).configure {
     }
 }
 
-mixin {
-    add sourceSets.main, "lotm.refmap.json"
 
-    config 'lotm.mixins.json'
-
-    debug.export = true
-
-}
 
 tasks.named('jar', Jar).configure {
     manifest {
@@ -144,13 +223,11 @@ publishing {
     }
     repositories {
         maven {
-
-            url "file://${project.projectDir}/mcmodsrepo"
+            url = "https://jitpack.io"
         }
         maven {
-            url
+            url = "https://cursemaven.com"
         }
-
     }
 }
 

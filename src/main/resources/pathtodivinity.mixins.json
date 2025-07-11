@@ -1,0 +1,39 @@
+{
+  "required": true,
+  "package": "net.swimmingtuna.pathtodivinity.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "pathtodivinity.refmap.json",
+  "mixins": [
+    "SurfaceRuleManagerMixin",
+    "Celestisynth.AquafloraBlastOffAttackMixin",
+    "Celestisynth.AquafloraFlowersAwayAttackMixin",
+    "Celestisynth.AquafloraPetalPiercesAttackMixin",
+    "Celestisynth.AquafloraSlashFrenzyAttackMixin",
+    "Celestisynth.BreezebreakerDualGalestormAttackMixin",
+    "Celestisynth.BreezebreakerGalestormAttackMixin",
+    "Celestisynth.BreezebreakerMixin",
+    "Celestisynth.BreezebreakerWheelAttackMixin",
+    "Celestisynth.BreezebreakerWindRoarAttackMixin",
+    "Celestisynth.CelestisynthItemTiersMixin",
+    "Celestisynth.CrescentiaBarrageAttackMixin",
+    "Celestisynth.CrescentiaDragonMixin",
+    "Celestisynth.FrostboundDanceAttackMixin",
+    "Celestisynth.FrostboundShardMixin",
+    "Celestisynth.KeresRendMixin",
+    "Celestisynth.PoltergeistBarrierCallAttackMixin",
+    "Celestisynth.PoltergeistCosmicSteelAttackMixin",
+    "Celestisynth.PoltergeistWardDamageMixin",
+    "Celestisynth.SkillCastBreezebreakerTornadoMixin",
+    "Celestisynth.SkillCastFrostboundIceCastMixin",
+    "Celestisynth.SkillCastKeresSlashWaveMixin",
+    "Celestisynth.SkillCastKeresSmashAttackMixin",
+    "Celestisynth.SolarisBombDamageMixin",
+    "Celestisynth.SolarisFullRoundAttackMixin",
+    "Celestisynth.SolarisSoulDashAttackMixin"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}
