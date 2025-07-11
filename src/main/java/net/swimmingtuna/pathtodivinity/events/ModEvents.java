@@ -58,7 +58,6 @@ import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.satisfy.sleepy_hollows.core.entity.Horseman;
 import net.soulsweaponry.registry.EntityRegistry;
 import net.swimmingtuna.lotm.LOTM;
 import net.swimmingtuna.lotm.beyonder.api.BeyonderClass;
@@ -72,9 +71,9 @@ import net.zoniex.init.ZoniexModEntities;
 
 import java.util.Map;
 
+
 @Mod.EventBusSubscriber(modid = PTD.MOD_ID)
 public class ModEvents {
-
     public static void commandEvent(CommandEvent event) {
         if (event.getParseResults().getContext().getSource().getEntity() instanceof ServerPlayer player) {
             CompoundTag tag = player.getPersistentData();
@@ -113,7 +112,7 @@ public class ModEvents {
                 living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 40, 1, false, false));
             } else if (living.getType() == ArphexModEntities.CENTIPEDE_EVICTOR.get()) {
                 living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 40, 1, false, false));
-            } else if (living instanceof Horseman) {
+            } else if (living.getName().getString().equalsIgnoreCase("horseman")) {
                 living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 40, 1, false, false));
             } else if (living.getType() == AwakenedBossesModEntities.HEROBRINE.get()) {
                 living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 40, 1, false, false));
@@ -131,8 +130,7 @@ public class ModEvents {
                 if (living.tickCount % 3 == 0) {
                     for (Mob mob : living.level().getEntitiesOfClass(Mob.class, living.getBoundingBox().inflate(25))) {
                         if (!(mob instanceof PlayerMobEntity)) {
-                            BeyonderUtil.makeAlly(mob, living);
-                            BeyonderUtil.makeAlly(living, mob);
+                            BeyonderUtil.forceAlly(mob, living);
                         }
                     }
                 }
@@ -213,7 +211,7 @@ public class ModEvents {
         Entity entitySource = source.getEntity();
         Entity directSource = source.getDirectEntity();
         Entity damageDealer = source.getEntity();
-        if (damageDealer == null) {
+        if (damageDealer == null && source.getDirectEntity() != null) {
             damageDealer = source.getDirectEntity();
         }
         if (!event.getEntity().level().isClientSide()) {
@@ -223,7 +221,12 @@ public class ModEvents {
                     event.setAmount(event.getAmount() * 0.6f);
                 }
             }
-
+            if (damageDealer != null) {
+                if (damageDealer.getPersistentData().getDouble("PTDDamageMultiplier") > 0) {
+                    event.setAmount((float) (event.getAmount() * damageDealer.getPersistentData().getDouble("PTDDamageMultiplier")));
+                    LOTM.LOGGER.info("DAMAGE MULTIPLIED FROM " + damageDealer.getName().getString() + " BY " + damageDealer.getPersistentData().getDouble("PTDDamageMultiplier"));
+                }
+            }
         }
     }
 
@@ -486,7 +489,7 @@ public class ModEvents {
                 } else if (type == ArphexModEntities.SPIDER_PROWLER.get()) {
                     multiplyMaxHealth(living, 4.0);
                     multiplyDamage(living, 2.5);
-                } else if (living instanceof Horseman) {
+                } else if (living.getName().getString().equalsIgnoreCase("horseman")) {
                     multiplyMaxHealth(living, 1.5);
                     BeyonderUtil.setPathway(living, BeyonderClassInit.SPECTATOR.get());
                     BeyonderUtil.setSequence(living, 6);

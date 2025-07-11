@@ -206,6 +206,7 @@ public class PTDUtil {
 
     }
 
+
     public static void removeBannedItem(LivingEntity living) {
         // Check armor slots
         for (EquipmentSlot slot : EquipmentSlot.values()) {

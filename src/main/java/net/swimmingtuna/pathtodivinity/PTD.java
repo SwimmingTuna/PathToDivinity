@@ -3,8 +3,6 @@ package net.swimmingtuna.pathtodivinity;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
-import net.swimmingtuna.lotm.init.CommandInit;
-import net.swimmingtuna.lotm.init.GameRuleInit;
 import org.slf4j.Logger;
 
 import java.util.function.Supplier;

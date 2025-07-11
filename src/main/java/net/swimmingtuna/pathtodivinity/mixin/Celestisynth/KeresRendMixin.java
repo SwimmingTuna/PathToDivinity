@@ -28,7 +28,7 @@ public class KeresRendMixin {
     @Shadow
     public float baseDamage;
 
-    @SuppressWarnings("Deprecated")
+    @SuppressWarnings("deprecation")
     @Inject(method = "checkWalls", at = @At("HEAD"), cancellable = true)
     private void amplifyDamage(net.minecraft.world.phys.AABB pArea, CallbackInfo ci) {
         KeresRend self = (KeresRend)(Object)this;

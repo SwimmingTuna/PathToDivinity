@@ -15,8 +15,8 @@ base {
 }
 
 mixin {
-    add sourceSets.main, "${mod_id}.refmap.json"
-    config "${mod_id}.mixins.json"
+    add sourceSets.main, "pathtodivinity.refmap.json"
+    config "pathtodivinity.mixins.json"
     debug.export = true
 }
 
@@ -163,22 +163,21 @@ dependencies {
     implementation fg.deobf("curse.maven:terrablender-563928:6290448")
     //Celestisynth
     implementation fg.deobf("curse.maven:celestisynth-872712:5776930")
-    //Zoniex
-    implementation fg.deobf("curse.maven:zoniex-1171163:6276844")
-    //Sleepy Hollows
-    implementation fg.deobf("curse.maven:sleepyhollows-1124163:5897782")
-    //Alex's Mobs
-    implementation fg.deobf("curse.maven:alexsmobs-426558:5698791")
-    //Deeper Darker
-    implementation fg.deobf("curse.maven:deeperdarker-659011:5906086")
-    //Aether
-    implementation fg.deobf("curse.maven:aether-255308:6134920")
     //Bosses of Mass Destruction
     implementation fg.deobf("curse.maven:bomd-438365:4993305")
     //Awakened Bosses
     implementation fg.deobf("curse.maven:awakenedbosses-548167:5057212")
     //AME's Mobs Renew
     implementation fg.deobf("curse.maven:amemobs-1080087:5773065")
+    //Deeper Darker
+    implementation fg.deobf("curse.maven:deeperdarker-659011:5906086")
+    //Aether
+    implementation fg.deobf("curse.maven:aether-255308:6134920")
+    //Zoniex
+    implementation fg.deobf("curse.maven:zoniex-1171163:6276844")
+    //Alex's Mobs
+    implementation fg.deobf("curse.maven:alexsmobs-426558:5698791")
+
 
 }
 
