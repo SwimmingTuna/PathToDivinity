@@ -97,6 +97,7 @@ public class ModEvents {
             if (combatTimer >= 1) {
                 tag.putInt("PTDCombatTimer", combatTimer - 1);
             }
+
             int tickCount = living.tickCount;
             if (tickCount % 400 == 0 && living instanceof Player) {
                 ItemStack mainHand = living.getMainHandItem();
@@ -108,6 +109,72 @@ public class ModEvents {
                 }
                 PTDUtil.removeBannedItem(living);
             }
+
+            if (living.tickCount % 40 == 0) {
+                if (living.getType() == EntityRegistry.CHAOS_MONARCH.get()) {
+                    BeyonderUtil.setPathway(living, BeyonderClassInit.MONSTER.get());
+                    BeyonderUtil.setSequence(living, 7);
+                } else if (living.getType() == EntityRegistry.DRAUGR_BOSS.get()) {
+                    BeyonderUtil.setPathway(living, BeyonderClassInit.SPECTATOR.get());
+                    BeyonderUtil.setSequence(living, 7);
+                } else if (living.getType() == EntityRegistry.NIGHT_SHADE.get()) {
+                    BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
+                    BeyonderUtil.setSequence(living, 7);
+                } else if (living.getType() == ModEntities.Cloud_golem.get()) {
+                    BeyonderUtil.setPathway(living, BeyonderClassInit.SPECTATOR.get());
+                    BeyonderUtil.setSequence(living, 6);
+                } else if (living.getType() == com.github.L_Ender.cataclysm.init.ModEntities.THE_LEVIATHAN.get()) {
+                    BeyonderUtil.setPathway(living, BeyonderClassInit.MONSTER.get());
+                    BeyonderUtil.setSequence(living, 6);
+                } else if (living.getName().getString().equalsIgnoreCase("horseman")) {
+                    BeyonderUtil.setPathway(living, BeyonderClassInit.SPECTATOR.get());
+                    BeyonderUtil.setSequence(living, 6);
+                } else if (living.getType() == EntityInit.NAMELESS_GUARDIAN.get()) {
+                    BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
+                    BeyonderUtil.setSequence(living, 6);
+                } else if (living.getName().getString().toLowerCase().contains("vessel")) {
+                    BeyonderUtil.setPathway(living, BeyonderClassInit.MONSTER.get());
+                    BeyonderUtil.setSequence(living, 5);
+                } else if (living.getType() == EntityRegistry.MOONKNIGHT.get()) {
+                    BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
+                    BeyonderUtil.setSequence(living, 5);
+                } else if (living.getType() == BornInChaosV1ModEntities.LORD_PUMPKINHEAD.get()) {
+                    BeyonderUtil.setPathway(living, BeyonderClassInit.SPECTATOR.get());
+                    BeyonderUtil.setSequence(living, 5);
+                } else if (living.getType() == TerramityModEntities.TRIAL_GUARDIAN.get()) {
+                    BeyonderUtil.setPathway(living, BeyonderClassInit.SAILOR.get());
+                    BeyonderUtil.setSequence(living, 5);
+                } else if (living.getType() == EntityRegistry.DAY_STALKER.get()) {
+                    if (living.tickCount % 4 == 0) {
+                        for (Mob mob : living.level().getEntitiesOfClass(Mob.class, living.getBoundingBox().inflate(25))) {
+                            if (mob.getType() == EntityRegistry.NIGHT_PROWLER.get()) {
+                                BeyonderUtil.forceAlly(mob, living);
+                            }
+                        }
+                    }
+                    BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
+                    BeyonderUtil.setSequence(living, 4);
+                } else if (living.getType() == EntityRegistry.NIGHT_PROWLER.get()) {
+                    if (living.tickCount % 4 == 0) {
+                        for (Mob mob : living.level().getEntitiesOfClass(Mob.class, living.getBoundingBox().inflate(25))) {
+                            if (mob.getType() == EntityRegistry.DAY_STALKER.get()) {
+                                BeyonderUtil.forceAlly(mob, living);
+                            }
+                        }
+                    }
+                    BeyonderUtil.setPathway(living, BeyonderClassInit.SAILOR.get());
+                    BeyonderUtil.setSequence(living, 4);
+                } else if (living.getType() == TerramityModEntities.ULTRA_SNIFFER.get()) {
+                    BeyonderClass[] pathways = {BeyonderClassInit.MONSTER.get(), BeyonderClassInit.WARRIOR.get(), BeyonderClassInit.SPECTATOR.get(), BeyonderClassInit.SAILOR.get()};
+                    BeyonderClass randomPathway = pathways[living.getRandom().nextInt(pathways.length)];
+                    BeyonderUtil.setPathway(living, randomPathway);
+                    BeyonderUtil.setSequence(living, 3);
+                }
+            }
+
+
+
+
             if (living.getType() == ArphexModEntities.ROACH_RIVERSPAWN.get()) {
                 living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 40, 1, false, false));
             } else if (living.getType() == ArphexModEntities.CENTIPEDE_EVICTOR.get()) {
@@ -156,6 +223,10 @@ public class ModEvents {
                 for (Player player : ultraSniffer.level().getEntitiesOfClass(Player.class, ultraSniffer.getBoundingBox().inflate(50))) {
                     ultraSniffer.setTarget(player);
                 }
+                float health = ultraSniffer.getHealth();
+                if (Float.isNaN(health) || health < 0.0F) {
+                    ultraSniffer.setHealth(0.0F);
+                }
             }
             if (living instanceof SuperSnifferEntity superSnifferEntity && superSnifferEntity.getTarget() == null) {
                 for (Player player : superSnifferEntity.level().getEntitiesOfClass(Player.class, superSnifferEntity.getBoundingBox().inflate(50))) {
@@ -186,8 +257,6 @@ public class ModEvents {
         LivingEntity living = event.getEntity();
         CompoundTag tag = living.getPersistentData();
         BeyonderClass pathway = BeyonderUtil.getPathway(living);
-        int sequence = BeyonderUtil.getSequence(living);
-        int tickCount = living.tickCount;
         if (!living.level().isClientSide() && (event.getOriginalTarget() instanceof Player || event.getNewTarget() instanceof Player) && event.getOriginalTarget() != null && event.getNewTarget() != null) {
             if (PTDUtil.isBeyonderEntity(living.getScoreboardName()) && living instanceof Mob mob) {
                 float newTargetHealth = event.getNewTarget().getHealth();
@@ -198,7 +267,6 @@ public class ModEvents {
                     event.setCanceled(true);
                 }
             }
-            //spiritWorldChangeTargetEvent(event);
         }
     }
 
@@ -532,18 +600,18 @@ public class ModEvents {
 
                     // Sequence 2
                 } else if (type == TerramityModEntities.SUPER_SNIFFER.get()) {
-                    multiplyMaxHealth(living, 4.0);
+                    multiplyMaxHealth(living, 6.0);
                     multiplyDamage(living, 1.2);
                 } else if (type == EntityRegistry.DAY_STALKER.get()) {
-                    multiplyMaxHealth(living, 4.0);
+                    multiplyMaxHealth(living, 7.0);
                     BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
                     BeyonderUtil.setSequence(living, 4);
                 } else if (type == EntityRegistry.NIGHT_PROWLER.get()) {
-                    multiplyMaxHealth(living, 4.0);
+                    multiplyMaxHealth(living, 7.0);
                     BeyonderUtil.setPathway(living, BeyonderClassInit.SAILOR.get());
                     BeyonderUtil.setSequence(living, 4);
                 } else if (type == TerramityModEntities.GUNDALF.get()) {
-                    multiplyMaxHealth(living, 4.0);
+                    multiplyMaxHealth(living, 6.0);
                     multiplyDamage(living, 1.5);
 
                     // Sequence 1
