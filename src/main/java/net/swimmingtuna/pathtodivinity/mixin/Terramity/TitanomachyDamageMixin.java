@@ -1,0 +1,20 @@
+package net.swimmingtuna.pathtodivinity.mixin.Terramity;
+
+import net.mcreator.terramity.procedures.DavyJonesRightclickedProcedure;
+import net.mcreator.terramity.procedures.TitanomachyRightclickedProcedure;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.Constant;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
+
+
+@Mixin(value = TitanomachyRightclickedProcedure.class, remap = false)
+public class TitanomachyDamageMixin {
+
+    @ModifyConstant(
+            method = "execute(Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;Lnet/minecraft/world/item/ItemStack;)V",
+            constant = @Constant(doubleValue = 0.55D)
+    )
+    private static double modifyDamage(double damage) {
+        return damage * 2.0D;
+    }
+}

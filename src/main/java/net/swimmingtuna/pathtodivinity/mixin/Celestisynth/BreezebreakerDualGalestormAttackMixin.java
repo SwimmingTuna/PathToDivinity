@@ -35,7 +35,7 @@ public class BreezebreakerDualGalestormAttackMixin {
 
             for (Entity entity : entities) {
                 if (entity instanceof LivingEntity target && target != player && target.isAlive() && !player.isAlliedTo(target)) {
-                    self.attributeDependentAttack(player, target, self.getStack(), 6.75F, AttackHurtTypes.RAPID);
+                    self.attributeDependentAttack(player, target, self.getStack(), 3.05F, AttackHurtTypes.RAPID);
                     target.addEffect(CSWeaponUtil.nonVisiblePotionEffect(MobEffects.WEAKNESS, 40, 1));
                     self.sendExpandingParticles(level, ParticleTypes.POOF, target.blockPosition().above(), 15, 0.0F);
                 }

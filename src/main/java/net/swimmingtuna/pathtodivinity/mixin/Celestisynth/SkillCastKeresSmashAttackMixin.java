@@ -4,24 +4,25 @@ import com.aqutheseal.celestisynth.api.item.AttackHurtTypes;
 import com.aqutheseal.celestisynth.common.entity.base.CSEffectEntity;
 import com.aqutheseal.celestisynth.common.entity.helper.CSVisualType;
 import com.aqutheseal.celestisynth.common.entity.skillcast.SkillCastKeresSmash;
+import com.aqutheseal.celestisynth.common.registry.CSMobEffects;
+import com.aqutheseal.celestisynth.common.registry.CSParticleTypes;
 import com.aqutheseal.celestisynth.common.registry.CSSoundEvents;
 import com.aqutheseal.celestisynth.common.registry.CSVisualTypes;
-import com.aqutheseal.celestisynth.common.registry.CSParticleTypes;
-import com.aqutheseal.celestisynth.common.registry.CSMobEffects;
 import com.aqutheseal.celestisynth.util.ParticleUtil;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.phys.AABB;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
 import java.util.List;
 import java.util.UUID;
 import java.util.function.Predicate;
@@ -38,18 +39,18 @@ public class SkillCastKeresSmashAttackMixin {
         if (player != null) {
             if (self.tickCount == 1) {
                 CSEffectEntity.createInstance(player, (Entity)null, (CSVisualType)CSVisualTypes.KERES_PULSE.get(), 0.0, 0.35, 0.0);
-                self.doSmashAttack(player, 3.0, 0.0, 3.5F);
+                self.doSmashAttack(player, 3.0, 0.0, 2.5F);
             }
 
             if (self.tickCount == 6) {
                 CSEffectEntity.createInstance(player, (Entity)null, (CSVisualType)CSVisualTypes.KERES_PULSE_1.get(), 0.0, -0.35, 0.0);
-                self.doSmashAttack(player, 5.0, 1.5, 0.8F * 4.5F);
+                self.doSmashAttack(player, 5.0, 1.5, 0.8F * 2.5F);
             }
 
             if (self.tickCount == 11) {
                 CSEffectEntity.createInstance(player, (Entity)null, (CSVisualType)CSVisualTypes.KERES_PULSE_2.get(), 0.0, -1.45, 0.0);
                 self.remove(Entity.RemovalReason.DISCARDED);
-                self.doSmashAttack(player, 7.0, 3.0, 0.6F * 4.5F);
+                self.doSmashAttack(player, 7.0, 3.0, 0.6F * 2.5F);
             }
         }
 
@@ -74,8 +75,8 @@ public class SkillCastKeresSmashAttackMixin {
 
         for (LivingEntity target : targets) {
             target.addEffect(new MobEffectInstance((MobEffect) CSMobEffects.CURSEBANE.get(), 100, 1));
-            self.initiateAbilityAttack(owner, target, self.damage * multiplier, AttackHurtTypes.RAPID);
-            owner.heal(self.damage * multiplier / 4.0F);
+            self.initiateAbilityAttack(owner, target, (self.damage * multiplier) * 0.4f, AttackHurtTypes.RAPID);
+            owner.heal(self.damage * multiplier / 8.0F);
         }
 
         ci.cancel();

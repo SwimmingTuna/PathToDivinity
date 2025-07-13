@@ -5,11 +5,11 @@ import com.aqutheseal.celestisynth.common.attack.frostbound.FrostboundDanceAttac
 import com.aqutheseal.celestisynth.common.capabilities.CSEntityCapabilityProvider;
 import com.aqutheseal.celestisynth.common.entity.base.CSEffectEntity;
 import com.aqutheseal.celestisynth.common.entity.helper.CSVisualType;
+import com.aqutheseal.celestisynth.common.registry.CSParticleTypes;
 import com.aqutheseal.celestisynth.common.registry.CSSoundEvents;
 import com.aqutheseal.celestisynth.common.registry.CSVisualTypes;
-import com.aqutheseal.celestisynth.common.registry.CSParticleTypes;
-import com.aqutheseal.celestisynth.util.SkinUtil;
 import com.aqutheseal.celestisynth.util.ParticleUtil;
+import com.aqutheseal.celestisynth.util.SkinUtil;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleType;
@@ -25,8 +25,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.Iterator;
 
 @Mixin(value = FrostboundDanceAttack.class, remap = false)
 public class FrostboundDanceAttackMixin {
@@ -68,7 +66,7 @@ public class FrostboundDanceAttackMixin {
         for (Entity entity : self.iterateEntities(level, self.createAABB(groundPos.offset((int) xOffset, 1, (int) zOffset), 6.0, 3.0))) {
             if (entity instanceof LivingEntity target) {
                 if (entity != player) {
-                    self.attributeDependentAttack(player, target, self.getStack(), 5.5F, AttackHurtTypes.REGULAR);
+                    self.attributeDependentAttack(player, target, self.getStack(), 1.5F, AttackHurtTypes.REGULAR);
                     CSEntityCapabilityProvider.get(target).ifPresent((data) -> {
                         data.setFrostbound(100);
                     });
@@ -125,7 +123,7 @@ public class FrostboundDanceAttackMixin {
         for (Entity entity : self.iterateEntities(level, self.createAABB(player.blockPosition().offset((int) xOffset, 1, (int) zOffset), slashIndex == 2 ? 8.0 : 5.0, 3.0))) {
             if (entity instanceof LivingEntity target) {
                 if (entity != player) {
-                    self.attributeDependentAttack(player, target, self.getStack(), 5.5F, AttackHurtTypes.REGULAR);
+                    self.attributeDependentAttack(player, target, self.getStack(), 1.5F, AttackHurtTypes.REGULAR);
                     CSEntityCapabilityProvider.get(target).ifPresent((data) -> {
                         data.setFrostbound(60);
                     });

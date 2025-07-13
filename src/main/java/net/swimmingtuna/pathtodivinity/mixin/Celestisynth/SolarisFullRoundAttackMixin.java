@@ -3,7 +3,6 @@ package net.swimmingtuna.pathtodivinity.mixin.Celestisynth;
 import com.aqutheseal.celestisynth.api.item.AttackHurtTypes;
 import com.aqutheseal.celestisynth.common.attack.solaris.SolarisFullRoundAttack;
 import com.aqutheseal.celestisynth.common.entity.base.CSEffectEntity;
-import com.aqutheseal.celestisynth.common.entity.helper.CSVisualType;
 import com.aqutheseal.celestisynth.common.registry.CSSoundEvents;
 import com.aqutheseal.celestisynth.common.registry.CSVisualTypes;
 import com.aqutheseal.celestisynth.util.ParticleUtil;
@@ -11,7 +10,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
@@ -22,7 +20,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import software.bernie.geckolib.core.object.Color;
 
-import java.util.Iterator;
 import java.util.List;
 
 @Mixin(value = SolarisFullRoundAttack.class, remap = false)
@@ -55,7 +52,7 @@ public class SolarisFullRoundAttackMixin {
             List<LivingEntity> entities = self.level.getEntitiesOfClass(LivingEntity.class, new AABB(blockPosForAttack.offset(-range, -range, -range), blockPosForAttack.offset(range, range, range)));
             for (LivingEntity target : entities) {
                 if (target != self.player && !self.player.isAlliedTo(target) && target.isAlive()) {
-                    self.attributeDependentAttack(self.player, target, self.stack, 0.23F * 3.5F, AttackHurtTypes.RAPID_NO_KB);
+                    self.attributeDependentAttack(self.player, target, self.stack, 0.23F * 2.0F, AttackHurtTypes.RAPID_NO_KB);
                     target.setSecondsOnFire(5);
                 }
             }

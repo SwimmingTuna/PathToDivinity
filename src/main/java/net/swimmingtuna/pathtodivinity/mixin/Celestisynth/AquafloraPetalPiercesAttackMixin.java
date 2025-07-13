@@ -39,7 +39,7 @@ public class AquafloraPetalPiercesAttackMixin {
             for (Entity entityBatch : entities) {
                 if (entityBatch instanceof LivingEntity target) {
                     if (target != player && target.isAlive() && !player.isAlliedTo(target)) {
-                        self.attributeDependentAttack(player, target, self.getStack(), 0.575F, AttackHurtTypes.RAPID_NO_KB);
+                        self.attributeDependentAttack(player, target, self.getStack(), 0.275F, AttackHurtTypes.RAPID_NO_KB);
                         self.createHitEffect(self.getStack(), level, player, target);
                     }
                 }

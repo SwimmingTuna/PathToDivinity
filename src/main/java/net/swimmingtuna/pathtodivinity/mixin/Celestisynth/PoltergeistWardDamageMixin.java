@@ -3,8 +3,6 @@ package net.swimmingtuna.pathtodivinity.mixin.Celestisynth;
 import com.aqutheseal.celestisynth.common.entity.skillcast.SkillCastPoltergeistWard;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
-import net.swimmingtuna.lotm.LOTM;
-import net.swimmingtuna.pathtodivinity.PTD;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;

@@ -19,7 +19,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,7 +43,7 @@ public class SkillCastBreezebreakerTornadoMixin {
         for (Entity entityBatch : entities) {
             if (entityBatch instanceof LivingEntity target) {
                 if (target != ownerPlayer && target.isAlive()) {
-                    self.initiateAbilityAttack(ownerPlayer, target, self.damage * 9F, AttackHurtTypes.RAPID_NO_KB);
+                    self.initiateAbilityAttack(ownerPlayer, target, self.damage * 5.5F, AttackHurtTypes.RAPID_NO_KB);
                     target.setDeltaMovement(0.0, 0.05, 0.0);
                 }
             }

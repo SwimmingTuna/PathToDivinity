@@ -1,7 +1,6 @@
 package net.swimmingtuna.pathtodivinity.mixin.Celestisynth;
 
 import com.aqutheseal.celestisynth.common.entity.projectile.FrostboundShard;
-import com.aqutheseal.celestisynth.common.entity.skillcast.SkillCastPoltergeistWard;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;

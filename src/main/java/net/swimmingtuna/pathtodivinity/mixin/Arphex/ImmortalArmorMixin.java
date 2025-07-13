@@ -1,6 +1,5 @@
 package net.swimmingtuna.pathtodivinity.mixin.Arphex;
 
-import net.arphex.item.ImmortalItem;
 import net.minecraft.world.item.ArmorItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,7 +11,11 @@ public class ImmortalArmorMixin {
 
     @Inject(method = "getDefenseForType", at = @At("HEAD"), cancellable = true)
     private void modifyDefenseForType(ArmorItem.Type type, CallbackInfoReturnable<Integer> cir) {
-        int[] newValues = {7, 14, 12, 7};
+        int[] newValues = {7, 12, 14, 7};
         cir.setReturnValue(newValues[type.getSlot().getIndex()]);
+    }
+    @Inject(method = "getToughness", at = @At("HEAD"), cancellable = true)
+    private void modifyToughnessForType(CallbackInfoReturnable<Float> cir) {
+        cir.setReturnValue(5.0f);
     }
 }

@@ -27,7 +27,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -71,7 +70,7 @@ public class CrescentiaDragonMixin {
             for (Entity entityBatch : entities) {
                 if (entityBatch instanceof LivingEntity target) {
                     if (target != self.getOwner() && target.isAlive()) {
-                        self.initiateAbilityAttack(playerOwner, target, this.damage * 4.0f, AttackHurtTypes.RAPID_NO_KB);
+                        self.initiateAbilityAttack(playerOwner, target, this.damage * 2.0f, AttackHurtTypes.RAPID_NO_KB);
                         target.addEffect(CSWeaponUtil.nonVisiblePotionEffect(MobEffects.MOVEMENT_SLOWDOWN, 20, 2));
                     }
                 }

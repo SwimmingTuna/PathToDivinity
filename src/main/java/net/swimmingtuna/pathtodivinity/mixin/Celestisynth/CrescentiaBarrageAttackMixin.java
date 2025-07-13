@@ -24,6 +24,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import software.bernie.geckolib.core.object.Color;
+
 import java.util.List;
 
 @Mixin(value = CrescentiaBarrageAttack.class, remap = false)
@@ -56,7 +57,7 @@ public class CrescentiaBarrageAttackMixin {
             for (Entity entityBatch : entities) {
                 if (entityBatch instanceof LivingEntity target) {
                     if (target != player && target.isAlive() && !player.isAlliedTo(target) && target.distanceToSqr(player) <= range * range) {
-                        self.attributeDependentAttack(player, target, self.getStack(), 0.55F, AttackHurtTypes.RAPID);
+                        self.attributeDependentAttack(player, target, self.getStack(), 0.25F, AttackHurtTypes.RAPID);
                         target.addEffect(CSWeaponUtil.nonVisiblePotionEffect(MobEffects.MOVEMENT_SLOWDOWN, 20, 2));
                     }
                 }

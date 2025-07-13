@@ -1,11 +1,11 @@
 package net.swimmingtuna.pathtodivinity.mixin.Celestisynth;
 
-import com.aqutheseal.celestisynth.common.entity.skillcast.SkillCastKeresSlashWave;
-import com.aqutheseal.celestisynth.common.entity.projectile.KeresSlash;
 import com.aqutheseal.celestisynth.common.entity.projectile.KeresShadow;
-import com.aqutheseal.celestisynth.common.registry.CSSoundEvents;
+import com.aqutheseal.celestisynth.common.entity.projectile.KeresSlash;
+import com.aqutheseal.celestisynth.common.entity.skillcast.SkillCastKeresSlashWave;
 import com.aqutheseal.celestisynth.common.registry.CSEntityTypes;
 import com.aqutheseal.celestisynth.common.registry.CSParticleTypes;
+import com.aqutheseal.celestisynth.common.registry.CSSoundEvents;
 import com.aqutheseal.celestisynth.util.ParticleUtil;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.sounds.SoundEvent;
@@ -61,7 +61,7 @@ public class SkillCastKeresSlashWaveMixin {
                     Vector3f shootAngle = vec3.toVector3f().rotate(quaternionf);
                     slash.setRoll((float) (self.random.nextGaussian() * 360.0));
                     slash.moveTo(self.position().add(0.0, 1.0, 0.0));
-                    slash.baseDamage = self.damage * 4.0F;
+                    slash.baseDamage = self.damage * 1.1F;
                     slash.shoot((double) shootAngle.x, (double) shootAngle.y, (double) shootAngle.z, 6.0F, 0.0F);
                     self.level().addFreshEntity(slash);
                 }
@@ -71,7 +71,7 @@ public class SkillCastKeresSlashWaveMixin {
                     shadow.moveTo(player.getX(), shadow.getY() - 1.0, player.getZ());
                     shadow.shootFromRotation(player, (float)(self.level().random.nextGaussian() * 180.0), -15.0F - (float)(self.level().random.nextDouble() * 75.0), 0.0F, 1.0F, 0.0F);
                     shadow.setDeltaMovement(self.level().random.nextGaussian() * 0.25, 0.4, self.level().random.nextGaussian() * 0.25);
-                    shadow.damage = self.damage * 1.5F;
+                    shadow.damage = self.damage * 1.0F;
                     self.level().addFreshEntity(shadow);
                 }
             }

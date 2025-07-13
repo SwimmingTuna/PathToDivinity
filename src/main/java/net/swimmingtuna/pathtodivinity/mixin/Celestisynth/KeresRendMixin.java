@@ -16,7 +16,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Iterator;
 import java.util.List;
 
 @Mixin(value = KeresRend.class, remap = false)
@@ -77,18 +76,17 @@ public class KeresRendMixin {
             Entity entity = self.getOwner();
             if (entity instanceof LivingEntity owner) {
                 target.addEffect(new MobEffectInstance((MobEffect) CSMobEffects.CURSEBANE.get(), 250, 7));
-                float damageCalculation = (this.baseDamage + target.getMaxHealth() * this.baseDamage * 0.015F); // Amplify damage by 5
+                float damageCalculation = (this.baseDamage + target.getMaxHealth() * this.baseDamage * 0.008F); // Amplify damage by 5
                 owner.heal(damageCalculation / 8.0F);
                 if (owner instanceof Player player) {
                     player.getFoodData().setFoodLevel(player.getFoodData().getFoodLevel() + (int) ((double) damageCalculation * 0.025));
                     player.getFoodData().setSaturation(player.getFoodData().getSaturationLevel() + (float) ((int) ((double) damageCalculation * 0.025)));
                 }
 
-                ((com.aqutheseal.celestisynth.api.item.CSWeaponUtil) self).initiateAbilityAttack(owner, target, damageCalculation, CSDamageSources.instance(level).erasure(owner), AttackHurtTypes.RAPID_NO_KB);
+                self.initiateAbilityAttack(owner, target, damageCalculation, CSDamageSources.instance(level).erasure(owner), AttackHurtTypes.RAPID_NO_KB);
                 if (target.isDeadOrDying()) {
                     target.remove(Entity.RemovalReason.KILLED);
                 }
-
                 this.finishedAttacking.add(target);
             }
         }

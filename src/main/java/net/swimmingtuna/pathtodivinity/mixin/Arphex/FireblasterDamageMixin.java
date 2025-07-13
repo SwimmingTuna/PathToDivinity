@@ -1,14 +1,9 @@
 package net.swimmingtuna.pathtodivinity.mixin.Arphex;
 
-import com.aetherteam.aether.mixin.mixins.common.accessor.LevelAccessor;
 import net.arphex.procedures.FireblasterRightClickProcedure;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(FireblasterRightClickProcedure.class)
 public class FireblasterDamageMixin {

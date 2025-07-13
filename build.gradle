@@ -179,6 +179,10 @@ dependencies {
     implementation fg.deobf("curse.maven:alexsmobs-426558:5698791")
     //Jade
     implementation fg.deobf("curse.maven:jade-324717:6271651")
+    //JEI
+    implementation fg.deobf("curse.maven:alexsmobs-238222:6600311")
+    //JER
+    implementation fg.deobf("curse.maven:jade-240630:5057220")
 
 }
 

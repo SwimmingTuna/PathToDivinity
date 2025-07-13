@@ -23,7 +23,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import software.bernie.geckolib.core.object.Color;
 
-import java.util.Iterator;
 import java.util.List;
 
 @Mixin(value = SolarisSoulDashAttack.class, remap = false)
@@ -57,7 +56,7 @@ public class SolarisSoulDashAttackMixin {
             for (LivingEntity target : entities) {
                 if (target != self.player && !self.player.isAlliedTo(target) && target.isAlive()) {
                     // Increased damage from 0.18F to 0.18F * 6.0F = 1.08F
-                    self.attributeDependentAttack(self.player, target, self.stack, 0.18F * 3.8F, AttackHurtTypes.RAPID_NO_KB);
+                    self.attributeDependentAttack(self.player, target, self.stack, 0.18F * 2.2F, AttackHurtTypes.RAPID_NO_KB);
                     target.setSecondsOnFire(5);
                 }
             }

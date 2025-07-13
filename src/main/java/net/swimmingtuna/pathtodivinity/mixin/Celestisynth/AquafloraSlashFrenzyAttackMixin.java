@@ -76,7 +76,7 @@ public class AquafloraSlashFrenzyAttackMixin {
             player.setDeltaMovement(((double)toPos.getX() - player.getX()) * 0.25, ((double)toPos.getY() - player.getY()) * 0.25, ((double)toPos.getZ() - player.getZ()) * 0.25);
             CSEffectEntity.createInstance(player, target, CSVisualTypes.AQUAFLORA_ASSASSINATE.get(), 0.0, -0.2, 0.0);
             player.playSound(CSSoundEvents.WIND_STRIKE.get(), 0.15F, 0.5F);
-            float dualWieldMultiplier = self.checkDualWield(player, AquafloraItem.class) ? 2.5F : 3.5F;
+            float dualWieldMultiplier = self.checkDualWield(player, AquafloraItem.class) ? 1.5F : 2.5F;
             self.attributeDependentAttack(player, target, self.getStack(), dualWieldMultiplier, AttackHurtTypes.RAPID_NO_KB);
             AquafloraSlashFrenzyAttack.createAquafloraFirework(self.getStack(), level, player, target.getX(), target.getY() + 1.0, target.getZ());
         }

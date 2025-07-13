@@ -1,0 +1,22 @@
+package net.swimmingtuna.pathtodivinity.mixin.Terramity;
+
+import net.mcreator.terramity.item.AxeOfUnholyDivinityItem;
+import net.mcreator.terramity.procedures.AxeOfUnholyDivinityRightclickedProcedure;
+import net.mcreator.terramity.procedures.HeroSwordProjectileProcedure;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.Constant;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
+
+
+@Mixin(value = AxeOfUnholyDivinityRightclickedProcedure.class, remap = false)
+public class AxeOfUnholyDivinityDamageMixin {
+
+    @ModifyConstant(
+            method = "execute(Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;Lnet/minecraft/world/item/ItemStack;)V",
+            constant = @Constant(intValue = 80),
+            remap = false
+    )
+    private static int modifyEffectDuration(int original) {
+        return 140;
+    }
+}

@@ -9,13 +9,11 @@ import com.github.L_Ender.cataclysm.init.ModItems;
 import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
 import com.github.alexthe666.alexsmobs.entity.AMEntityRegistry;
 import com.github.alexthe666.iceandfire.entity.IafEntityRegistry;
-import com.github.alexthe666.iceandfire.item.IafItemRegistry;
 import com.kyanite.deeperdarker.content.DDEntities;
 import com.obscuria.aquamirae.registry.AquamiraeEntities;
 import com.yellowbrossproductions.illageandspillage.init.ModEntityTypes;
 import fuzs.mutantmonsters.init.ModRegistry;
 import net.arphex.init.ArphexModEntities;
-import net.arphex.init.ArphexModItems;
 import net.cursedwarrior.awakenedbosses.init.AwakenedBossesModEntities;
 import net.mcreator.animatedmobsmod.init.AnimatedmobsmodModEntities;
 import net.mcreator.borninchaosv.init.BornInChaosV1ModEntities;
@@ -194,52 +192,7 @@ public class PTDUtil {
     public static boolean isBannableItem(ItemStack itemStack) {
         return
 
-                itemStack.is(MacabreModItems.ABHORRENT_SWORD.get()) ||
-                        itemStack.is(MacabreModItems.ABHORRENT_AXE.get()) ||
-                        itemStack.is(MacabreModItems.BLOOD_CLOT_ARMOR_HELMET.get()) ||
-                        itemStack.is(MacabreModItems.BLOOD_CLOT_ARMOR_CHESTPLATE.get()) ||
-                        itemStack.is(MacabreModItems.BLOOD_CLOT_ARMOR_LEGGINGS.get()) ||
-                        itemStack.is(MacabreModItems.BLOOD_CLOT_ARMOR_BOOTS.get()) ||
-                        itemStack.is(MacabreModItems.SYMBIOTIC_ARMOR_HELMET.get()) ||
-                        itemStack.is(MacabreModItems.SYMBIOTIC_ARMOR_CHESTPLATE.get()) ||
-                        itemStack.is(MacabreModItems.SYMBIOTIC_ARMOR_LEGGINGS.get()) ||
-                        itemStack.is(MacabreModItems.SYMBIOTIC_ARMOR_BOOTS.get()) ||
-                        itemStack.is(MacabreModItems.PLASMA_ARMOR_HELMET.get()) ||
-                        itemStack.is(MacabreModItems.PLASMA_ARMOR_CHESTPLATE.get()) ||
-                        itemStack.is(MacabreModItems.PLASMA_ARMOR_LEGGINGS.get()) ||
-                        itemStack.is(MacabreModItems.PLASMA_ARMOR_BOOTS.get()) ||
-                        itemStack.is(MacabreModItems.FERRUM_ARMOR_HELMET.get()) ||
-                        itemStack.is(MacabreModItems.FERRUM_ARMOR_CHESTPLATE.get()) ||
-                        itemStack.is(MacabreModItems.FERRUM_ARMOR_LEGGINGS.get()) ||
-                        itemStack.is(MacabreModItems.FERRUM_ARMOR_BOOTS.get()) ||
-                        itemStack.is(MacabreModItems.ABHORRENT_ARMOR_HELMET.get()) ||
-                        itemStack.is(MacabreModItems.ABHORRENT_ARMOR_CHESTPLATE.get()) ||
-                        itemStack.is(MacabreModItems.ABHORRENT_ARMOR_LEGGINGS.get()) ||
-                        itemStack.is(MacabreModItems.ABHORRENT_ARMOR_BOOTS.get()) ||
-                        itemStack.is(MacabreModItems.BAAL_ARMOR_HELMET.get()) ||
-                        itemStack.is(MacabreModItems.BAAL_ARMOR_CHESTPLATE.get()) ||
-                        itemStack.is(MacabreModItems.BAAL_ARMOR_LEGGINGS.get()) ||
-                        itemStack.is(MacabreModItems.BAAL_ARMOR_BOOTS.get()) ||
-                        itemStack.is(MacabreModItems.GOMORIA_ARMOR_HELMET.get()) ||
-                        itemStack.is(MacabreModItems.GOMORIA_ARMOR_CHESTPLATE.get()) ||
-                        itemStack.is(MacabreModItems.GOMORIA_ARMOR_LEGGINGS.get()) ||
-                        itemStack.is(MacabreModItems.GOMORIA_ARMOR_BOOTS.get()) ||
-                        itemStack.is(MacabreModItems.MORPHEGOR_ARMOR_HELMET.get()) ||
-                        itemStack.is(MacabreModItems.MORPHEGOR_ARMOR_CHESTPLATE.get()) ||
-                        itemStack.is(MacabreModItems.MORPHEGOR_ARMOR_LEGGINGS.get()) ||
-                        itemStack.is(MacabreModItems.MORPHEGOR_ARMOR_BOOTS.get()) ||
-                        itemStack.is(MacabreModItems.GARGAMAW_ARMOR_HELMET.get()) ||
-                        itemStack.is(MacabreModItems.GARGAMAW_ARMOR_CHESTPLATE.get()) ||
-                        itemStack.is(MacabreModItems.GARGAMAW_ARMOR_LEGGINGS.get()) ||
-                        itemStack.is(MacabreModItems.GARGAMAW_ARMOR_BOOTS.get()) ||
-                        itemStack.is(MacabreModItems.VALAMON_ARMOR_HELMET.get()) ||
-                        itemStack.is(MacabreModItems.VALAMON_ARMOR_CHESTPLATE.get()) ||
-                        itemStack.is(MacabreModItems.VALAMON_ARMOR_LEGGINGS.get()) ||
-                        itemStack.is(MacabreModItems.VALAMON_ARMOR_BOOTS.get()) ||
-
-
-                        itemStack.is(TerramityModItems.ULTRA_SNIFFER_FUR.get()) ||
-
+                itemStack.is(TerramityModItems.ULTRA_SNIFFER_FUR.get()) ||
                         itemStack.is(TerramityModItems.POKER_CHIP_BRACELETS.get()) ||
                         itemStack.is(TerramityModItems.FATEFUL_COIN.get()) ||
                         itemStack.is(TerramityModItems.LUCKY_DICE.get()) ||
