@@ -8,6 +8,11 @@ import com.curseforge.macabre.entity.GutsEntity;
 import com.curseforge.macabre.entity.PierceProjectileEntity;
 import com.curseforge.macabre.init.MacabreModEntities;
 import com.eeeab.eeeabsmobs.sever.init.EntityInit;
+import com.github.L_Ender.cataclysm.entity.effect.Sandstorm_Entity;
+import com.github.L_Ender.cataclysm.entity.effect.Void_Vortex_Entity;
+import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
+import com.github.L_Ender.cataclysm.entity.projectile.*;
+import com.github.L_Ender.cataclysm.init.ModItems;
 import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
 import com.github.alexthe666.alexsmobs.entity.AMEntityRegistry;
 import com.github.alexthe666.iceandfire.entity.EntityDragonBase;
@@ -20,6 +25,7 @@ import fuzs.mutantmonsters.init.ModRegistry;
 import net.arphex.init.ArphexModEntities;
 import net.cursedwarrior.awakenedbosses.init.AwakenedBossesModEntities;
 import net.mcreator.animatedmobsmod.init.AnimatedmobsmodModEntities;
+import net.mcreator.borninchaosv.entity.PumpkinPistolProjectileEntity;
 import net.mcreator.borninchaosv.init.BornInChaosV1ModEntities;
 import net.mcreator.terramity.entity.SuperSnifferEntity;
 import net.mcreator.terramity.entity.UltraSnifferEntity;
@@ -218,8 +224,8 @@ public class ModEvents {
                     multiplyDamage(living, 1.3);
                 }
 
-                    // Sequence 7
-                 else if (type == ACEntityRegistry.FORSAKEN.get()) {
+                // Sequence 7
+                else if (type == ACEntityRegistry.FORSAKEN.get()) {
                     multiplyDamage(living, 1.5);
                 } else if (type == ArphexModEntities.SPIDER_SNATCHER.get()) {
                     multiplyDamage(living, 1.5);
@@ -363,8 +369,6 @@ public class ModEvents {
             }
 
 
-
-
             if (type == ArphexModEntities.ROACH_RIVERSPAWN.get()) {
                 living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 40, 1, false, false));
             } else if (type == ArphexModEntities.CENTIPEDE_EVICTOR.get()) {
@@ -391,10 +395,16 @@ public class ModEvents {
                         }
                     }
                 }
-            }  else if (type == EntityRegistry.DAY_STALKER.get()) {
+            } else if (type == EntityRegistry.DAY_STALKER.get()) {
                 living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 40, 2, false, false));
-            }  else if (type == EntityRegistry.NIGHT_PROWLER.get()) {
+            } else if (type == EntityRegistry.NIGHT_PROWLER.get()) {
                 living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 40, 2, false, false));
+            } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.ANCIENT_ANCIENT_REMNANT.get()) {
+                living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 40, 1, false, false));
+            } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.MALEDICTUS.get()) {
+                living.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 40, 2, false, false));
+            } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.SCYLLA.get()) {
+                living.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 40, 2, false, false));
             }
             if (living instanceof EntityDragonBase dragon && tickCount % 300 == 0) {
                 if (dragon.getDragonStage() >= 3 && dragon.getDragonStage() != 5) {
@@ -493,17 +503,67 @@ public class ModEvents {
                 if (projectile.getOwner() != null && projectile.getOwner() instanceof Player) {
                     event.setAmount(event.getAmount() * 0.8f);
                 }
+            } else if (directSource instanceof PierceProjectileEntity) {
+                event.setAmount(event.getAmount() * 4.0f);
+            } else if (directSource instanceof PumpkinPistolProjectileEntity projectile) {
+                if (projectile.getOwner() != null && projectile.getOwner() instanceof Player) {
+                    event.setAmount(event.getAmount() * 7.0f);
+                }
+            } else if (directSource instanceof Tidal_Tentacle_Entity) {
+                event.setAmount(event.getAmount() * 4.0f);
+            } else if (directSource instanceof Wither_Howitzer_Entity projectile) {
+                if (projectile.getOwner() != null && projectile.getOwner() instanceof Player player) {
+                    boolean hasVoidAssault = false;
+                    for (ItemStack itemStack : player.getInventory().items) {
+                        if (itemStack.getItem() == ModItems.VOID_ASSULT_SHOULDER_WEAPON.get()) {
+                            hasVoidAssault = true;
+                            break;
+                        }
+                    }
+                    if (hasVoidAssault) {
+                        event.setAmount(event.getAmount() * 1.7f);
+                    } else {
+                        event.setAmount(event.getAmount() * 1.3f);
+                    }
+                }
+            } else if (directSource instanceof Wither_Missile_Entity projectile) {
+                if (projectile.getOwner() != null && projectile.getOwner() instanceof Player) {
+                    event.setAmount(event.getAmount() * 1.3f);
+                }
+            } else if (directSource instanceof Sandstorm_Entity projectile) {
+                if (projectile.getCaster() != null && projectile.getCaster() instanceof Player) {
+                    event.setAmount(event.getAmount() * 1.5f);
+                }
+            } else if (directSource instanceof Phantom_Halberd_Entity projectile) {
+                if (projectile.getCaster() != null && projectile.getCaster() instanceof Player) {
+                    event.setAmount(event.getAmount() * 1.5f);
+                }
+            } else if (directSource instanceof Wave_Entity projectile) {
+                if (projectile.getOwner() != null && projectile.getOwner() instanceof Player) {
+                    event.setAmount(event.getAmount() * 1.5f);
+                }
+            } else if (directSource instanceof Void_Vortex_Entity projectile) {
+                if (projectile.getOwner() != null && projectile.getOwner() instanceof Player) {
+                    event.setAmount(event.getAmount() * 2.0f);
+                }
+            }  else if (directSource instanceof Cursed_Sandstorm_Entity projectile) {
+                if (projectile.getOwner() != null && projectile.getOwner() instanceof Player) {
+                    event.setAmount(event.getAmount() * 1.5f);
+                }
             }
+
+
             tag.putInt("PTDCombatTimer", 200);
             if (entitySource instanceof LivingEntity livingEntity) {
                 if (PTDUtil.isBeyonderEntity(livingEntity) && directSource instanceof Projectile) {
                     event.setAmount(event.getAmount() * 0.6f);
                 }
             }
+
+
             if (damageDealer != null) {
                 if (damageDealer.getPersistentData().getDouble("PTDDamageMultiplier") > 0) {
                     event.setAmount((float) (event.getAmount() * damageDealer.getPersistentData().getDouble("PTDDamageMultiplier")));
-                    LOTM.LOGGER.info("DAMAGE MULTIPLIED FROM " + damageDealer.getName().getString() + " BY " + damageDealer.getPersistentData().getDouble("PTDDamageMultiplier"));
                 }
             }
         }
@@ -779,6 +839,13 @@ public class ModEvents {
                     multiplyMaxHealth(living, 1.0);
                     BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
                     BeyonderUtil.setSequence(living, 6);
+                } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.MALEDICTUS.get()) {
+                    multiplyMaxHealth(living, 4.0);
+                    multiplyDamage(living, 2.5);
+                } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.ANCIENT_ANCIENT_REMNANT.get()) {
+                    multiplyMaxHealth(living, 4.0);
+                    multiplyDamage(living, 2.5);
+
 
                     // Sequence 3
                 } else if (living.getName().getString().toLowerCase().contains("vessel")) {
@@ -859,7 +926,9 @@ public class ModEvents {
         float maxHealth = living.getMaxHealth();
         AttributeInstance maxHealthAttribute = living.getAttribute(Attributes.MAX_HEALTH);
         if (maxHealthAttribute != null) {
-            maxHealthAttribute.setBaseValue(maxHealth * multiplierAmount);
+            if (maxHealth < 10000) {
+                maxHealthAttribute.setBaseValue(maxHealth * multiplierAmount);
+            }
         }
         living.setHealth(maxHealth * multiplierAmount);
         LOTM.LOGGER.info("Multiplied{}'s health by {}", living.getName().getString(), multiplier);
