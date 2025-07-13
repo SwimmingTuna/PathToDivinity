@@ -233,7 +233,7 @@ public class ModEvents {
                     superSnifferEntity.setTarget(player);
                 }
             }
-            if (living instanceof Mob mob && PTDUtil.isBeyonderEntity(mob.getName().getString().toLowerCase()) && tickCount % 10 == 0) {
+            if (living instanceof Mob mob && PTDUtil.isBeyonderEntity(mob) && tickCount % 10 == 0) {
                 if (mob.getTarget() == null && combatTimer == 0 && mob.getHealth() < mob.getMaxHealth()) {
                     mob.setHealth(Math.min(mob.getMaxHealth(), mob.getHealth() + (mob.getMaxHealth() * 0.02f)));
                 }
@@ -258,7 +258,7 @@ public class ModEvents {
         CompoundTag tag = living.getPersistentData();
         BeyonderClass pathway = BeyonderUtil.getPathway(living);
         if (!living.level().isClientSide() && (event.getOriginalTarget() instanceof Player || event.getNewTarget() instanceof Player) && event.getOriginalTarget() != null && event.getNewTarget() != null) {
-            if (PTDUtil.isBeyonderEntity(living.getScoreboardName()) && living instanceof Mob mob) {
+            if (PTDUtil.isBeyonderEntity(living) && living instanceof Mob mob) {
                 float newTargetHealth = event.getNewTarget().getHealth();
                 float originalTargetHealth = event.getOriginalTarget().getHealth();
                 if (newTargetHealth > originalTargetHealth) {
@@ -285,7 +285,7 @@ public class ModEvents {
         if (!event.getEntity().level().isClientSide()) {
             tag.putInt("PTDCombatTimer", 200);
             if (entitySource instanceof LivingEntity livingEntity) {
-                if (PTDUtil.isBeyonderEntity(livingEntity.getScoreboardName()) && (directSource instanceof Projectile || entitySource instanceof Projectile)) {
+                if (PTDUtil.isBeyonderEntity(livingEntity) && (directSource instanceof Projectile || entitySource instanceof Projectile)) {
                     event.setAmount(event.getAmount() * 0.6f);
                 }
             }
@@ -390,8 +390,8 @@ public class ModEvents {
                     multiplyMaxHealth(living, 2.0);
                     multiplyDamage(living, 2.0);
                 } else if (type == ArphexModEntities.SPIDER_GOLIATH.get()) {
-                    multiplyMaxHealth(living, 1.0);
-                    multiplyDamage(living, 1.2);
+                    multiplyMaxHealth(living, 1.5);
+                    multiplyDamage(living, 1.3);
                 } else if (type == TerramityModEntities.HELLROK.get()) {
                     multiplyMaxHealth(living, 1.3);
                     multiplyDamage(living, 1.3);
@@ -616,7 +616,7 @@ public class ModEvents {
 
                     // Sequence 1
                 } else if (type == TerramityModEntities.ULTRA_SNIFFER.get()) {
-                    multiplyMaxHealth(living, 10.0);
+                    multiplyMaxHealthUltraSniffer(living, 10.0);
                 }
             }
         }
@@ -650,6 +650,18 @@ public class ModEvents {
         if (maxHealthAttribute != null) {
             maxHealthAttribute.setBaseValue(maxHealth * multiplierAmount);
         }
+        living.setHealth(maxHealth * multiplierAmount);
+        LOTM.LOGGER.info("Multiplied{}'s health by {}", living.getName().getString(), multiplier);
+    }
+
+    public static void multiplyMaxHealthUltraSniffer(LivingEntity living, double multiplier) {
+        float multiplierAmount = (float) multiplier;
+        float maxHealth = living.getMaxHealth();
+        AttributeInstance maxHealthAttribute = living.getAttribute(Attributes.MAX_HEALTH);
+        if (maxHealthAttribute != null) {
+            maxHealthAttribute.setBaseValue(maxHealth * multiplierAmount + 1);
+        }
+        living.setHealth(maxHealth * multiplierAmount);
         LOTM.LOGGER.info("Multiplied{}'s health by {}", living.getName().getString(), multiplier);
     }
 
