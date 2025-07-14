@@ -176,10 +176,12 @@ public class ModEvents {
                     BeyonderUtil.setPathway(living, BeyonderClassInit.SAILOR.get());
                     BeyonderUtil.setSequence(living, 4);
                 } else if (type == TerramityModEntities.ULTRA_SNIFFER.get()) {
-                    BeyonderClass[] pathways = {BeyonderClassInit.MONSTER.get(), BeyonderClassInit.WARRIOR.get(), BeyonderClassInit.SPECTATOR.get(), BeyonderClassInit.SAILOR.get()};
-                    BeyonderClass randomPathway = pathways[living.getRandom().nextInt(pathways.length)];
-                    BeyonderUtil.setPathway(living, randomPathway);
-                    BeyonderUtil.setSequence(living, 3);
+                    if (BeyonderUtil.getPathway(living) == null) {
+                        BeyonderClass[] pathways = {BeyonderClassInit.MONSTER.get(), BeyonderClassInit.WARRIOR.get(), BeyonderClassInit.SPECTATOR.get(), BeyonderClassInit.SAILOR.get()};
+                        BeyonderClass randomPathway = pathways[living.getRandom().nextInt(pathways.length)];
+                        BeyonderUtil.setPathway(living, randomPathway);
+                        BeyonderUtil.setSequence(living, 3);
+                    }
                 } else if (type == ACEntityRegistry.BRAINIAC.get()) {
                     multiplyDamage(living, 1.3);
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.KOBOLEDIATOR.get()) {
@@ -425,7 +427,9 @@ public class ModEvents {
             }
             if (living instanceof UltraSnifferEntity ultraSniffer && ultraSniffer.getTarget() == null) {
                 for (Player player : ultraSniffer.level().getEntitiesOfClass(Player.class, ultraSniffer.getBoundingBox().inflate(50))) {
-                    ultraSniffer.setTarget(player);
+                    if (!player.isCreative() && !player.isSpectator()) {
+                        ultraSniffer.setTarget(player);
+                    }
                 }
                 float health = ultraSniffer.getHealth();
                 if (Float.isNaN(health) || health < 0.0F) {
@@ -434,7 +438,9 @@ public class ModEvents {
             }
             if (living instanceof SuperSnifferEntity superSnifferEntity && superSnifferEntity.getTarget() == null) {
                 for (Player player : superSnifferEntity.level().getEntitiesOfClass(Player.class, superSnifferEntity.getBoundingBox().inflate(50))) {
-                    superSnifferEntity.setTarget(player);
+                    if (!player.isCreative() && !player.isSpectator()) {
+                        superSnifferEntity.setTarget(player);
+                    }
                 }
             }
             if (living instanceof Mob mob && PTDUtil.isBeyonderEntity(mob) && tickCount % 10 == 0) {
@@ -895,6 +901,12 @@ public class ModEvents {
                     // Sequence 1
                 } else if (type == TerramityModEntities.ULTRA_SNIFFER.get()) {
                     multiplyMaxHealthUltraSniffer(living, 10.0);
+                    if (BeyonderUtil.getPathway(living) == null) {
+                        BeyonderClass[] pathways = {BeyonderClassInit.MONSTER.get(), BeyonderClassInit.WARRIOR.get(), BeyonderClassInit.SPECTATOR.get(), BeyonderClassInit.SAILOR.get()};
+                        BeyonderClass randomPathway = pathways[living.getRandom().nextInt(pathways.length)];
+                        BeyonderUtil.setPathway(living, randomPathway);
+                        BeyonderUtil.setSequence(living, 3);
+                    }
                 }
             }
         }

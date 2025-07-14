@@ -1,15 +1,15 @@
 package net.swimmingtuna.pathtodivinity.mixin.Cataclysm;
 
+import com.github.L_Ender.cataclysm.entity.projectile.Lightning_Spear_Entity;
 import com.github.L_Ender.cataclysm.items.Astrape;
-import com.github.L_Ender.cataclysm.items.Gauntlet_of_Guard;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Constant;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.injection.*;
 
 @Mixin(value = Astrape.class, remap = false)
-public class AstrapeMixin { //ATTRIBUTE
+public class AstrapeMixin {
 
     @ModifyConstant(
             method = "<init>(Lnet/minecraft/world/item/Item$Properties;)V",
@@ -21,8 +21,9 @@ public class AstrapeMixin { //ATTRIBUTE
 
     @ModifyArg(
             method = "releaseUsing",
-            at = @At(value = "NEW", target = "Lcom/github/L_Ender/cataclysm/entity/projectile/Lightning_Spear_Entity;"),
-            index = 3
+            at = @At(value = "INVOKE", target = "Lcom/github/L_Ender/cataclysm/entity/projectile/Lightning_Spear_Entity;<init>(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/level/Level;F)V"),
+            index = 3,
+            remap = false
     )
     private float multiplyLightningDamage(float damage) {
         return damage * 7.0F;
