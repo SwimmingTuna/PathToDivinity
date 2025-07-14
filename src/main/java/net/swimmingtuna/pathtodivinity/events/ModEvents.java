@@ -68,6 +68,7 @@ import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.soulsweaponry.entity.mobs.FreyrSwordEntity;
 import net.soulsweaponry.registry.EntityRegistry;
 import net.swimmingtuna.lotm.LOTM;
 import net.swimmingtuna.lotm.beyonder.api.BeyonderClass;
@@ -556,6 +557,8 @@ public class ModEvents {
                 if (projectile.getOwner() != null && projectile.getOwner() instanceof Player) {
                     event.setAmount(event.getAmount() * 1.5f);
                 }
+            }  else if (directSource instanceof FreyrSwordEntity) {
+                    event.setAmount(event.getAmount() * 1.8f);
             }
 
 
