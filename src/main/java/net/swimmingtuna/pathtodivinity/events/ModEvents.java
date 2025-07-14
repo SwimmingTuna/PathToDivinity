@@ -30,6 +30,7 @@ import net.mcreator.borninchaosv.init.BornInChaosV1ModEntities;
 import net.mcreator.terramity.entity.SuperSnifferEntity;
 import net.mcreator.terramity.entity.UltraSnifferEntity;
 import net.mcreator.terramity.init.TerramityModEntities;
+import net.mcreator.terramity.init.TerramityModItems;
 import net.miauczel.legendary_monsters.entity.ModEntities;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
@@ -49,6 +50,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
@@ -62,6 +64,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.CommandEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -74,6 +77,7 @@ import net.swimmingtuna.lotm.LOTM;
 import net.swimmingtuna.lotm.beyonder.api.BeyonderClass;
 import net.swimmingtuna.lotm.entity.PlayerMobEntity;
 import net.swimmingtuna.lotm.init.BeyonderClassInit;
+import net.swimmingtuna.lotm.init.ItemInit;
 import net.swimmingtuna.lotm.util.BeyonderUtil;
 import net.swimmingtuna.pathtodivinity.PTD;
 import net.swimmingtuna.pathtodivinity.PTDGameRules;
@@ -481,6 +485,20 @@ public class ModEvents {
         }
     }
 
+    @SubscribeEvent
+    public static void livingDeathEvent(LivingDeathEvent event) {
+        Entity entity = event.getEntity();
+        CompoundTag tag = entity.getPersistentData();
+        if (entity.getName().getString().contains("vessel")) {
+            ItemStack stack = new ItemStack(TerramityModItems.POCKET_UNIVERSE.get());
+            ItemEntity itemEntity = new ItemEntity(entity.level(), entity.getX(), entity.getY(), entity.getZ(), stack);
+            itemEntity.setNoPickUpDelay();
+            itemEntity.teleportTo(entity.getX(), entity.getY(), entity.getZ());
+            itemEntity.setUnlimitedLifetime();
+            entity.level().addFreshEntity(itemEntity);
+        }
+    }
+
 
     @SubscribeEvent
     public static void hurtEvent(LivingHurtEvent event) {
@@ -645,7 +663,7 @@ public class ModEvents {
                 } else if (type == ModRegistry.MUTANT_SKELETON_ENTITY_TYPE.get()) {
                     multiplyMaxHealth(living, 1.5);
                     multiplyDamage(living, 1.2);
-                } else if (living.getName().getString().toLowerCase().contains("terrible") || living.getName().getString().toLowerCase().contains("puny")) {
+                } else if (living.getName().getString().toLowerCase().contains("terrible") || living.getName().getString().toLowerCase().contains("puny")) { //Terrible Ten
                     multiplyMaxHealth(living, 1.0);
                     multiplyDamage(living, 1.3);
                 } else if (type == AMEntityRegistry.WARPED_MOSCO.get()) {
@@ -659,7 +677,7 @@ public class ModEvents {
                 } else if (type == ModRegistry.MUTANT_ENDERMAN_ENTITY_TYPE.get()) {
                     multiplyMaxHealth(living, 1.4);
                     multiplyDamage(living, 1.2);
-                } else if (living.getName().getString().toLowerCase().contains("aero_guardian")) {
+                } else if (living.getName().getString().toLowerCase().contains("aero_guardian")) { //Aero Guardian
                     multiplyMaxHealth(living, 1.0);
                     multiplyDamage(living, 1.6);
                 } else if (type == ACEntityRegistry.TREMORSAURUS.get()) {
@@ -690,7 +708,7 @@ public class ModEvents {
                 } else if (type == MacabreModEntities.CRAWLER.get()) {
                     multiplyMaxHealth(living, 2.0);
                     multiplyDamage(living, 2.0);
-                } else if (living.getName().getString().toLowerCase().contains("doomharbor")) {
+                } else if (living.getName().getString().toLowerCase().contains("doomharbor")) { //Doomharbor Lich
                     multiplyMaxHealth(living, 1.0);
                     multiplyDamage(living, 1.75);
                 } else if (type == EntityHandler.FROSTMAW.get()) {
@@ -702,7 +720,7 @@ public class ModEvents {
                 } else if (type == ArphexModEntities.CENTIPEDE_EVICTOR.get()) {
                     multiplyMaxHealth(living, 1.0);
                     multiplyDamage(living, 1.3);
-                } else if (living.getName().getString().toLowerCase().contains("plague_bringer")) {
+                } else if (living.getName().getString().toLowerCase().contains("plague_bringer")) { //Plague Bringer
                     multiplyMaxHealth(living, 1.0);
                     multiplyDamage(living, 1.4);
                 } else if (type == DDEntities.STALKER.get()) {
@@ -711,7 +729,7 @@ public class ModEvents {
                 } else if (type == AnimatedmobsmodModEntities.ENDER_KING.get()) {
                     multiplyMaxHealth(living, 0.8);
                     multiplyDamage(living, 0.8);
-                } else if (entity.getClass().getSimpleName().equals("LichEntity")) {
+                } else if (entity.getClass().getSimpleName().equals("LichEntity")) { //Lich (Bosses of Mass Destruction)
                     multiplyMaxHealth(living, 1.0);
                     multiplyDamage(living, 1.1);
                 } else if (type == ModEntities.Withered_Abomination.get()) {
@@ -719,13 +737,13 @@ public class ModEvents {
                 } else if (type == AetherEntityTypes.SUN_SPIRIT.get()) {
                     multiplyMaxHealth(living, 1.0);
                     multiplyDamage(living, 1.2);
-                } else if (entity.getClass().getSimpleName().equals("GauntletEntity")) {
+                } else if (entity.getClass().getSimpleName().equals("GauntletEntity")) { //Nether Gauntlet
                     multiplyMaxHealth(living, 1.1);
                     multiplyDamage(living, 1.2);
                 } else if (type == ArphexModEntities.SOLIFUGE_SKULKER.get()) {
                     multiplyMaxHealth(living, 1.3);
                     multiplyDamage(living, 1.3);
-                } else if (entity.getClass().getSimpleName().equals("ObsidilithEntity")) {
+                } else if (entity.getClass().getSimpleName().equals("ObsidilithEntity")) { //Obsidilith
                     multiplyMaxHealth(living, 1.1);
                     multiplyDamage(living, 1.5);
 
@@ -735,7 +753,7 @@ public class ModEvents {
                 } else if (type == EntityType.WITHER) {
                     multiplyMaxHealth(living, 1.0);
                     multiplyDamage(living, 1.1);
-                } else if (entity.getClass().getSimpleName().equals("VoidBlossomEntity")) {
+                } else if (entity.getClass().getSimpleName().equals("VoidBlossomEntity")) { //Void Blossom
                     multiplyMaxHealth(living, 1.2);
                     multiplyDamage(living, 1.3);
                 } else if (type == ModEntityTypes.Freakager.get()) {
@@ -837,7 +855,7 @@ public class ModEvents {
                 } else if (type == ArphexModEntities.SPIDER_PROWLER.get()) {
                     multiplyMaxHealth(living, 4.0);
                     multiplyDamage(living, 2.5);
-                } else if (living.getName().getString().equalsIgnoreCase("horseman")) {
+                } else if (living.getName().getString().equalsIgnoreCase("horseman")) { //Pumpkin Horseman
                     multiplyMaxHealth(living, 1.5);
                     BeyonderUtil.setPathway(living, BeyonderClassInit.SPECTATOR.get());
                     BeyonderUtil.setSequence(living, 6);
@@ -857,8 +875,9 @@ public class ModEvents {
 
 
                     // Sequence 3
-                } else if (living.getName().getString().toLowerCase().contains("vessel")) {
+                } else if (living.getName().getString().toLowerCase().contains("vessel")) { //Vessel of Calamity
                     multiplyMaxHealth(living, 4.0);
+                    multiplyDamage(living, 2.5);
                     BeyonderUtil.setPathway(living, BeyonderClassInit.MONSTER.get());
                     BeyonderUtil.setSequence(living, 5);
                 } else if (type == ArphexModEntities.SPIDER_MOTH.get()) {
