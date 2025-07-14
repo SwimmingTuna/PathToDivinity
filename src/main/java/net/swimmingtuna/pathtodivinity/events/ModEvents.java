@@ -1,6 +1,9 @@
 package net.swimmingtuna.pathtodivinity.events;
 
 import com.aetherteam.aether.entity.AetherEntityTypes;
+import com.aqutheseal.celestisynth.common.entity.projectile.CrescentiaDragon;
+import com.aqutheseal.celestisynth.common.entity.projectile.FrostboundShard;
+import com.aqutheseal.celestisynth.common.entity.projectile.SolarisBomb;
 import com.bobmowzie.mowziesmobs.server.entity.EntityHandler;
 import com.curseforge.macabre.entity.GomoriaHandProjEntity;
 import com.curseforge.macabre.entity.GorepumpProjEntity;
@@ -77,7 +80,6 @@ import net.swimmingtuna.lotm.LOTM;
 import net.swimmingtuna.lotm.beyonder.api.BeyonderClass;
 import net.swimmingtuna.lotm.entity.PlayerMobEntity;
 import net.swimmingtuna.lotm.init.BeyonderClassInit;
-import net.swimmingtuna.lotm.init.ItemInit;
 import net.swimmingtuna.lotm.util.BeyonderUtil;
 import net.swimmingtuna.pathtodivinity.PTD;
 import net.swimmingtuna.pathtodivinity.PTDGameRules;
@@ -516,6 +518,12 @@ public class ModEvents {
                 if (projectile.getOwner() != null && projectile.getOwner() instanceof Player) {
                     event.setAmount(event.getAmount() * 2.5f);
                 }
+            } else if (directSource instanceof SolarisBomb) {
+                event.setAmount(event.getAmount() * 5.0f);
+            } else if (directSource instanceof CrescentiaDragon) {
+                event.setAmount(event.getAmount() * 2.0f);
+            } else if (directSource instanceof FrostboundShard) {
+                event.setAmount(event.getAmount() * 6.5f);
             } else if (directSource instanceof GutsEntity projectile) {
                 if (projectile.getOwner() != null && projectile.getOwner() instanceof Player) {
                     event.setAmount(event.getAmount() * 3.5f);
@@ -534,8 +542,10 @@ public class ModEvents {
                 if (projectile.getOwner() != null && projectile.getOwner() instanceof Player) {
                     event.setAmount(event.getAmount() * 7.0f);
                 }
-            } else if (directSource instanceof Tidal_Tentacle_Entity) {
-                event.setAmount(event.getAmount() * 4.0f);
+            } else if (directSource instanceof Tidal_Tentacle_Entity tidalTentacleEntity) {
+                if (tidalTentacleEntity.getCreatorEntity() != null && tidalTentacleEntity.getCreatorEntity() instanceof Player) {
+                    event.setAmount(event.getAmount() * 4.0f);
+                }
             } else if (directSource instanceof Wither_Howitzer_Entity projectile) {
                 if (projectile.getOwner() != null && projectile.getOwner() instanceof Player player) {
                     boolean hasVoidAssault = false;
@@ -571,12 +581,12 @@ public class ModEvents {
                 if (projectile.getOwner() != null && projectile.getOwner() instanceof Player) {
                     event.setAmount(event.getAmount() * 2.0f);
                 }
-            }  else if (directSource instanceof Cursed_Sandstorm_Entity projectile) {
+            } else if (directSource instanceof Cursed_Sandstorm_Entity projectile) {
                 if (projectile.getOwner() != null && projectile.getOwner() instanceof Player) {
                     event.setAmount(event.getAmount() * 1.5f);
                 }
-            }  else if (directSource instanceof FreyrSwordEntity) {
-                    event.setAmount(event.getAmount() * 1.8f);
+            } else if (directSource instanceof FreyrSwordEntity) {
+                event.setAmount(event.getAmount() * 1.8f);
             }
 
 

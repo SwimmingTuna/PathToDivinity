@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
-@Mixin(value = Meat_Shredder.class, remap = false)
+@Mixin(value = Meat_Shredder.class, remap = true)
 public class MeatShredderMixin { //ATTRIBUTE
 
     @ModifyConstant(
@@ -17,7 +17,7 @@ public class MeatShredderMixin { //ATTRIBUTE
     }
 
     @ModifyConstant(
-            method = "onUseTick(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;I)V",
+            method = "onUseTick",
             constant = @Constant(floatValue = 8.5F)
     )
     private float modifyUseDamage(float divisor) {

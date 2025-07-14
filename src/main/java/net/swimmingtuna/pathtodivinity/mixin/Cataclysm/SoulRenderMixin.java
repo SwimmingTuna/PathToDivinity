@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-@Mixin(value = Soul_Render.class, remap = false)
+@Mixin(value = Soul_Render.class, remap = true)
 public class SoulRenderMixin {
 
     @ModifyVariable(

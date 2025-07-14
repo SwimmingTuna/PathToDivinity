@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
-@Mixin(value = Bulwark_of_the_flame.class, remap = false)
+@Mixin(value = Bulwark_of_the_flame.class, remap = true)
 public class BulwarkOfTheFlameMixin {
 
     @ModifyConstant(

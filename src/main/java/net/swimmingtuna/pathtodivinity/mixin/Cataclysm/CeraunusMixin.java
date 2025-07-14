@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
-@Mixin(value = Ceraunus.class, remap = false)
+@Mixin(value = Ceraunus.class, remap = true)
 public class CeraunusMixin { //ATTRIBUTE
 
     @ModifyConstant(

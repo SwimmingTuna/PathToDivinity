@@ -27,10 +27,10 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.Predicate;
 
-@Mixin(value = SkillCastKeresSmash.class, remap = false)
+@Mixin(value = SkillCastKeresSmash.class)
 public class SkillCastKeresSmashAttackMixin {
 
-    @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "tick", at = @At("HEAD"), cancellable = true, remap = true)
     public void injectTick(CallbackInfo ci) {
         SkillCastKeresSmash self = (SkillCastKeresSmash)(Object)this;
 
@@ -57,7 +57,7 @@ public class SkillCastKeresSmashAttackMixin {
         ci.cancel();
     }
 
-    @Inject(method = "doSmashAttack", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "doSmashAttack", at = @At("HEAD"), cancellable = true, remap = false)
     public void injectDoSmashAttack(Player owner, double radius, double out, float multiplier, CallbackInfo ci) {
         SkillCastKeresSmash self = (SkillCastKeresSmash)(Object)this;
 

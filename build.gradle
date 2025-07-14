@@ -126,7 +126,7 @@ dependencies {
     //Marium's Soulslike Weaponry
     implementation fg.deobf("curse.maven:soulsweapons-632066:6509913")
     //Cataclysm
-    implementation fg.deobf("curse.maven:cataclysm-551586:6729683")
+    implementation fg.deobf("curse.maven:cataclysm-551586:6769185")
     //Mowzie's Mobs
     implementation fg.deobf("curse.maven:mowziesmobs-250498:6586086")
     //Aquamirae

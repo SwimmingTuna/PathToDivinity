@@ -31,7 +31,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
-@Mixin(value = SkillCastFrostboundIceCast.class, remap = false)
+@Mixin(value = SkillCastFrostboundIceCast.class, remap = true)
 public class SkillCastFrostboundIceCastMixin {
 
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)

@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
-@Mixin(value = Tidal_Claws.class, remap = false)
+@Mixin(value = Tidal_Claws.class, remap = true)
 public class TidalClawsMixin { //ATTRIBUTE
 
     @ModifyConstant(

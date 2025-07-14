@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 import java.util.UUID;
 
-@Mixin(value = SkillCastBreezebreakerTornado.class, remap = false)
+@Mixin(value = SkillCastBreezebreakerTornado.class, remap = true)
 public class SkillCastBreezebreakerTornadoMixin {
 
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)

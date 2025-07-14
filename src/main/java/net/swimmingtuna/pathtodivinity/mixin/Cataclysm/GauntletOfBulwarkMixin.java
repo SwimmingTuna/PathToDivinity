@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
-@Mixin(value = Gauntlet_of_Bulwark.class, remap = false)
+@Mixin(value = Gauntlet_of_Bulwark.class, remap = true)
 public class GauntletOfBulwarkMixin { //ATTRIBUTE
 
     @ModifyConstant(
@@ -17,7 +17,7 @@ public class GauntletOfBulwarkMixin { //ATTRIBUTE
     }
 
     @ModifyConstant(
-            method = "onUseTick(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;I)V",
+            method = "onUseTick",
             constant = @Constant(intValue = 40)
     )
     private int modifyBlazingBrandDuration(int duration) {

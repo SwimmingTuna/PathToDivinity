@@ -6,11 +6,11 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
-@Mixin(value = TrueGorescytheItem.class, remap = false)
+@Mixin(value = TrueGorescytheItem.class, remap = true)
 public class SoakedGorescytheMixin {
 
     @ModifyConstant(
-            method = "getDefaultAttributeModifiers(Lnet/minecraft/world/entity/EquipmentSlot;)Lcom/google/common/collect/Multimap;",
+            method = "getDefaultAttributeModifiers",
             constant = @Constant(doubleValue = 11.0)
     )
     private double modifyAttackDamage(double damage) {

@@ -8,11 +8,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = ChaniswordItem.class, remap = false)
+@Mixin(value = ChaniswordItem.class, remap = true)
 public class ChanisSwordMixin {
 
     @ModifyConstant(
-            method = "getDefaultAttributeModifiers(Lnet/minecraft/world/entity/EquipmentSlot;)Lcom/google/common/collect/Multimap;",
+            method = "getDefaultAttributeModifiers",
             constant = @Constant(doubleValue = 11.0)
     )
     private double modifyAttackDamage(double damage) {

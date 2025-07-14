@@ -23,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mixin(value = SkillCastKeresSlashWave.class, remap = false)
+@Mixin(value = SkillCastKeresSlashWave.class, remap = true)
 public class SkillCastKeresSlashWaveMixin {
 
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)

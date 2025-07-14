@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
-@Mixin(value = The_Incinerator.class, remap = false)
+@Mixin(value = The_Incinerator.class, remap = true)
 public class TheIncineratorMixin {
 
     @ModifyConstant(

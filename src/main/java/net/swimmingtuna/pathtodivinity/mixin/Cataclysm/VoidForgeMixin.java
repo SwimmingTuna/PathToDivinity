@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
-@Mixin(value = void_forge.class, remap = false)
+@Mixin(value = void_forge.class, remap = true)
 public class VoidForgeMixin {
 
     @ModifyConstant(

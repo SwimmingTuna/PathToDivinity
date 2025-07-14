@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
-@Mixin(value = Cursed_bow.class, remap = false)
+@Mixin(value = Cursed_bow.class)
 public class CursedBowMixin {
 
     // Modify the base damage for homing arrows (Phantom_Arrow_Entity)
