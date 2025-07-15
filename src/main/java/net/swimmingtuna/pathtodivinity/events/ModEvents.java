@@ -43,6 +43,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -65,6 +66,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.CommandEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -87,6 +89,7 @@ import net.swimmingtuna.pathtodivinity.PTDUtil;
 import net.zoniex.init.ZoniexModEntities;
 
 import java.util.Map;
+import java.util.Random;
 
 
 @Mod.EventBusSubscriber(modid = PTD.MOD_ID)
@@ -129,6 +132,9 @@ public class ModEvents {
             }
 
             if (living.tickCount % 40 == 0) {
+                if (BeyonderUtil.getPathway(living) != null && !(living instanceof Player)) {
+                    LOTM.sendMessageToAllPlayers("PATHWAY IS " + BeyonderUtil.getPathway(living).sequenceNames().get(BeyonderUtil.getSequence(living)) + " FOR " + living.getName().getString());
+                }
                 if (type == EntityRegistry.CHAOS_MONARCH.get()) {
                     BeyonderUtil.setPathway(living, BeyonderClassInit.MONSTER.get());
                     BeyonderUtil.setSequence(living, 7);
@@ -139,7 +145,7 @@ public class ModEvents {
                     BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
                     BeyonderUtil.setSequence(living, 7);
                 } else if (type == ModEntities.Cloud_golem.get()) {
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.SPECTATOR.get());
+                    BeyonderUtil.setPathway(living, BeyonderClassInit.SAILOR.get());
                     BeyonderUtil.setSequence(living, 6);
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.THE_LEVIATHAN.get()) {
                     BeyonderUtil.setPathway(living, BeyonderClassInit.MONSTER.get());
@@ -873,7 +879,8 @@ public class ModEvents {
                     multiplyMaxHealth(living, 1.4);
                     multiplyDamage(living, 1.6);
                 } else if (type == EntityInit.NAMELESS_GUARDIAN.get()) {
-                    multiplyMaxHealth(living, 1.0);
+                    multiplyMaxHealth(living, 1.7);
+                    multiplyDamage(living, 2.2);
                     BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
                     BeyonderUtil.setSequence(living, 6);
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.MALEDICTUS.get()) {
@@ -951,8 +958,63 @@ public class ModEvents {
         CommandSourceStack commandSource = server.createCommandSourceStack();
         try {
             commands.performPrefixedCommand(commandSource, "beyonderrecipe load");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:chaos_monarch lotm:monster 7");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add legendary_monsters:cloud_golem lotm:sailor 6");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add faded_conquest_2:vessel_of_calamity lotm:monster 5");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:day_stalker lotm:warrior 4");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:draugr_boss lotm:spectator 7");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:night_shade lotm:warrior 7");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add cataclysm:the_leviathan lotm:monster 6");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:moonknight lotm:warrior 5");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:night_prowler lotm:sailor 4");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add sleepy_hollows:horseman lotm:spectator_6");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add born_in_chaos_v1:lord_pumpkinhead lotm:spectator 5");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add eeeabsmobs:nameless_guardian lotm:warrior 6");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add terramity:trial_guardian lotm:sailor 5");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:chaos_monarch lotm:monster 7");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:chaos_monarch lotm:monster 7");
+            int random = (int) BeyonderUtil.getPositiveRandomInRange(4);
+            if (random == 0) {
+                commands.performPrefixedCommand(commandSource, "beyonderentity add terramity:ultra_sniffer lotm:spectator 3");
+            } else if (random == 1) {
+                commands.performPrefixedCommand(commandSource, "beyonderentity add terramity:ultra_sniffer lotm:warrior 3");
+            } else if (random == 2) {
+                commands.performPrefixedCommand(commandSource, "beyonderentity add terramity:ultra_sniffer lotm:sailor 3");
+            } else {
+                commands.performPrefixedCommand(commandSource, "beyonderentity add terramity:ultra_sniffer lotm:monster 3");
+            }
+
         } catch (Exception e) {
             PTD.LOGGER.info("Failed to execute beyonderrecipe load command: {}", e.getMessage());
+        }
+    }
+
+    @SubscribeEvent
+    public void onServerTick(TickEvent.ServerTickEvent event) {
+        if (event.phase == TickEvent.Phase.END && event.getServer().getTickCount() % 1200 == 0) {
+            MinecraftServer server = event.getServer();
+            float foundSniffers = 0;
+            for (ServerLevel level : server.getAllLevels()) {
+                for (Entity entity : level.getAllEntities()) {
+                    if (entity.getType() == TerramityModEntities.ULTRA_SNIFFER.get()) {
+                        foundSniffers++;
+                    }
+                }
+            }
+            if (foundSniffers == 0) {
+                Commands commands = server.getCommands();
+                CommandSourceStack commandSource = server.createCommandSourceStack();
+                int random = (int) BeyonderUtil.getPositiveRandomInRange(4);
+                if (random == 0) {
+                    commands.performPrefixedCommand(commandSource, "beyonderentity add terramity:ultra_sniffer lotm:spectator 3");
+                } else if (random == 1) {
+                    commands.performPrefixedCommand(commandSource, "beyonderentity add terramity:ultra_sniffer lotm:warrior 3");
+                } else if (random == 2) {
+                    commands.performPrefixedCommand(commandSource, "beyonderentity add terramity:ultra_sniffer lotm:sailor 3");
+                } else {
+                    commands.performPrefixedCommand(commandSource, "beyonderentity add terramity:ultra_sniffer lotm:monster 3");
+                }
+            }
         }
     }
 

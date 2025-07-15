@@ -106,7 +106,7 @@ dependencies {
     implementation fg.deobf("net.tslat.smartbrainlib:SmartBrainLib-forge-${project.minecraft_version}:${project.sbl_version}")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     //LOTMC
-    implementation fg.deobf("curse.maven:lord-of-the-mysteries-craft-1095869:6769266")
+    implementation fg.deobf("curse.maven:lord-of-the-mysteries-craft-1095869:6773065")
     //Ice and Fire
     implementation fg.deobf("curse.maven:iceandfire-264231:5633453")
     //Legendary Monsters
