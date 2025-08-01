@@ -10,6 +10,7 @@ import com.curseforge.macabre.entity.GorepumpProjEntity;
 import com.curseforge.macabre.entity.GutsEntity;
 import com.curseforge.macabre.entity.PierceProjectileEntity;
 import com.curseforge.macabre.init.MacabreModEntities;
+import com.eeeab.eeeabsmobs.sever.entity.effects.EntityGuardianLaser;
 import com.eeeab.eeeabsmobs.sever.init.EntityInit;
 import com.github.L_Ender.cataclysm.entity.effect.Sandstorm_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.Void_Vortex_Entity;
@@ -25,17 +26,26 @@ import com.kyanite.deeperdarker.content.DDEntities;
 import com.obscuria.aquamirae.registry.AquamiraeEntities;
 import com.yellowbrossproductions.illageandspillage.init.ModEntityTypes;
 import fuzs.mutantmonsters.init.ModRegistry;
+import net.arphex.configuration.ConfigurationSettingsConfiguration;
+import net.arphex.entity.CentipedeEvictorEntity;
+import net.arphex.entity.SpiderProwlerEntity;
+import net.arphex.init.ArphexModBlocks;
 import net.arphex.init.ArphexModEntities;
+import net.arphex.init.ArphexModItems;
 import net.cursedwarrior.awakenedbosses.init.AwakenedBossesModEntities;
 import net.mcreator.animatedmobsmod.init.AnimatedmobsmodModEntities;
 import net.mcreator.borninchaosv.entity.PumpkinPistolProjectileEntity;
 import net.mcreator.borninchaosv.init.BornInChaosV1ModEntities;
+import net.mcreator.terramity.entity.DuskrokEntity;
 import net.mcreator.terramity.entity.SuperSnifferEntity;
 import net.mcreator.terramity.entity.UltraSnifferEntity;
 import net.mcreator.terramity.init.TerramityModEntities;
 import net.mcreator.terramity.init.TerramityModItems;
 import net.miauczel.legendary_monsters.entity.ModEntities;
 import net.minecraft.ChatFormatting;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementProgress;
+import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.BlockPos;
@@ -48,40 +58,43 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec2;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.CommandEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
-import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.soulsweaponry.entity.mobs.DayStalker;
 import net.soulsweaponry.entity.mobs.FreyrSwordEntity;
+import net.soulsweaponry.entity.mobs.NightProwler;
 import net.soulsweaponry.registry.EntityRegistry;
 import net.swimmingtuna.lotm.LOTM;
 import net.swimmingtuna.lotm.beyonder.api.BeyonderClass;
 import net.swimmingtuna.lotm.entity.PlayerMobEntity;
 import net.swimmingtuna.lotm.init.BeyonderClassInit;
+import net.swimmingtuna.lotm.item.BeyonderAbilities.Monster.ProbabilityManipulationFortune;
 import net.swimmingtuna.lotm.util.BeyonderUtil;
 import net.swimmingtuna.pathtodivinity.PTD;
 import net.swimmingtuna.pathtodivinity.PTDGameRules;
@@ -89,11 +102,12 @@ import net.swimmingtuna.pathtodivinity.PTDUtil;
 import net.zoniex.init.ZoniexModEntities;
 
 import java.util.Map;
-import java.util.Random;
 
 
 @Mod.EventBusSubscriber(modid = PTD.MOD_ID)
 public class ModEvents {
+
+    @SubscribeEvent
     public static void commandEvent(CommandEvent event) {
         if (event.getParseResults().getContext().getSource().getEntity() instanceof ServerPlayer player) {
             CompoundTag tag = player.getPersistentData();
@@ -103,6 +117,182 @@ public class ModEvents {
                     event.setCanceled(true);
                     player.sendSystemMessage(Component.literal("You are in combat and cannot use /home or /spawn!"));
                 }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void rightClickItemEvent(PlayerInteractEvent.RightClickItem event) {
+        Player player = event.getEntity();
+        ItemStack itemStack = event.getItemStack();
+        Level level = player.level();
+        if (!itemStack.getItem().getDescriptionId().equals("item.faded_conquest_2.abyssal_device")) {
+            return;
+        }
+        if (level.isClientSide()) {
+            return;
+        }
+        ServerLevel serverLevel = (ServerLevel) level;
+        Vec3 playerPos = player.position();
+        CommandSourceStack commandSource = new CommandSourceStack(CommandSource.NULL, playerPos, Vec2.ZERO, serverLevel, 4, "", Component.literal(""), serverLevel.getServer(), null).withSuppressedOutput();
+        serverLevel.getServer().getCommands().performPrefixedCommand(commandSource, "summon faded_conquest_2:vessel_of_calamity");
+        itemStack.shrink(1);
+        event.setCanceled(true);
+    }
+
+    @SubscribeEvent
+    public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        if (event.getHand() == event.getEntity().getUsedItemHand()) {
+            Player player = event.getEntity();
+            Level level = player.level();
+            int x = event.getPos().getX();
+            int y = event.getPos().getY();
+            int z = event.getPos().getZ();
+            if (level.getBlockState(BlockPos.containing(x, y, z)).getBlock() == ArphexModBlocks.CRAWLING_ALTAR.get()) {
+                event.setCanceled(true);
+                if (level.getBlockState(BlockPos.containing(x, y - 1.0, z)).getBlock() == Blocks.END_ROD) {
+                    if (level.getBlockState(BlockPos.containing(x, y - 2.0, z)).getBlock() == Blocks.BEDROCK) {
+                        if (level.getBlockState(BlockPos.containing(x + 5.0, y + 1.0, z)).getBlock() != ArphexModBlocks.SCORCH.get()) {
+                            if (!player.level().isClientSide()) {
+                                player.displayClientMessage(Component.literal("The pillars are not all lit"), true);
+                            }
+                        } else if (level.getBlockState(BlockPos.containing(x - 5.0, y + 1.0, z)).getBlock() != ArphexModBlocks.SCORCH.get()) {
+                            if (!player.level().isClientSide()) {
+                                player.displayClientMessage(Component.literal("The pillars are not all lit"), true);
+                            }
+                        } else if (level.getBlockState(BlockPos.containing(x, y + 1.0, z + 5.0)).getBlock() != ArphexModBlocks.SCORCH.get()) {
+                            if (!player.level().isClientSide()) {
+                                player.displayClientMessage(Component.literal("The pillars are not all lit"), true);
+                            }
+                        } else if (level.getBlockState(BlockPos.containing(x, y + 1.0, z - 5.0)).getBlock() != ArphexModBlocks.SCORCH.get() && !(Boolean) ConfigurationSettingsConfiguration.CRAWLING_ONLY.get()) {
+                            if (!player.level().isClientSide()) {
+                                player.displayClientMessage(Component.literal("The pillars are not all lit"), true);
+                            }
+                        } else {
+                            label:
+                            {
+                                if (player instanceof ServerPlayer serverPlayer) {
+                                    if (serverPlayer.level() instanceof ServerLevel && serverPlayer.getAdvancements().getOrStartProgress(serverPlayer.server.getAdvancements().getAdvancement(new ResourceLocation("arphex:crawling_portal_activated"))).isDone()) {
+                                        break label;
+                                    }
+                                }
+
+                                if (player instanceof ServerPlayer serverPlayer) {
+                                    Advancement advancement = serverPlayer.server.getAdvancements().getAdvancement(new ResourceLocation("arphex:crawling_portal_activated"));
+                                    AdvancementProgress advancementProgress = serverPlayer.getAdvancements().getOrStartProgress(advancement);
+                                    if (!advancementProgress.isDone()) {
+                                        for (String criteria : advancementProgress.getRemainingCriteria()) {
+                                            serverPlayer.getAdvancements().award(advancement, criteria);
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (level instanceof ServerLevel serverLevel) {
+                                serverLevel.getServer().getCommands().performPrefixedCommand((new CommandSourceStack(CommandSource.NULL, new Vec3(x, y - 1.0, z), Vec2.ZERO, serverLevel, 4, "", Component.literal(""), serverLevel.getServer(), (Entity) null)).withSuppressedOutput(), "fill ~-2 ~ ~-2 ~2 ~ ~2 arphex:crawling_portal");
+                            }
+
+                            if (level instanceof ServerLevel serverLevel) {
+                                serverLevel.getServer().getCommands().performPrefixedCommand((new CommandSourceStack(CommandSource.NULL, new Vec3(x, y - 2.0, z), Vec2.ZERO, serverLevel, 4, "", Component.literal(""), serverLevel.getServer(), (Entity) null)).withSuppressedOutput(), "fill ~-2 ~ ~-2 ~2 ~ ~2 bedrock");
+                            }
+
+                            level.setBlock(BlockPos.containing(x + 3.0, y - 2.0, z), Blocks.BEDROCK.defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x + 4.0, y - 2.0, z), Blocks.BEDROCK.defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x - 3.0, y - 2.0, z), Blocks.BEDROCK.defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x - 4.0, y - 2.0, z), Blocks.BEDROCK.defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x, y - 2.0, z + 3.0), Blocks.BEDROCK.defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x, y - 2.0, z + 4.0), Blocks.BEDROCK.defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x, y - 2.0, z - 3.0), Blocks.BEDROCK.defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x, y - 2.0, z - 4.0), Blocks.BEDROCK.defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x + 1.0, y - 2.0, z + 1.0), Blocks.BEDROCK.defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x + 1.0, y - 2.0, z - 1.0), Blocks.BEDROCK.defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x - 1.0, y - 2.0, z + 1.0), Blocks.BEDROCK.defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x - 1.0, y - 2.0, z - 1.0), Blocks.BEDROCK.defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x - 3.0, y - 2.0, z - 1.0), Blocks.BEDROCK.defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x - 3.0, y - 2.0, z + 1.0), Blocks.BEDROCK.defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x - 1.0, y - 2.0, z - 3.0), Blocks.BEDROCK.defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x + 1.0, y - 2.0, z - 3.0), Blocks.BEDROCK.defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x + 3.0, y - 2.0, z - 1.0), Blocks.BEDROCK.defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x + 3.0, y - 2.0, z + 1.0), Blocks.BEDROCK.defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x - 1.0, y - 2.0, z + 3.0), Blocks.BEDROCK.defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x + 1.0, y - 2.0, z + 3.0), Blocks.BEDROCK.defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x + 3.0, y - 1.0, z), ((Block) ArphexModBlocks.CRAWLING_PORTAL.get()).defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x + 4.0, y - 1.0, z), ((Block) ArphexModBlocks.CRAWLING_PORTAL.get()).defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x - 3.0, y - 1.0, z), ((Block) ArphexModBlocks.CRAWLING_PORTAL.get()).defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x - 4.0, y - 1.0, z), ((Block) ArphexModBlocks.CRAWLING_PORTAL.get()).defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x, y - 1.0, z + 3.0), ((Block) ArphexModBlocks.CRAWLING_PORTAL.get()).defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x, y - 1.0, z + 4.0), ((Block) ArphexModBlocks.CRAWLING_PORTAL.get()).defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x, y - 1.0, z - 3.0), ((Block) ArphexModBlocks.CRAWLING_PORTAL.get()).defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x, y - 1.0, z - 4.0), ((Block) ArphexModBlocks.CRAWLING_PORTAL.get()).defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x + 1.0, y - 1.0, z + 1.0), ((Block) ArphexModBlocks.CRAWLING_PORTAL.get()).defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x + 1.0, y - 1.0, z - 1.0), ((Block) ArphexModBlocks.CRAWLING_PORTAL.get()).defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x - 1.0, y - 1.0, z + 1.0), ((Block) ArphexModBlocks.CRAWLING_PORTAL.get()).defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x - 1.0, y - 1.0, z - 1.0), ((Block) ArphexModBlocks.CRAWLING_PORTAL.get()).defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x - 3.0, y - 1.0, z - 1.0), ((Block) ArphexModBlocks.CRAWLING_PORTAL.get()).defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x - 3.0, y - 1.0, z + 1.0), ((Block) ArphexModBlocks.CRAWLING_PORTAL.get()).defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x - 1.0, y - 1.0, z - 3.0), ((Block) ArphexModBlocks.CRAWLING_PORTAL.get()).defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x + 1.0, y - 1.0, z - 3.0), ((Block) ArphexModBlocks.CRAWLING_PORTAL.get()).defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x + 3.0, y - 1.0, z - 1.0), ((Block) ArphexModBlocks.CRAWLING_PORTAL.get()).defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x + 3.0, y - 1.0, z + 1.0), ((Block) ArphexModBlocks.CRAWLING_PORTAL.get()).defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x - 1.0, y - 1.0, z + 3.0), ((Block) ArphexModBlocks.CRAWLING_PORTAL.get()).defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x + 1.0, y - 1.0, z + 3.0), ((Block) ArphexModBlocks.CRAWLING_PORTAL.get()).defaultBlockState(), 3);
+                            level.setBlock(BlockPos.containing(x, y, z), Blocks.AIR.defaultBlockState(), 3);
+                            if (level instanceof ServerLevel serverLevel) {
+                                LightningBolt entityToSpawn = EntityType.LIGHTNING_BOLT.create(serverLevel);
+                                entityToSpawn.moveTo(Vec3.atBottomCenterOf(BlockPos.containing(x, y, z)));
+                                entityToSpawn.setVisualOnly(true);
+                                serverLevel.addFreshEntity(entityToSpawn);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void craftEvent(PlayerEvent.ItemCraftedEvent event) {
+        Player player = event.getEntity();
+        if (!player.level().isClientSide()) {
+            ItemStack craftedItem = event.getCrafting();
+            if (craftedItem.is(ArphexModItems.ABYSSAL_CRYSTAL.get())) {
+                for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+                    ItemStack slot = player.getInventory().getItem(i);
+                    if (slot.is(ArphexModItems.ABYSSAL_CRYSTAL.get())) {
+                        player.getInventory().removeItem(i, 1);
+                        break;
+                    }
+                }
+                for (int i = 0; i < 4; i++) {
+                    player.addItem(ArphexModItems.ABYSSAL_SHARD.get().getDefaultInstance());
+                }
+                player.sendSystemMessage(Component.literal("You can't craft this item.").withStyle(ChatFormatting.RED));
+
+            } else if (craftedItem.is(ArphexModItems.VOID_GEODE.get())) {
+                for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+                    ItemStack slot = player.getInventory().getItem(i);
+                    if (slot.is(ArphexModItems.VOID_GEODE.get())) {
+                        player.getInventory().removeItem(i, 1);
+                        break;
+                    }
+                }
+                for (int i = 0; i < 4; i++) {
+                    player.addItem(ArphexModItems.VOID_GEODE_SHARD.get().getDefaultInstance());
+                }
+                player.sendSystemMessage(Component.literal("You can't craft this item.").withStyle(ChatFormatting.RED));
+
+            } else if (craftedItem.is(ArphexModItems.FIRE_OPAL.get())) {
+                for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+                    ItemStack slot = player.getInventory().getItem(i);
+                    if (slot.is(ArphexModItems.FIRE_OPAL.get())) {
+                        player.getInventory().removeItem(i, 1);
+                        break;
+                    }
+                }
+                for (int i = 0; i < 4; i++) {
+                    player.addItem(ArphexModItems.FIRE_OPAL_SHARD.get().getDefaultInstance());
+                }
+                player.sendSystemMessage(Component.literal("You can't craft this item.").withStyle(ChatFormatting.RED));
             }
         }
     }
@@ -120,7 +310,7 @@ public class ModEvents {
             }
 
             int tickCount = living.tickCount;
-            if (tickCount % 400 == 0 && living instanceof Player) {
+            if (tickCount % 200 == 0 && living instanceof Player) {
                 ItemStack mainHand = living.getMainHandItem();
                 if (mainHand.isEnchanted() && mainHand.getEnchantmentLevel(Enchantments.PIERCING) > 0) {
                     Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(mainHand);
@@ -132,9 +322,6 @@ public class ModEvents {
             }
 
             if (living.tickCount % 40 == 0) {
-                if (BeyonderUtil.getPathway(living) != null && !(living instanceof Player)) {
-                    LOTM.sendMessageToAllPlayers("PATHWAY IS " + BeyonderUtil.getPathway(living).sequenceNames().get(BeyonderUtil.getSequence(living)) + " FOR " + living.getName().getString());
-                }
                 if (type == EntityRegistry.CHAOS_MONARCH.get()) {
                     BeyonderUtil.setPathway(living, BeyonderClassInit.MONSTER.get());
                     BeyonderUtil.setSequence(living, 7);
@@ -156,9 +343,6 @@ public class ModEvents {
                 } else if (type == EntityInit.NAMELESS_GUARDIAN.get()) {
                     BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
                     BeyonderUtil.setSequence(living, 6);
-                } else if (living.getName().getString().toLowerCase().contains("vessel")) {
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.MONSTER.get());
-                    BeyonderUtil.setSequence(living, 5);
                 } else if (type == EntityRegistry.MOONKNIGHT.get()) {
                     BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
                     BeyonderUtil.setSequence(living, 5);
@@ -176,6 +360,14 @@ public class ModEvents {
                             }
                         }
                     }
+                    if (living instanceof DayStalker dayStalker && dayStalker.isPhaseTwo()) {
+                        boolean x = tag.getBoolean("isPhaseTwo");
+                        tag.putBoolean("isPhaseTwo", false);
+                        if (!x) {
+                            multiplyMaxHealth(living, 2);
+                        }
+                        multiplyDamage(dayStalker, 2.6);
+                    }
                     BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
                     BeyonderUtil.setSequence(living, 4);
                 } else if (type == EntityRegistry.NIGHT_PROWLER.get()) {
@@ -184,6 +376,14 @@ public class ModEvents {
                             if (mob.getType() == EntityRegistry.DAY_STALKER.get()) {
                                 BeyonderUtil.forceAlly(mob, living);
                             }
+                        }
+                    }
+                    if (living instanceof NightProwler nightProwler && nightProwler.isPhaseTwo()) {
+                        boolean x = tag.getBoolean("isPhaseTwo");
+                        multiplyDamage(nightProwler, 0.75);
+                        if (!x) {
+                            tag.putBoolean("isPhaseTwo", false);
+                            multiplyMaxHealth(living, 2);
                         }
                     }
                     BeyonderUtil.setPathway(living, BeyonderClassInit.SAILOR.get());
@@ -202,7 +402,7 @@ public class ModEvents {
                 } else if (type == AquamiraeEntities.MAW.get()) {
                     multiplyDamage(living, 1.5);
                 } else if (type == ArphexModEntities.LONG_LEGS_FLY.get()) {
-                    multiplyDamage(living, 2.0);
+                    multiplyDamage(living, 1.0);
                 } else if (type == ModEntities.Skeletosaurus.get()) {
                     multiplyDamage(living, 1.2);
                 } else if (type == ArphexModEntities.SCORPION_STRIKER.get()) {
@@ -234,18 +434,19 @@ public class ModEvents {
                 } else if (type == BornInChaosV1ModEntities.MOTHER_SPIDER.get()) {
                     multiplyDamage(living, 2.0);
                 } else if (type == ArphexModEntities.SPIDER_GOLIATH.get()) {
-                    multiplyDamage(living, 1.3);
+                    multiplyDamage(living, 1.4);
                 } else if (type == TerramityModEntities.HELLROK.get()) {
                     multiplyDamage(living, 1.3);
+                    living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1, 40, false, false));
                 }
 
                 // Sequence 7
                 else if (type == ACEntityRegistry.FORSAKEN.get()) {
                     multiplyDamage(living, 1.5);
                 } else if (type == ArphexModEntities.SPIDER_SNATCHER.get()) {
-                    multiplyDamage(living, 1.5);
+                    multiplyDamage(living, 1.6);
                 } else if (type == MacabreModEntities.CRAWLER.get()) {
-                    multiplyDamage(living, 2.0);
+                    multiplyDamage(living, 6.0);
                 } else if (living.getName().getString().toLowerCase().contains("doomharbor")) {
                     multiplyDamage(living, 1.75);
                 } else if (type == EntityHandler.FROSTMAW.get()) {
@@ -257,7 +458,8 @@ public class ModEvents {
                 } else if (living.getName().getString().toLowerCase().contains("plague_bringer")) {
                     multiplyDamage(living, 1.4);
                 } else if (type == DDEntities.STALKER.get()) {
-                    multiplyDamage(living, 1.2);
+                    multiplyDamage(living, 0.8);
+                    multiplyMaxHealth(living, 1.5);
                 } else if (type == AnimatedmobsmodModEntities.ENDER_KING.get()) {
                     multiplyDamage(living, 0.8);
                 } else if (living.getClass().getSimpleName().equals("LichEntity")) {
@@ -265,11 +467,11 @@ public class ModEvents {
                 } else if (type == AetherEntityTypes.SUN_SPIRIT.get()) {
                     multiplyDamage(living, 1.2);
                 } else if (living.getClass().getSimpleName().equals("GauntletEntity")) {
-                    multiplyDamage(living, 1.2);
+                    multiplyDamage(living, 2.0);
                 } else if (type == ArphexModEntities.SOLIFUGE_SKULKER.get()) {
-                    multiplyDamage(living, 1.3);
+                    multiplyDamage(living, 1.8);
                 } else if (living.getClass().getSimpleName().equals("ObsidilithEntity")) {
-                    multiplyDamage(living, 1.5);
+                    multiplyDamage(living, 1.1);
 
                     //Sequence 6
                 } else if (type == EntityType.WITHER) {
@@ -283,15 +485,18 @@ public class ModEvents {
                 } else if (type == ModEntityTypes.Magispeller.get()) {
                     multiplyDamage(living, 1.5);
                 } else if (type == BornInChaosV1ModEntities.LIFESTEALER.get()) {
-                    multiplyDamage(living, 1.5);
+                    multiplyDamage(living, 2.0);
+                    multiplyMaxHealth(living, 1.4);
                 } else if (type == MacabreModEntities.THE_HOLLOW_MAN.get()) {
-                    multiplyDamage(living, 1.4);
+                    multiplyDamage(living, 1.7);
                 } else if (type == BornInChaosV1ModEntities.SIR_PUMPKINHEAD.get()) {
-                    multiplyDamage(living, 1.6);
+                    multiplyDamage(living, 2.8);
+                } else if (living.getName().getString().toLowerCase().contains("dyrolian")) {
+                    multiplyDamage(living, 1.2);
 
                     // Sequence 5
                 } else if (type == EntityRegistry.CHAOS_MONARCH.get()) {
-                    multiplyDamage(living, 1.5);
+                    multiplyDamage(living, 4.5);
                     BeyonderUtil.setPathway(living, BeyonderClassInit.MONSTER.get());
                     BeyonderUtil.setSequence(living, 7);
                 } else if (type == ArphexModEntities.CRAB_CONSTRICTOR.get()) {
@@ -299,7 +504,8 @@ public class ModEvents {
                 } else if (type == ArphexModEntities.SPIDER_REAPER.get()) {
                     multiplyDamage(living, 2.0);
                 } else if (type == AquamiraeEntities.CAPTAIN_CORNELIA.get()) {
-                    multiplyDamage(living, 1.3);
+                    multiplyDamage(living, 1.6);
+                    multiplyMaxHealth(living, 1.3);
                 } else if (type == EntityRegistry.DRAUGR_BOSS.get()) {
                     multiplyDamage(living, 1.2);
                     BeyonderUtil.setPathway(living, BeyonderClassInit.SPECTATOR.get());
@@ -309,7 +515,7 @@ public class ModEvents {
                     BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
                     BeyonderUtil.setSequence(living, 7);
                 } else if (type == EntityRegistry.ACCURSED_LORD_BOSS.get()) {
-                    multiplyDamage(living, 1.7);
+                    multiplyDamage(living, 2.0);
                 } else if (type == EntityRegistry.RETURNING_KNIGHT.get()) {
                     multiplyDamage(living, 1.6);
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.ENDER_GUARDIAN.get()) {
@@ -324,9 +530,9 @@ public class ModEvents {
                     BeyonderUtil.setPathway(living, BeyonderClassInit.SAILOR.get());
                     BeyonderUtil.setSequence(living, 6);
                 } else if (type == MacabreModEntities.BAAL.get()) {
-                    multiplyDamage(living, 1.2);
+                    multiplyDamage(living, 1.7);
                 } else if (type == ACEntityRegistry.LUXTRUCTOSAURUS.get()) {
-                    multiplyDamage(living, 2.5);
+                    multiplyDamage(living, 4.0);
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.THE_LEVIATHAN.get()) {
                     BeyonderUtil.setPathway(living, BeyonderClassInit.MONSTER.get());
                     BeyonderUtil.setSequence(living, 6);
@@ -335,14 +541,16 @@ public class ModEvents {
                     BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
                     BeyonderUtil.setSequence(living, 7);
                 } else if (type == TerramityModEntities.GOB.get()) {
-                    multiplyDamage(living, 2.0);
+                    multiplyDamage(living, 3.6);
+                    living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 40, 1, false, false));
                 } else if (type == ArphexModEntities.SPIDER_PROWLER.get()) {
                     multiplyDamage(living, 2.5);
+                    multiplyMaxHealth(living, 1.4);
                 } else if (living.getName().getString().equalsIgnoreCase("horseman")) {
                     BeyonderUtil.setPathway(living, BeyonderClassInit.SPECTATOR.get());
                     BeyonderUtil.setSequence(living, 6);
                 } else if (type == MacabreModEntities.VALAMON.get()) {
-                    multiplyDamage(living, 1.6);
+                    multiplyDamage(living, 2.1);
                 } else if (type == EntityInit.NAMELESS_GUARDIAN.get()) {
                     BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
                     BeyonderUtil.setSequence(living, 6);
@@ -351,6 +559,7 @@ public class ModEvents {
                 } else if (living.getName().getString().toLowerCase().contains("vessel")) {
                     BeyonderUtil.setPathway(living, BeyonderClassInit.MONSTER.get());
                     BeyonderUtil.setSequence(living, 5);
+                    multiplyDamage(living, 2.5);
                 } else if (type == ArphexModEntities.SPIDER_MOTH.get()) {
                     multiplyDamage(living, 2.0);
                 } else if (type == EntityRegistry.MOONKNIGHT.get()) {
@@ -438,15 +647,39 @@ public class ModEvents {
                     PTD.LOGGER.info("Despawned Dragon at{}, {}, {}", dragon.getX(), dragon.getY(), dragon.getZ());
                 }
             }
-            if (living instanceof UltraSnifferEntity ultraSniffer && ultraSniffer.getTarget() == null) {
-                for (Player player : ultraSniffer.level().getEntitiesOfClass(Player.class, ultraSniffer.getBoundingBox().inflate(50))) {
-                    if (!player.isCreative() && !player.isSpectator()) {
-                        ultraSniffer.setTarget(player);
+            if (living instanceof UltraSnifferEntity ultraSniffer) {
+                if (ultraSniffer.getTarget() == null) {
+                    for (Player player : ultraSniffer.level().getEntitiesOfClass(Player.class, ultraSniffer.getBoundingBox().inflate(50))) {
+                        if (!player.isCreative() && !player.isSpectator()) {
+                            ultraSniffer.setTarget(player);
+                        }
+                    }
+                    float health = ultraSniffer.getHealth();
+                    if (Float.isNaN(health) || health < 0.0F) {
+                        ultraSniffer.setHealth(0.0F);
+                    }
+                    boolean isPhaseTwo = ultraSniffer.getEntityData().get(UltraSnifferEntity.DATA_phase_two);
+                    if (isPhaseTwo) {
+                        int fullHeal = ultraSniffer.getPersistentData().getInt("PtDFullHeal");
+                        if (fullHeal <= 100) {
+                            ultraSniffer.getPersistentData().putInt("PtDFullHeal", fullHeal + 1);
+                            ultraSniffer.setHealth(ultraSniffer.getMaxHealth());
+                            ultraSniffer.getPersistentData().putInt("age", 0);
+                        }
+                    } else if (ultraSniffer.tickCount <= 100) {
+                        ultraSniffer.setHealth(ultraSniffer.getMaxHealth());
+                        ultraSniffer.getPersistentData().putInt("age", 0);
                     }
                 }
-                float health = ultraSniffer.getHealth();
-                if (Float.isNaN(health) || health < 0.0F) {
-                    ultraSniffer.setHealth(0.0F);
+                if (BeyonderUtil.currentPathwayMatchesNoException(living, BeyonderClassInit.SPECTATOR.get())) {
+                    multiplyDamage(living, 0.8);
+                } else if (BeyonderUtil.currentPathwayMatchesNoException(living, BeyonderClassInit.SAILOR.get())) {
+                    multiplyDamage(living, 0.8);
+                } else if (BeyonderUtil.currentPathwayMatchesNoException(living, BeyonderClassInit.MONSTER.get())) {
+                    if (!ultraSniffer.getPersistentData().getBoolean("PtDGaveLuck")) {
+                        ultraSniffer.getPersistentData().putDouble("luck", 5000);
+                        ultraSniffer.getPersistentData().putBoolean("PtDGaveLuck", true);
+                    }
                 }
             }
             if (living instanceof SuperSnifferEntity superSnifferEntity && superSnifferEntity.getTarget() == null) {
@@ -494,16 +727,48 @@ public class ModEvents {
     }
 
     @SubscribeEvent
+    public static void livingDropEvent(LivingDropsEvent event) {
+        LivingEntity entity = event.getEntity();
+        if (!entity.level().isClientSide()) {
+            if (entity instanceof CentipedeEvictorEntity) {
+                event.setCanceled(true);
+                ItemStack stack = new ItemStack(ArphexModItems.ABYSSAL_SHARD.get());
+                ItemEntity itemEntity = new ItemEntity(entity.level(), entity.getX(), entity.getY(), entity.getZ(), stack);
+                itemEntity.setNoPickUpDelay();
+                itemEntity.teleportTo(entity.getX(), entity.getY(), entity.getZ());
+                itemEntity.setUnlimitedLifetime();
+                entity.level().addFreshEntity(itemEntity);
+            } else if (entity instanceof SpiderProwlerEntity) {
+                event.setCanceled(true);
+                ItemStack stack = new ItemStack(ArphexModItems.FIRE_OPAL_SHARD.get());
+                ItemEntity itemEntity = new ItemEntity(entity.level(), entity.getX(), entity.getY(), entity.getZ(), stack);
+                itemEntity.setNoPickUpDelay();
+                itemEntity.teleportTo(entity.getX(), entity.getY(), entity.getZ());
+                itemEntity.setUnlimitedLifetime();
+                entity.level().addFreshEntity(itemEntity);
+            }
+        }
+    }
+
+    @SubscribeEvent
     public static void livingDeathEvent(LivingDeathEvent event) {
         Entity entity = event.getEntity();
-        CompoundTag tag = entity.getPersistentData();
-        if (entity.getName().getString().contains("vessel")) {
-            ItemStack stack = new ItemStack(TerramityModItems.POCKET_UNIVERSE.get());
-            ItemEntity itemEntity = new ItemEntity(entity.level(), entity.getX(), entity.getY(), entity.getZ(), stack);
-            itemEntity.setNoPickUpDelay();
-            itemEntity.teleportTo(entity.getX(), entity.getY(), entity.getZ());
-            itemEntity.setUnlimitedLifetime();
-            entity.level().addFreshEntity(itemEntity);
+        if (!event.getEntity().level().isClientSide()) {
+            if (entity.getName().getString().contains("vessel")) {
+                ItemStack stack = new ItemStack(TerramityModItems.POCKET_UNIVERSE.get());
+                ItemEntity itemEntity = new ItemEntity(entity.level(), entity.getX(), entity.getY(), entity.getZ(), stack);
+                itemEntity.setNoPickUpDelay();
+                itemEntity.teleportTo(entity.getX(), entity.getY(), entity.getZ());
+                itemEntity.setUnlimitedLifetime();
+                entity.level().addFreshEntity(itemEntity);
+            } else if (event.getEntity() instanceof DuskrokEntity) {
+                ItemStack stack = new ItemStack(Items.NETHERITE_SCRAP);
+                ItemEntity itemEntity = new ItemEntity(entity.level(), entity.getX(), entity.getY(), entity.getZ(), stack);
+                itemEntity.setNoPickUpDelay();
+                itemEntity.teleportTo(entity.getX(), entity.getY(), entity.getZ());
+                itemEntity.setUnlimitedLifetime();
+                entity.level().addFreshEntity(itemEntity);
+            }
         }
     }
 
@@ -521,8 +786,12 @@ public class ModEvents {
         }
         if (!event.getEntity().level().isClientSide()) {
             if (directSource instanceof GomoriaHandProjEntity projectile) {
-                if (projectile.getOwner() != null && projectile.getOwner() instanceof Player) {
-                    event.setAmount(event.getAmount() * 2.5f);
+                if (projectile.getOwner() != null) {
+                    if (projectile.getOwner() instanceof Player) {
+                        event.setAmount(event.getAmount() * 2.5f);
+                    } else {
+                        event.setAmount(event.getAmount() * 0.6f);
+                    }
                 }
             } else if (directSource instanceof SolarisBomb) {
                 event.setAmount(event.getAmount() * 5.0f);
@@ -593,6 +862,10 @@ public class ModEvents {
                 }
             } else if (directSource instanceof FreyrSwordEntity) {
                 event.setAmount(event.getAmount() * 1.8f);
+            } else if (directSource instanceof EntityGuardianLaser projectile) {
+                if (projectile.getOwner() != null && !(projectile.getOwner() instanceof Player)) {
+                    event.setAmount(event.getAmount() * 0.6f);
+                }
             }
 
 
@@ -643,10 +916,11 @@ public class ModEvents {
                     multiplyMaxHealth(living, 2.0);
                     multiplyDamage(living, 1.5);
                 } else if (type == ArphexModEntities.ROACH_RIVERSPAWN.get()) {
-                    multiplyMaxHealth(living, 49.0);
+                    multiplyMaxHealth(living, 10.0);
+                    multiplyDamage(living, 0.4);
                 } else if (type == ArphexModEntities.LONG_LEGS_FLY.get()) {
                     multiplyMaxHealth(living, 4.0);
-                    multiplyDamage(living, 2.0);
+                    multiplyDamage(living, 1.0);
                 } else if (type == ModEntities.Skeletosaurus.get()) {
                     multiplyMaxHealth(living, 1.2);
                     multiplyDamage(living, 1.2);
@@ -708,7 +982,7 @@ public class ModEvents {
                     multiplyDamage(living, 1.3);
                 } else if (type == TerramityModEntities.HELLROK.get()) {
                     multiplyMaxHealth(living, 1.3);
-                    multiplyDamage(living, 1.3);
+                    multiplyDamage(living, 1.4);
                 } else if (type == ModRegistry.MUTANT_ZOMBIE_ENTITY_TYPE.get()) {
                     multiplyMaxHealth(living, 1.5);
 
@@ -720,10 +994,10 @@ public class ModEvents {
                     multiplyMaxHealth(living, 1.3);
                 } else if (type == ArphexModEntities.SPIDER_SNATCHER.get()) {
                     multiplyMaxHealth(living, 1.0);
-                    multiplyDamage(living, 1.5);
+                    multiplyDamage(living, 1.6);
                 } else if (type == MacabreModEntities.CRAWLER.get()) {
                     multiplyMaxHealth(living, 2.0);
-                    multiplyDamage(living, 2.0);
+                    multiplyDamage(living, 6.0);
                 } else if (living.getName().getString().toLowerCase().contains("doomharbor")) { //Doomharbor Lich
                     multiplyMaxHealth(living, 1.0);
                     multiplyDamage(living, 1.75);
@@ -737,8 +1011,8 @@ public class ModEvents {
                     multiplyMaxHealth(living, 1.0);
                     multiplyDamage(living, 1.3);
                 } else if (living.getName().getString().toLowerCase().contains("plague_bringer")) { //Plague Bringer
-                    multiplyMaxHealth(living, 1.0);
-                    multiplyDamage(living, 1.4);
+                    multiplyMaxHealth(living, 0.7);
+                    multiplyDamage(living, 1.7);
                 } else if (type == DDEntities.STALKER.get()) {
                     multiplyMaxHealth(living, 1.0);
                     multiplyDamage(living, 1.2);
@@ -755,13 +1029,13 @@ public class ModEvents {
                     multiplyDamage(living, 1.2);
                 } else if (entity.getClass().getSimpleName().equals("GauntletEntity")) { //Nether Gauntlet
                     multiplyMaxHealth(living, 1.1);
-                    multiplyDamage(living, 1.2);
+                    multiplyDamage(living, 2.0);
                 } else if (type == ArphexModEntities.SOLIFUGE_SKULKER.get()) {
                     multiplyMaxHealth(living, 1.3);
-                    multiplyDamage(living, 1.3);
+                    multiplyDamage(living, 1.8);
                 } else if (entity.getClass().getSimpleName().equals("ObsidilithEntity")) { //Obsidilith
-                    multiplyMaxHealth(living, 1.1);
-                    multiplyDamage(living, 1.5);
+                    multiplyMaxHealth(living, 1.8);
+                    multiplyDamage(living, 1.2);
 
                     //Sequence 6
                 } else if (type == ModEntityTypes.Spiritcaller.get()) {
@@ -779,30 +1053,36 @@ public class ModEvents {
                     multiplyMaxHealth(living, 1.5);
                 } else if (type == ArphexModEntities.WASP_NEMESIS.get()) {
                     multiplyMaxHealth(living, 1.5);
-                    multiplyDamage(living, 1.6);
+                    multiplyDamage(living, 1.9);
                 } else if (type == ModEntityTypes.Magispeller.get()) {
                     multiplyMaxHealth(living, 1.5);
                     multiplyDamage(living, 1.5);
                 } else if (type == AwakenedBossesModEntities.HEROBRINE.get()) {
                     multiplyMaxHealth(living, 1.0);
+                    multiplyDamage(living, 1.2);
                 } else if (type == BornInChaosV1ModEntities.LIFESTEALER.get()) {
                     multiplyMaxHealth(living, 1.5);
                     multiplyDamage(living, 1.5);
                 } else if (type == ModEntities.Lava_eater.get()) {
-                    multiplyMaxHealth(living, 1.3);
+                    multiplyMaxHealth(living, 1.7);
+                    multiplyDamage(living, 1.2);
                 } else if (type == MacabreModEntities.THE_HOLLOW_MAN.get()) {
                     multiplyMaxHealth(living, 1.2);
-                    multiplyDamage(living, 1.4);
+                    multiplyDamage(living, 1.7);
                 } else if (type == BornInChaosV1ModEntities.SIR_PUMPKINHEAD.get()) {
-                    multiplyMaxHealth(living, 1.5);
-                    multiplyDamage(living, 1.6);
+                    multiplyMaxHealth(living, 2.2);
+                    multiplyDamage(living, 2.8);
+                } else if (living.getName().getString().toLowerCase().contains("dyrolian")) {
+                    multiplyDamage(living, 1.3);
+                    multiplyMaxHealth(living, 0.5);
 
                     // Sequence 5
                 } else if (type == EntityRegistry.CHAOS_MONARCH.get()) {
                     multiplyMaxHealth(living, 1.8);
-                    multiplyDamage(living, 1.5);
+                    multiplyDamage(living, 4.5);
                     BeyonderUtil.setPathway(living, BeyonderClassInit.MONSTER.get());
                     BeyonderUtil.setSequence(living, 7);
+                    living.getPersistentData().putDouble("luck", 500);
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.THE_HARBINGER.get()) {
                     multiplyMaxHealth(living, 1.3);
                 } else if (type == ArphexModEntities.CRAB_CONSTRICTOR.get()) {
@@ -842,7 +1122,8 @@ public class ModEvents {
                     multiplyMaxHealth(living, 1.5);
                     multiplyDamage(living, 1.3);
                 } else if (type == MacabreModEntities.GARGAMAW.get()) {
-                    multiplyMaxHealth(living, 2.0);
+                    multiplyMaxHealth(living, 2.5);
+                    multiplyDamage(living, 1.7);
                     //ADD SMALLER EXPLOSIONS
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.IGNIS.get()) {
                     multiplyMaxHealth(living, 1.2);
@@ -854,8 +1135,8 @@ public class ModEvents {
                     multiplyMaxHealth(living, 1.8);
                     multiplyDamage(living, 1.2);
                 } else if (type == ACEntityRegistry.LUXTRUCTOSAURUS.get()) {
-                    multiplyMaxHealth(living, 2.0);
-                    multiplyDamage(living, 2.5);
+                    multiplyMaxHealth(living, 2.5);
+                    multiplyDamage(living, 4.0);
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.THE_LEVIATHAN.get()) {
                     multiplyMaxHealth(living, 1.0);
                     BeyonderUtil.setPathway(living, BeyonderClassInit.MONSTER.get());
@@ -867,7 +1148,7 @@ public class ModEvents {
                     BeyonderUtil.setSequence(living, 7);
                 } else if (type == TerramityModEntities.GOB.get()) {
                     multiplyMaxHealth(living, 3.0);
-                    multiplyDamage(living, 2.0);
+                    multiplyDamage(living, 3.6);
                 } else if (type == ArphexModEntities.SPIDER_PROWLER.get()) {
                     multiplyMaxHealth(living, 4.0);
                     multiplyDamage(living, 2.5);
@@ -897,6 +1178,8 @@ public class ModEvents {
                     multiplyDamage(living, 2.5);
                     BeyonderUtil.setPathway(living, BeyonderClassInit.MONSTER.get());
                     BeyonderUtil.setSequence(living, 5);
+                    ProbabilityManipulationFortune.giveFortuneEvents(living);
+                    living.getPersistentData().putDouble("luck", 3000);
                 } else if (type == ArphexModEntities.SPIDER_MOTH.get()) {
                     multiplyMaxHealth(living, 4.0);
                     multiplyDamage(living, 2.0);
@@ -926,11 +1209,13 @@ public class ModEvents {
                     multiplyMaxHealth(living, 6.0);
                     multiplyDamage(living, 1.2);
                 } else if (type == EntityRegistry.DAY_STALKER.get()) {
-                    multiplyMaxHealth(living, 7.0);
+                    multiplyMaxHealth(living, 4.0);
+                    multiplyDamage(living, 1.1);
                     BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
                     BeyonderUtil.setSequence(living, 4);
                 } else if (type == EntityRegistry.NIGHT_PROWLER.get()) {
-                    multiplyMaxHealth(living, 7.0);
+                    multiplyMaxHealth(living, 3.0);
+                    multiplyDamage(living, 0.4);
                     BeyonderUtil.setPathway(living, BeyonderClassInit.SAILOR.get());
                     BeyonderUtil.setSequence(living, 4);
                 } else if (type == TerramityModEntities.GUNDALF.get()) {
@@ -967,7 +1252,7 @@ public class ModEvents {
             commands.performPrefixedCommand(commandSource, "beyonderentity add cataclysm:the_leviathan lotm:monster 6");
             commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:moonknight lotm:warrior 5");
             commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:night_prowler lotm:sailor 4");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add sleepy_hollows:horseman lotm:spectator_6");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add sleepy_hollows:horseman lotm:spectator 6");
             commands.performPrefixedCommand(commandSource, "beyonderentity add born_in_chaos_v1:lord_pumpkinhead lotm:spectator 5");
             commands.performPrefixedCommand(commandSource, "beyonderentity add eeeabsmobs:nameless_guardian lotm:warrior 6");
             commands.performPrefixedCommand(commandSource, "beyonderentity add terramity:trial_guardian lotm:sailor 5");
@@ -1028,31 +1313,41 @@ public class ModEvents {
     }
 
     public static void multiplyMaxHealth(LivingEntity living, double multiplier) {
-        float multiplierAmount = (float) multiplier;
-        float maxHealth = living.getMaxHealth();
-        AttributeInstance maxHealthAttribute = living.getAttribute(Attributes.MAX_HEALTH);
-        if (maxHealthAttribute != null) {
-            if (maxHealth < 10000) {
-                maxHealthAttribute.setBaseValue(maxHealth * multiplierAmount);
+        if (!living.getPersistentData().getBoolean("maxHealthMultiplied")) {
+            float multiplierAmount = (float) multiplier;
+            float maxHealth = living.getMaxHealth();
+            AttributeInstance maxHealthAttribute = living.getAttribute(Attributes.MAX_HEALTH);
+            if (maxHealthAttribute != null) {
+                if (maxHealth < 10000) {
+                    maxHealthAttribute.setBaseValue(maxHealth * multiplierAmount);
+                }
             }
+            living.setHealth(maxHealth * multiplierAmount);
+            living.getPersistentData().putBoolean("maxHealthMultiplied", true);
+            LOTM.LOGGER.info("Multiplied{}'s health by {}", living.getName().getString(), multiplier);
         }
-        living.setHealth(maxHealth * multiplierAmount);
-        LOTM.LOGGER.info("Multiplied{}'s health by {}", living.getName().getString(), multiplier);
     }
 
     public static void multiplyMaxHealthUltraSniffer(LivingEntity living, double multiplier) {
-        float multiplierAmount = (float) multiplier;
-        float maxHealth = living.getMaxHealth();
-        AttributeInstance maxHealthAttribute = living.getAttribute(Attributes.MAX_HEALTH);
-        if (maxHealthAttribute != null) {
-            maxHealthAttribute.setBaseValue(maxHealth * multiplierAmount + 1);
+        if (!living.getPersistentData().getBoolean("maxHealthMultiplied")) {
+
+            float multiplierAmount = (float) multiplier;
+            float maxHealth = living.getMaxHealth();
+            AttributeInstance maxHealthAttribute = living.getAttribute(Attributes.MAX_HEALTH);
+            if (maxHealthAttribute != null) {
+                maxHealthAttribute.setBaseValue(maxHealth * multiplierAmount + 1);
+            }
+            living.setHealth(maxHealth * multiplierAmount);
+            living.getPersistentData().putBoolean("maxHealthMultiplied", true);
+            LOTM.LOGGER.info("Multiplied{}'s health by {}", living.getName().getString(), multiplier);
         }
-        living.setHealth(maxHealth * multiplierAmount);
-        LOTM.LOGGER.info("Multiplied{}'s health by {}", living.getName().getString(), multiplier);
     }
 
     private static void multiplyDamage(LivingEntity entity, double multiplier) {
-        CompoundTag tag = entity.getPersistentData();
-        tag.putDouble("PTDDamageMultiplier", multiplier);
+        if (!entity.getPersistentData().getBoolean("damageMultiplied")) {
+            CompoundTag tag = entity.getPersistentData();
+            tag.putDouble("PTDDamageMultiplier", multiplier);
+            entity.getPersistentData().putBoolean("damageMultiplied", true);
+        }
     }
 }

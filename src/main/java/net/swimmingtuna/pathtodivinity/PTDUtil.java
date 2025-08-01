@@ -1,6 +1,8 @@
 package net.swimmingtuna.pathtodivinity;
 
 import com.aetherteam.aether.entity.AetherEntityTypes;
+import com.aqutheseal.celestisynth.Celestisynth;
+import com.aqutheseal.celestisynth.common.registry.CSItems;
 import com.bobmowzie.mowziesmobs.server.entity.EntityHandler;
 import com.curseforge.macabre.init.MacabreModEntities;
 import com.curseforge.macabre.init.MacabreModItems;
@@ -22,12 +24,17 @@ import net.mcreator.terramity.init.TerramityModItems;
 import net.miauczel.legendary_monsters.entity.ModEntities;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.soulsweaponry.registry.EntityRegistry;
+import net.swimmingtuna.lotm.util.BeyonderUtil;
 import net.zoniex.init.ZoniexModEntities;
 
 import java.util.HashSet;
@@ -51,8 +58,8 @@ public class PTDUtil {
         BEYONDER_ENTITY_TYPES.add(com.github.L_Ender.cataclysm.init.ModEntities.KOBOLEDIATOR.get());
         BEYONDER_ENTITY_TYPES.add(EntityHandler.UMVUTHI.get());
         BEYONDER_ENTITY_TYPES.add(AquamiraeEntities.MAW.get());
-        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.ROACH_RIVERSPAWN.get());
-        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.LONG_LEGS_FLY.get());
+        //BEYONDER_ENTITY_TYPES.add(ArphexModEntities.ROACH_RIVERSPAWN.get());
+        //BEYONDER_ENTITY_TYPES.add(ArphexModEntities.LONG_LEGS_FLY.get());
         BEYONDER_ENTITY_TYPES.add(ModEntities.Skeletosaurus.get());
         BEYONDER_ENTITY_TYPES.add(BornInChaosV1ModEntities.NIGHTMARE_STALKER.get());
         BEYONDER_ENTITY_TYPES.add(ArphexModEntities.SCORPION_STRIKER.get());
@@ -205,7 +212,6 @@ public class PTDUtil {
 
 
     public static void removeBannedItem(LivingEntity living) {
-        // Check armor slots
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             if (slot.getType() == EquipmentSlot.Type.ARMOR || slot == EquipmentSlot.MAINHAND || slot == EquipmentSlot.OFFHAND) {
                 ItemStack itemStack = living.getItemBySlot(slot);
@@ -214,6 +220,73 @@ public class PTDUtil {
                     living.sendSystemMessage(Component.literal("Banned item removed: " + itemStack.getHoverName().getString()).withStyle(ChatFormatting.RED));
                 }
             }
+            if (slot.getType() == EquipmentSlot.Type.HAND) {
+                ItemStack itemStack = living.getItemBySlot(slot);
+                if (BeyonderUtil.getSequence(living) > 4) {
+                    if (isBannableSequence5Item(itemStack)) {
+                        if (living instanceof Player player) {
+                            boolean moved = false;
+                            if (player.getInventory().add(itemStack)) {
+                                moved = true;
+                            } else {
+                                for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+                                    if (player.getInventory().getItem(i).isEmpty()) {
+                                        player.getInventory().setItem(i, itemStack);
+                                        moved = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (moved) {
+                                living.setItemSlot(slot, ItemStack.EMPTY);
+                                living.sendSystemMessage(Component.literal("Item moved to inventory: " + itemStack.getHoverName().getString() + " (Requires Sequence 4 or higher)").withStyle(ChatFormatting.YELLOW));
+                            } else {
+                                living.setItemSlot(slot, ItemStack.EMPTY);
+                                player.drop(itemStack, false);
+                                living.sendSystemMessage(Component.literal("Item dropped (inventory full): " + itemStack.getHoverName().getString() + " (Requires Sequence 4 or higher)").withStyle(ChatFormatting.GOLD));
+                            }
+                        }
+                    }
+                }
+            }
         }
+        if (living instanceof Player player) {
+            Inventory inventory = player.getInventory();
+            for (int i = 0; i < inventory.getContainerSize(); i++) {
+                ItemStack itemStack = inventory.getItem(i);
+                if (isBannableItem(itemStack)) {
+                    inventory.setItem(i, ItemStack.EMPTY);
+                    living.sendSystemMessage(Component.literal("Banned item removed from inventory: " + itemStack.getHoverName().getString()).withStyle(ChatFormatting.RED));
+                } else if (BeyonderUtil.getSequence(living) > 4 && isBannableSequence5Item(itemStack)) {
+                    inventory.setItem(i, ItemStack.EMPTY);
+                    player.drop(itemStack, false);
+                    living.sendSystemMessage(Component.literal("Item dropped from inventory: " + itemStack.getHoverName().getString() + " (Requires Sequence 4 or higher)").withStyle(ChatFormatting.GOLD));
+                } else if (itemStack.is(TerramityModItems.MUSIC_SHEET_OF_UNTIMELY_DEATH.get())) {
+                    inventory.setItem(i, ItemStack.EMPTY);
+                }
+            }
+            ItemStack offhandStack = inventory.offhand.get(0);
+            if (isBannableItem(offhandStack)) {
+                inventory.offhand.set(0, ItemStack.EMPTY);
+                living.sendSystemMessage(Component.literal("Banned item removed from offhand: " + offhandStack.getHoverName().getString()).withStyle(ChatFormatting.RED));
+            } else if (BeyonderUtil.getSequence(living) > 4 && isBannableSequence5Item(offhandStack)) {
+                inventory.offhand.set(0, ItemStack.EMPTY);
+                player.drop(offhandStack, false);
+                living.sendSystemMessage(Component.literal("Item dropped from offhand: " + offhandStack.getHoverName().getString() + " (Requires Sequence 4 or higher)").withStyle(ChatFormatting.GOLD));
+            }
+        }
+    }
+
+    public static boolean isBannableSequence5Item(ItemStack stack) {
+        return
+                stack.is(CSItems.AQUAFLORA.get()) ||
+                        stack.is(CSItems.KERES.get()) ||
+                        stack.is(CSItems.BREEZEBREAKER.get()) ||
+                        stack.is(CSItems.SOLARIS.get()) ||
+                        stack.is(CSItems.CRESCENTIA.get()) ||
+                        stack.is(CSItems.POLTERGEIST.get()) ||
+                        stack.is(CSItems.AQUAFLORA.get()) ||
+                        stack.is(CSItems.RAINFALL_SERENITY.get()) ||
+                        stack.is(CSItems.FROSTBOUND.get());
     }
 }

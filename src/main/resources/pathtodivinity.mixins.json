@@ -76,6 +76,7 @@
     "Celestisynth.SolarisFullRoundAttackMixin",
     "Celestisynth.SolarisSoulDashAttackMixin",
     "DeeperDarker.DDTiersMixin",
+    "LOTMC.UltraSnifferAgeMixin",
     "Macabre.AbhorrentArmorMixin",
     "Macabre.BaalArmorMixin",
     "Macabre.BloodclotArmorMixin",

@@ -106,13 +106,13 @@ dependencies {
     implementation fg.deobf("net.tslat.smartbrainlib:SmartBrainLib-forge-${project.minecraft_version}:${project.sbl_version}")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     //LOTMC
-    implementation fg.deobf("curse.maven:lord-of-the-mysteries-craft-1095869:6773065")
+    implementation fg.deobf("curse.maven:lord-of-the-mysteries-craft-1095869:6809040")
     //Ice and Fire
     implementation fg.deobf("curse.maven:iceandfire-264231:5633453")
     //Legendary Monsters
-    implementation fg.deobf("curse.maven:legendarymonsters-944035:6649937")
+    implementation fg.deobf("curse.maven:legendarymonsters-944035:6776766")
     //Arphex
-    implementation fg.deobf("curse.maven:arphex-967672:6701116")
+    implementation fg.deobf("curse.maven:arphex-967672:6835837")
     //Alex's Caves
     implementation fg.deobf("curse.maven:alexscaves-924854:5848216")
     //Terramity
@@ -126,13 +126,13 @@ dependencies {
     //Marium's Soulslike Weaponry
     implementation fg.deobf("curse.maven:soulsweapons-632066:6509913")
     //Cataclysm
-    implementation fg.deobf("curse.maven:cataclysm-551586:6769185")
+    implementation fg.deobf("curse.maven:cataclysm-551586:6832543")
     //Mowzie's Mobs
     implementation fg.deobf("curse.maven:mowziesmobs-250498:6586086")
     //Aquamirae
     implementation fg.deobf("curse.maven:aquamirae-536254:4616373")
     //Born in Chaos
-    implementation fg.deobf("curse.maven:borninchaos-686437:6474407")
+    implementation fg.deobf("curse.maven:borninchaos-686437:6833957")
     //EEEAB's Mobs
     implementation fg.deobf("curse.maven:eeeabmobs-921600:6095880")
     //Curios API
