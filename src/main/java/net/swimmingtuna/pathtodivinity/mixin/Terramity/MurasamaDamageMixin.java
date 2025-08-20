@@ -1,8 +1,5 @@
 package net.swimmingtuna.pathtodivinity.mixin.Terramity;
 
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
 import net.mcreator.terramity.TerramityMod;
 import net.mcreator.terramity.init.TerramityModParticleTypes;
 import net.mcreator.terramity.procedures.MurasamaDamageProcedure;
@@ -25,6 +22,9 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
+
+import java.util.Comparator;
+import java.util.List;
 
 @Mixin(value = MurasamaDamageProcedure.class, remap = false)
 public class MurasamaDamageMixin {

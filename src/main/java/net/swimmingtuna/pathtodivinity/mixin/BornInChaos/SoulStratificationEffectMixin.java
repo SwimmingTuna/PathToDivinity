@@ -1,15 +1,12 @@
 package net.swimmingtuna.pathtodivinity.mixin.BornInChaos;
 
-import com.aetherteam.aether.mixin.mixins.common.accessor.LevelAccessor;
 import net.mcreator.borninchaosv.procedures.SoulStratificationKazhdyiTikVoVriemiaEffiektaProcedure;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(SoulStratificationKazhdyiTikVoVriemiaEffiektaProcedure.class)
 public class SoulStratificationEffectMixin {

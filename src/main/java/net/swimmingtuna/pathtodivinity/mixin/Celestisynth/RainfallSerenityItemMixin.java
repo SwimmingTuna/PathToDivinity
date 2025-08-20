@@ -1,15 +1,15 @@
 package net.swimmingtuna.pathtodivinity.mixin.Celestisynth;
 
 
-import com.aqutheseal.celestisynth.common.compat.apotheosis.CSCompatAP;
-import com.aqutheseal.celestisynth.common.entity.projectile.RainfallArrow;
-import com.aqutheseal.celestisynth.common.item.weapons.RainfallSerenityItem;
-import com.aqutheseal.celestisynth.manager.CSIntegrationManager;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
+import org.thecelestialworkshop.celestisynth.common.compat.apotheosis.CSCompatAP;
+import org.thecelestialworkshop.celestisynth.common.entity.projectile.RainfallArrow;
+import org.thecelestialworkshop.celestisynth.common.item.weapons.RainfallSerenityItem;
+import org.thecelestialworkshop.celestisynth.manager.CSIntegrationManager;
 
 @Mixin(value = RainfallSerenityItem.class, remap = false)
 public class RainfallSerenityItemMixin {
@@ -36,7 +36,7 @@ public class RainfallSerenityItemMixin {
             }
         }
 
-        rainfallArrow.setBaseDamage(rainfallArrow.getBaseDamage() * 0.4);
+        rainfallArrow.setBaseDamage(rainfallArrow.getBaseDamage() * 0.15);
 
         return rainfallArrow;
     }

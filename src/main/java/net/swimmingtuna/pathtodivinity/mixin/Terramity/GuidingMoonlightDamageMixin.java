@@ -1,6 +1,5 @@
 package net.swimmingtuna.pathtodivinity.mixin.Terramity;
 
-import com.curseforge.macabre.procedures.HemorrhageSwordRightclickedProcedure;
 import net.mcreator.terramity.procedures.GuidingMoonlightProjectileProcedure;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;

@@ -28,7 +28,4 @@ public class PTD {
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.addListener(PTDCommands::onCommandRegistration);
     }
-
-
-
 }

@@ -1,11 +1,6 @@
 package net.swimmingtuna.pathtodivinity.mixin.Celestisynth;
 
-import com.aqutheseal.celestisynth.api.item.AttackHurtTypes;
-import com.aqutheseal.celestisynth.common.attack.aquaflora.AquafloraSlashFrenzyAttack;
-import com.aqutheseal.celestisynth.common.entity.base.CSEffectEntity;
-import com.aqutheseal.celestisynth.common.item.weapons.AquafloraItem;
-import com.aqutheseal.celestisynth.common.registry.CSSoundEvents;
-import com.aqutheseal.celestisynth.common.registry.CSVisualTypes;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
@@ -16,6 +11,12 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.thecelestialworkshop.celestisynth.api.item.AttackHurtTypes;
+import org.thecelestialworkshop.celestisynth.common.attack.aquaflora.AquafloraSlashFrenzyAttack;
+import org.thecelestialworkshop.celestisynth.common.entity.base.CSEffectEntity;
+import org.thecelestialworkshop.celestisynth.common.item.weapons.AquafloraItem;
+import org.thecelestialworkshop.celestisynth.common.registry.CSSoundEvents;
+import org.thecelestialworkshop.celestisynth.common.registry.CSVisualTypes;
 
 import java.util.List;
 import java.util.Objects;
@@ -76,7 +77,7 @@ public class AquafloraSlashFrenzyAttackMixin {
             player.setDeltaMovement(((double)toPos.getX() - player.getX()) * 0.25, ((double)toPos.getY() - player.getY()) * 0.25, ((double)toPos.getZ() - player.getZ()) * 0.25);
             CSEffectEntity.createInstance(player, target, CSVisualTypes.AQUAFLORA_ASSASSINATE.get(), 0.0, -0.2, 0.0);
             player.playSound(CSSoundEvents.WIND_STRIKE.get(), 0.15F, 0.5F);
-            float dualWieldMultiplier = self.checkDualWield(player, AquafloraItem.class) ? 1.5F : 2.5F;
+            float dualWieldMultiplier = self.checkDualWield(player, AquafloraItem.class) ? 1.0F : 2.0F;
             self.attributeDependentAttack(player, target, self.getStack(), dualWieldMultiplier, AttackHurtTypes.RAPID_NO_KB);
             AquafloraSlashFrenzyAttack.createAquafloraFirework(self.getStack(), level, player, target.getX(), target.getY() + 1.0, target.getZ());
         }

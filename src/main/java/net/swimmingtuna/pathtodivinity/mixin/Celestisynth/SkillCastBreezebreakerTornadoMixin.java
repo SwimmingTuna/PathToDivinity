@@ -1,11 +1,6 @@
 package net.swimmingtuna.pathtodivinity.mixin.Celestisynth;
 
-import com.aqutheseal.celestisynth.api.item.AttackHurtTypes;
-import com.aqutheseal.celestisynth.common.entity.base.CSEffectEntity;
-import com.aqutheseal.celestisynth.common.entity.helper.CSVisualType;
-import com.aqutheseal.celestisynth.common.entity.skillcast.SkillCastBreezebreakerTornado;
-import com.aqutheseal.celestisynth.common.registry.CSSoundEvents;
-import com.aqutheseal.celestisynth.common.registry.CSVisualTypes;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -18,6 +13,12 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.thecelestialworkshop.celestisynth.api.item.AttackHurtTypes;
+import org.thecelestialworkshop.celestisynth.common.entity.base.CSEffectEntity;
+import org.thecelestialworkshop.celestisynth.common.entity.helper.CSVisualType;
+import org.thecelestialworkshop.celestisynth.common.entity.skillcast.SkillCastBreezebreakerTornado;
+import org.thecelestialworkshop.celestisynth.common.registry.CSSoundEvents;
+import org.thecelestialworkshop.celestisynth.common.registry.CSVisualTypes;
 
 import java.util.List;
 import java.util.UUID;
@@ -53,7 +54,7 @@ public class SkillCastBreezebreakerTornadoMixin {
         }
         for(int yLevel = -1; yLevel < 6; ++yLevel) {
             if (yLevel == -1 || yLevel == 0 || yLevel == 1) {
-                CSEffectEntity.createInstance(ownerPlayer, self, (CSVisualType)CSVisualTypes.SOLARIS_AIR_FLAT.get(), (double)self.getAngleX(), (double)(self.getAngleY() + (float)yLevel), (double)self.getAngleZ());
+                CSEffectEntity.createInstance(ownerPlayer, self, (CSVisualType) CSVisualTypes.SOLARIS_AIR_FLAT.get(), (double)self.getAngleX(), (double)(self.getAngleY() + (float)yLevel), (double)self.getAngleZ());
             }
 
             if (yLevel == 2 || yLevel == 3) {

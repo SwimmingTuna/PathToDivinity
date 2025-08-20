@@ -1,7 +1,6 @@
 package net.swimmingtuna.pathtodivinity.mixin.Cataclysm;
 
 import com.github.L_Ender.cataclysm.items.Gauntlet_of_Guard;
-import com.github.L_Ender.cataclysm.items.infernal_forge;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;

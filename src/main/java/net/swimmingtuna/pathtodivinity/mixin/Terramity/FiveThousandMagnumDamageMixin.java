@@ -1,7 +1,6 @@
 package net.swimmingtuna.pathtodivinity.mixin.Terramity;
 
 import net.mcreator.terramity.procedures.FiveThousandMagnumRightclickedProcedure;
-import net.mcreator.terramity.procedures.RailgunLaserProcedure;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;

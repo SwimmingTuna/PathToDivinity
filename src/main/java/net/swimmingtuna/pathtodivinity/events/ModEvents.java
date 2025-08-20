@@ -1,9 +1,6 @@
 package net.swimmingtuna.pathtodivinity.events;
 
 import com.aetherteam.aether.entity.AetherEntityTypes;
-import com.aqutheseal.celestisynth.common.entity.projectile.CrescentiaDragon;
-import com.aqutheseal.celestisynth.common.entity.projectile.FrostboundShard;
-import com.aqutheseal.celestisynth.common.entity.projectile.SolarisBomb;
 import com.bobmowzie.mowziesmobs.server.entity.EntityHandler;
 import com.curseforge.macabre.entity.GomoriaHandProjEntity;
 import com.curseforge.macabre.entity.GorepumpProjEntity;
@@ -19,9 +16,6 @@ import com.github.L_Ender.cataclysm.entity.projectile.*;
 import com.github.L_Ender.cataclysm.init.ModItems;
 import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
 import com.github.alexthe666.alexsmobs.entity.AMEntityRegistry;
-import com.github.alexthe666.iceandfire.entity.EntityDragonBase;
-import com.github.alexthe666.iceandfire.entity.EntityDragonPart;
-import com.github.alexthe666.iceandfire.entity.IafEntityRegistry;
 import com.kyanite.deeperdarker.content.DDEntities;
 import com.obscuria.aquamirae.registry.AquamiraeEntities;
 import com.yellowbrossproductions.illageandspillage.init.ModEntityTypes;
@@ -100,6 +94,9 @@ import net.swimmingtuna.pathtodivinity.PTD;
 import net.swimmingtuna.pathtodivinity.PTDGameRules;
 import net.swimmingtuna.pathtodivinity.PTDUtil;
 import net.zoniex.init.ZoniexModEntities;
+import org.thecelestialworkshop.celestisynth.common.entity.projectile.CrescentiaDragon;
+import org.thecelestialworkshop.celestisynth.common.entity.projectile.FrostboundShard;
+import org.thecelestialworkshop.celestisynth.common.entity.projectile.SolarisBomb;
 
 import java.util.Map;
 
@@ -630,23 +627,6 @@ public class ModEvents {
             } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.SCYLLA.get()) {
                 living.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 40, 2, false, false));
             }
-            if (living instanceof EntityDragonBase dragon && tickCount % 300 == 0) {
-                if (dragon.getDragonStage() >= 3 && dragon.getDragonStage() != 5) {
-                    BeyonderUtil.applyMobEffect(dragon, MobEffects.DAMAGE_BOOST, 600, 2, true, true);
-                    BeyonderUtil.applyMobEffect(dragon, MobEffects.DAMAGE_RESISTANCE, 600, 0, true, true);
-                    BeyonderUtil.applyMobEffect(dragon, MobEffects.REGENERATION, 600, 2, true, true);
-                } else if (dragon.getDragonStage() == 5) {
-                    BeyonderUtil.applyMobEffect(dragon, MobEffects.DAMAGE_BOOST, 40, 4, true, true);
-                    BeyonderUtil.applyMobEffect(dragon, MobEffects.DAMAGE_RESISTANCE, 40, 1, true, true);
-                    BeyonderUtil.applyMobEffect(dragon, MobEffects.REGENERATION, 40, 3, true, true);
-                }
-            }
-            if (living instanceof EntityDragonBase dragon && dragon.tickCount % 20 == 0) {
-                if (!dragon.level().getGameRules().getBoolean(PTDGameRules.SHOULD_ALLOW_DRAGONS)) {
-                    dragon.remove(Entity.RemovalReason.DISCARDED);
-                    PTD.LOGGER.info("Despawned Dragon at{}, {}, {}", dragon.getX(), dragon.getY(), dragon.getZ());
-                }
-            }
             if (living instanceof UltraSnifferEntity ultraSniffer) {
                 if (ultraSniffer.getTarget() == null) {
                     for (Player player : ultraSniffer.level().getEntitiesOfClass(Player.class, ultraSniffer.getBoundingBox().inflate(50))) {
@@ -674,7 +654,7 @@ public class ModEvents {
                 if (BeyonderUtil.currentPathwayMatchesNoException(living, BeyonderClassInit.SPECTATOR.get())) {
                     multiplyDamage(living, 0.8);
                 } else if (BeyonderUtil.currentPathwayMatchesNoException(living, BeyonderClassInit.SAILOR.get())) {
-                    multiplyDamage(living, 0.8);
+                    multiplyDamage(living, 0.9);
                 } else if (BeyonderUtil.currentPathwayMatchesNoException(living, BeyonderClassInit.MONSTER.get())) {
                     if (!ultraSniffer.getPersistentData().getBoolean("PtDGaveLuck")) {
                         ultraSniffer.getPersistentData().putDouble("luck", 5000);
@@ -892,17 +872,9 @@ public class ModEvents {
             Entity entity = event.getEntity();
             if (entity instanceof LivingEntity living) {
                 EntityType<?> type = living.getType();
-                float maxHealth = living.getMaxHealth();
-                if (!event.getEntity().level().getGameRules().getBoolean(PTDGameRules.SHOULD_ALLOW_DRAGONS)) {
-                    if (event.getEntity() instanceof EntityDragonBase || event.getEntity() instanceof EntityDragonPart) {
-                        event.setCanceled(true);
-                    }
-                }
 
                 // Sequence 9
-                if (type == IafEntityRegistry.CYCLOPS.get()) {
-                    multiplyMaxHealth(living, 1.3);
-                } else if (type == ModEntities.Overgrown_colossus.get()) {
+                if (type == ModEntities.Overgrown_colossus.get()) {
                     multiplyMaxHealth(living, 1.5);
                 } else if (type == ACEntityRegistry.BRAINIAC.get()) {
                     multiplyMaxHealth(living, 1.5);
@@ -959,8 +931,6 @@ public class ModEvents {
                 } else if (type == AMEntityRegistry.WARPED_MOSCO.get()) {
                     multiplyMaxHealth(living, 1.0);
                     multiplyDamage(living, 1.3);
-                } else if (type == IafEntityRegistry.SEA_SERPENT.get()) {
-                    multiplyMaxHealth(living, 2.0);
                 } else if (type == EntityType.ELDER_GUARDIAN) {
                     multiplyMaxHealth(living, 1.0);
                     multiplyDamage(living, 1.3);

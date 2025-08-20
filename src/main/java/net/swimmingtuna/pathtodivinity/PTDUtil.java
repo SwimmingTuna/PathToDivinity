@@ -1,16 +1,12 @@
 package net.swimmingtuna.pathtodivinity;
 
 import com.aetherteam.aether.entity.AetherEntityTypes;
-import com.aqutheseal.celestisynth.Celestisynth;
-import com.aqutheseal.celestisynth.common.registry.CSItems;
 import com.bobmowzie.mowziesmobs.server.entity.EntityHandler;
 import com.curseforge.macabre.init.MacabreModEntities;
-import com.curseforge.macabre.init.MacabreModItems;
 import com.eeeab.eeeabsmobs.sever.init.EntityInit;
 import com.github.L_Ender.cataclysm.init.ModItems;
 import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
 import com.github.alexthe666.alexsmobs.entity.AMEntityRegistry;
-import com.github.alexthe666.iceandfire.entity.IafEntityRegistry;
 import com.kyanite.deeperdarker.content.DDEntities;
 import com.obscuria.aquamirae.registry.AquamiraeEntities;
 import com.yellowbrossproductions.illageandspillage.init.ModEntityTypes;
@@ -24,18 +20,17 @@ import net.mcreator.terramity.init.TerramityModItems;
 import net.miauczel.legendary_monsters.entity.ModEntities;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.soulsweaponry.registry.EntityRegistry;
 import net.swimmingtuna.lotm.util.BeyonderUtil;
 import net.zoniex.init.ZoniexModEntities;
+import org.thecelestialworkshop.celestisynth.common.registry.CSItems;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -52,7 +47,6 @@ public class PTDUtil {
 
     private static void initializeBeyonderEntityTypes() {
         // Sequence 9 entities
-        BEYONDER_ENTITY_TYPES.add(IafEntityRegistry.CYCLOPS.get());
         BEYONDER_ENTITY_TYPES.add(ModEntities.Overgrown_colossus.get());
         BEYONDER_ENTITY_TYPES.add(ACEntityRegistry.BRAINIAC.get());
         BEYONDER_ENTITY_TYPES.add(com.github.L_Ender.cataclysm.init.ModEntities.KOBOLEDIATOR.get());
@@ -76,7 +70,6 @@ public class PTDUtil {
         BEYONDER_ENTITY_TYPES.add(ModRegistry.MUTANT_SKELETON_ENTITY_TYPE.get());
         BEYONDER_ENTITY_TYPES.add(ModRegistry.MUTANT_ENDERMAN_ENTITY_TYPE.get());
         BEYONDER_ENTITY_TYPES.add(AMEntityRegistry.WARPED_MOSCO.get());
-        BEYONDER_ENTITY_TYPES.add(IafEntityRegistry.SEA_SERPENT.get());
         BEYONDER_ENTITY_TYPES.add(EntityType.ELDER_GUARDIAN);
         BEYONDER_ENTITY_TYPES.add(ACEntityRegistry.TREMORSAURUS.get());
         BEYONDER_ENTITY_TYPES.add(BornInChaosV1ModEntities.SPIRITOF_CHAOS.get());
@@ -84,7 +77,6 @@ public class PTDUtil {
         BEYONDER_ENTITY_TYPES.add(TerramityModEntities.HELLROK.get());
         BEYONDER_ENTITY_TYPES.add(ModRegistry.MUTANT_ZOMBIE_ENTITY_TYPE.get());
         BEYONDER_ENTITY_TYPES.add(AetherEntityTypes.VALKYRIE_QUEEN.get());
-        BEYONDER_ENTITY_TYPES.add(IafEntityRegistry.HYDRA.get());
 
 
         // Sequence 7 entities

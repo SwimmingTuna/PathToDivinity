@@ -1,9 +1,5 @@
 package net.swimmingtuna.pathtodivinity.mixin.Celestisynth;
 
-import com.aqutheseal.celestisynth.api.item.AttackHurtTypes;
-import com.aqutheseal.celestisynth.api.item.CSWeaponUtil;
-import com.aqutheseal.celestisynth.common.attack.poltergeist.PoltergeistCosmicSteelAttack;
-import com.aqutheseal.celestisynth.common.capabilities.CSEntityCapabilityProvider;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,6 +10,10 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.thecelestialworkshop.celestisynth.api.item.AttackHurtTypes;
+import org.thecelestialworkshop.celestisynth.api.item.CSWeaponUtil;
+import org.thecelestialworkshop.celestisynth.common.attack.poltergeist.PoltergeistCosmicSteelAttack;
+import org.thecelestialworkshop.celestisynth.common.capabilities.CSEntityCapabilityProvider;
 
 @Mixin(value = PoltergeistCosmicSteelAttack.class, remap = false)
 public class PoltergeistCosmicSteelAttackMixin {

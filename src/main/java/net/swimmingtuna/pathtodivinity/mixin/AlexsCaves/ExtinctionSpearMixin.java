@@ -1,7 +1,6 @@
 package net.swimmingtuna.pathtodivinity.mixin.AlexsCaves;
 
 import com.github.alexmodguy.alexscaves.server.item.ExtinctionSpearItem;
-import net.minecraft.world.item.Item;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;

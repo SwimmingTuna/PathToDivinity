@@ -1,11 +1,8 @@
 package net.swimmingtuna.pathtodivinity.mixin.Cataclysm;
 
-import com.github.L_Ender.cataclysm.items.Bulwark_of_the_flame;
 import com.github.L_Ender.cataclysm.items.Soul_Render;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Constant;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(value = Soul_Render.class, remap = true)

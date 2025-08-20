@@ -1,12 +1,5 @@
 package net.swimmingtuna.pathtodivinity.mixin.Celestisynth;
 
-import com.aqutheseal.celestisynth.api.item.AttackHurtTypes;
-import com.aqutheseal.celestisynth.common.attack.solaris.SolarisSoulDashAttack;
-import com.aqutheseal.celestisynth.common.entity.base.CSEffectEntity;
-import com.aqutheseal.celestisynth.common.entity.helper.CSVisualType;
-import com.aqutheseal.celestisynth.common.registry.CSSoundEvents;
-import com.aqutheseal.celestisynth.common.registry.CSVisualTypes;
-import com.aqutheseal.celestisynth.util.ParticleUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -21,6 +14,13 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.thecelestialworkshop.celestisynth.api.item.AttackHurtTypes;
+import org.thecelestialworkshop.celestisynth.common.attack.solaris.SolarisSoulDashAttack;
+import org.thecelestialworkshop.celestisynth.common.entity.base.CSEffectEntity;
+import org.thecelestialworkshop.celestisynth.common.entity.helper.CSVisualType;
+import org.thecelestialworkshop.celestisynth.common.registry.CSSoundEvents;
+import org.thecelestialworkshop.celestisynth.common.registry.CSVisualTypes;
+import org.thecelestialworkshop.celestisynth.util.ParticleUtil;
 import software.bernie.geckolib.core.object.Color;
 
 import java.util.List;
@@ -34,7 +34,7 @@ public class SolarisSoulDashAttackMixin {
 
         RandomSource rand = self.level.random;
         if (self.getTimerProgress() == 13) {
-            self.player.playSound((SoundEvent)CSSoundEvents.STEP.get());
+            self.player.playSound((SoundEvent) CSSoundEvents.STEP.get());
 
             for(int i = 0; i < 15; ++i) {
                 ParticleUtil.sendParticles(self.level, ParticleTypes.LARGE_SMOKE, self.player.getX(), self.player.getY(), self.player.getZ(), 0, (double)(-1.0F + rand.nextFloat() * 2.0F) * 0.5, 0.1, (double)(-1.0F + rand.nextFloat() * 2.0F) * 0.5);
@@ -62,7 +62,7 @@ public class SolarisSoulDashAttackMixin {
             }
 
             movePlayerInStraightMotion(self.player, (float)self.getTagController().getInt("cs.headRotLock"));
-            CSEffectEntity.createInstance(self.player, (Entity)null, (CSVisualType)CSVisualTypes.SOLARIS_BLITZ_SOUL.get(), 0.0, 2.5, 0.0);
+            CSEffectEntity.createInstance(self.player, (Entity)null, (CSVisualType) CSVisualTypes.SOLARIS_BLITZ_SOUL.get(), 0.0, 2.5, 0.0);
             CSEffectEntity.createInstance(self.player, (Entity)null, (CSVisualType)CSVisualTypes.SOLARIS_AIR_LARGE.get());
             dashSound(self.player, 0.5 + self.player.getRandom().nextGaussian() / 2.0);
             BlockPos playerPos = self.player.blockPosition();

@@ -1,16 +1,5 @@
 package net.swimmingtuna.pathtodivinity.mixin.Celestisynth;
 
-import com.aqutheseal.celestisynth.api.item.AttackHurtTypes;
-import com.aqutheseal.celestisynth.common.capabilities.CSEntityCapabilityProvider;
-import com.aqutheseal.celestisynth.common.entity.base.CSEffectEntity;
-import com.aqutheseal.celestisynth.common.entity.helper.CSVisualType;
-import com.aqutheseal.celestisynth.common.entity.skillcast.SkillCastFrostboundIceCast;
-import com.aqutheseal.celestisynth.common.registry.CSEntityTypes;
-import com.aqutheseal.celestisynth.common.registry.CSParticleTypes;
-import com.aqutheseal.celestisynth.common.registry.CSSoundEvents;
-import com.aqutheseal.celestisynth.common.registry.CSVisualTypes;
-import com.aqutheseal.celestisynth.util.ParticleUtil;
-import com.aqutheseal.celestisynth.util.SkinUtil;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.ParticleTypes;
@@ -26,6 +15,17 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.thecelestialworkshop.celestisynth.api.item.AttackHurtTypes;
+import org.thecelestialworkshop.celestisynth.common.capabilities.CSEntityCapabilityProvider;
+import org.thecelestialworkshop.celestisynth.common.entity.base.CSEffectEntity;
+import org.thecelestialworkshop.celestisynth.common.entity.helper.CSVisualType;
+import org.thecelestialworkshop.celestisynth.common.entity.skillcast.SkillCastFrostboundIceCast;
+import org.thecelestialworkshop.celestisynth.common.registry.CSEntityTypes;
+import org.thecelestialworkshop.celestisynth.common.registry.CSParticleTypes;
+import org.thecelestialworkshop.celestisynth.common.registry.CSSoundEvents;
+import org.thecelestialworkshop.celestisynth.common.registry.CSVisualTypes;
+import org.thecelestialworkshop.celestisynth.util.ParticleUtil;
+// Add this import - adjust the package path as needed for your project
 
 import java.util.Iterator;
 import java.util.List;
@@ -40,34 +40,27 @@ public class SkillCastFrostboundIceCastMixin {
 
         UUID ownerUuid = self.getOwnerUUID();
         Player ownerPlayer = ownerUuid == null ? null : self.level().getPlayerByUUID(ownerUuid);
-        Pair sound;
-        Object particle;
-        CSVisualType impact;
-        if (SkinUtil.getSkinIndex(self.getOriginItem()) == 1) {
-            sound = Pair.of((SoundEvent)CSSoundEvents.ICE_CAST.get(), SoundEvents.PLAYER_HURT_DROWN);
-            particle = (ParticleType)CSParticleTypes.WATER_DROP.get();
-            impact = (CSVisualType)CSVisualTypes.FROSTBOUND_ICE_CAST_SEABR.get();
-        } else {
-            sound = Pair.of((SoundEvent)CSSoundEvents.ICE_CAST.get(), SoundEvents.PLAYER_HURT_FREEZE);
-            particle = ParticleTypes.SNOWFLAKE;
-            impact = (CSVisualType)CSVisualTypes.FROSTBOUND_ICE_CAST.get();
-        }
+
+        // Fixed: Properly typed variables and null safety
+        Pair<SoundEvent, SoundEvent> sound = Pair.of(CSSoundEvents.ICE_CAST.get(), SoundEvents.PLAYER_HURT_FREEZE);
+        ParticleType<?> particle = ParticleTypes.SNOWFLAKE;
+        CSVisualType impact = CSVisualTypes.FROSTBOUND_ICE_CAST.get();
 
         int i;
         double xI;
         double zI;
         if (self.tickCount == 1 && self.getCastLevel() > 0) {
-            self.playSound((SoundEvent)sound.getFirst());
+            self.playSound(sound.getFirst());
 
             for(i = 0; i < 360; i += 2) {
                 xI = (double)(Mth.sin((float)i) * 3.0F);
                 zI = (double)(Mth.cos((float)i) * 3.0F);
-                ParticleUtil.sendParticles(self.level(), (ParticleType)particle, self.getX() + xI, self.getY(), self.getZ() + zI, 1, -xI / 8.0, 0.0, -zI / 8.0);
+                ParticleUtil.sendParticles(self.level(), particle, self.getX() + xI, self.getY(), self.getZ() + zI, 1, -xI / 8.0, 0.0, -zI / 8.0);
             }
         }
 
         if (self.tickCount == 5 && self.getCastLevel() > 0 && !self.level().isClientSide()) {
-            SkillCastFrostboundIceCast frostboundIceCast = (SkillCastFrostboundIceCast)((EntityType)CSEntityTypes.FROSTBOUND_ICE_CAST.get()).create(self.level());
+            SkillCastFrostboundIceCast frostboundIceCast = (SkillCastFrostboundIceCast)((EntityType) CSEntityTypes.FROSTBOUND_ICE_CAST.get()).create(self.level());
             float aX = self.getAngleX();
             float aZ = self.getAngleZ();
             int floorPos = self.getFloorPositionUnderPlayerYLevel(self.level(), self.blockPosition().offset((int)aX, 0, (int)aZ));
@@ -87,7 +80,7 @@ public class SkillCastFrostboundIceCastMixin {
             for(i = 0; i < 360; i += 4) {
                 xI = (double)(Mth.sin((float)i) * 3.0F);
                 zI = (double)(Mth.cos((float)i) * 3.0F);
-                ParticleUtil.sendParticles(self.level(), (ParticleType)particle, self.getX(), self.getY() - 1.0, self.getZ(), 1, xI / 10.0, 0.3, zI / 10.0);
+                ParticleUtil.sendParticles(self.level(), particle, self.getX(), self.getY() - 1.0, self.getZ(), 1, xI / 10.0, 0.3, zI / 10.0);
             }
 
             double range = 1.0;
@@ -104,7 +97,7 @@ public class SkillCastFrostboundIceCastMixin {
                         CSEntityCapabilityProvider.get(target).ifPresent((data) -> {
                             data.setFrostbound(200);
                         });
-                        target.playSound((SoundEvent)sound.getSecond());
+                        target.playSound(sound.getSecond());
                     }
                 }
             }

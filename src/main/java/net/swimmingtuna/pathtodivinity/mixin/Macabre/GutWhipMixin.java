@@ -1,6 +1,5 @@
 package net.swimmingtuna.pathtodivinity.mixin.Macabre;
 
-import com.curseforge.macabre.item.ValamonAxeItem;
 import com.curseforge.macabre.item.ValamonGutWhipItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;

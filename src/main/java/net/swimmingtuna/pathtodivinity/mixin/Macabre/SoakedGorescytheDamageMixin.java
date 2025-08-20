@@ -1,6 +1,5 @@
 package net.swimmingtuna.pathtodivinity.mixin.Macabre;
 
-import com.curseforge.macabre.item.TrueGorescytheItem;
 import com.curseforge.macabre.procedures.DoubleslitRightclickedProcedure;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;

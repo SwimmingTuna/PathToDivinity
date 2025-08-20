@@ -1,6 +1,5 @@
 package net.swimmingtuna.pathtodivinity.mixin.Macabre;
 
-import com.curseforge.macabre.item.ValamonSickleItem;
 import com.curseforge.macabre.procedures.ValamonSickleRightclickedProcedure;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;

@@ -1,6 +1,5 @@
 package net.swimmingtuna.pathtodivinity.mixin.Cataclysm;
 
-import com.github.L_Ender.cataclysm.items.Bulwark_of_the_flame;
 import com.github.L_Ender.cataclysm.items.The_Incinerator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;

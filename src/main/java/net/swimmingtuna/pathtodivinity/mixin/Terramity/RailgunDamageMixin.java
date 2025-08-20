@@ -1,8 +1,6 @@
 package net.swimmingtuna.pathtodivinity.mixin.Terramity;
 
-import net.mcreator.terramity.procedures.NihilityRightclickedProcedure;
 import net.mcreator.terramity.procedures.RailgunLaserProcedure;
-import net.mcreator.terramity.procedures.RailgunRightclickedProcedure;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;

@@ -1,9 +1,5 @@
 package net.swimmingtuna.pathtodivinity.mixin.Celestisynth;
 
-import com.aqutheseal.celestisynth.api.item.AttackHurtTypes;
-import com.aqutheseal.celestisynth.common.entity.projectile.KeresRend;
-import com.aqutheseal.celestisynth.common.registry.CSDamageSources;
-import com.aqutheseal.celestisynth.common.registry.CSMobEffects;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -15,6 +11,11 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.thecelestialworkshop.celestisynth.api.item.AttackHurtTypes;
+import org.thecelestialworkshop.celestisynth.common.entity.projectile.KeresRend;
+import org.thecelestialworkshop.celestisynth.common.registry.CSDamageSources;
+import org.thecelestialworkshop.celestisynth.common.registry.CSMobEffects;
+import org.thecelestialworkshop.celestisynth.util.ParticleUtil;
 
 import java.util.List;
 
@@ -61,7 +62,7 @@ public class KeresRendMixin {
                         double xR = self.random.nextGaussian() * 0.5;
                         double yR = self.random.nextGaussian() * 0.5;
                         double zR = self.random.nextGaussian() * 0.5;
-                        com.aqutheseal.celestisynth.util.ParticleUtil.sendParticle(level, net.minecraft.core.particles.ParticleTypes.FLASH, (double)xx + xR, (double)yy + yR, (double)zz + zR);
+                        ParticleUtil.sendParticle(level, net.minecraft.core.particles.ParticleTypes.FLASH, (double)xx + xR, (double)yy + yR, (double)zz + zR);
                         self.playSound(net.minecraft.sounds.SoundEvents.BLAZE_SHOOT, 0.1F, 1.0F);
                     }
                 }

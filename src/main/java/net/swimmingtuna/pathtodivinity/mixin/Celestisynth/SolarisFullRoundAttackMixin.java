@@ -1,11 +1,5 @@
 package net.swimmingtuna.pathtodivinity.mixin.Celestisynth;
 
-import com.aqutheseal.celestisynth.api.item.AttackHurtTypes;
-import com.aqutheseal.celestisynth.common.attack.solaris.SolarisFullRoundAttack;
-import com.aqutheseal.celestisynth.common.entity.base.CSEffectEntity;
-import com.aqutheseal.celestisynth.common.registry.CSSoundEvents;
-import com.aqutheseal.celestisynth.common.registry.CSVisualTypes;
-import com.aqutheseal.celestisynth.util.ParticleUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
@@ -18,6 +12,12 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.thecelestialworkshop.celestisynth.api.item.AttackHurtTypes;
+import org.thecelestialworkshop.celestisynth.common.attack.solaris.SolarisFullRoundAttack;
+import org.thecelestialworkshop.celestisynth.common.entity.base.CSEffectEntity;
+import org.thecelestialworkshop.celestisynth.common.registry.CSSoundEvents;
+import org.thecelestialworkshop.celestisynth.common.registry.CSVisualTypes;
+import org.thecelestialworkshop.celestisynth.util.ParticleUtil;
 import software.bernie.geckolib.core.object.Color;
 
 import java.util.List;

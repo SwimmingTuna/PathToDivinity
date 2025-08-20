@@ -5,7 +5,9 @@ plugins {
     id 'org.spongepowered.mixin' version '0.7.+'
     id 'maven-publish'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
+apply plugin: 'net.minecraftforge.gradle'
 
 version = mod_version
 group = mod_group_id
@@ -55,15 +57,12 @@ minecraft {
             args '--nogui'
         }
 
-
         gameTestServer {
             property 'forge.enabledGameTestNamespaces', mod_id
         }
 
         data {
-
             workingDirectory project.file('run-data')
-
             args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
         }
     }
@@ -90,6 +89,17 @@ repositories {
     maven {
         url = "https://cursemaven.com"
     }
+    // Add 100 Media repository for Capability Syncer
+    maven {
+        name = '100Media'
+        url = 'https://maven.100media.dev/'
+    }
+}
+
+// Configure shading for Capability Syncer
+configurations {
+    shade
+    implementation.extendsFrom shade
 }
 
 dependencies {
@@ -97,6 +107,10 @@ dependencies {
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.4.1")) {
         jarJar.ranged(it, "[0.4.1,)")
     }
+
+    // Capability Syncer - Add this dependency
+    shade fg.deobf("dev._100media.capabilitysyncer:capabilitysyncer:1.20.1-4.0.1")
+
     //Pehkui
     implementation fg.deobf("com.github.Virtuoel:Pehkui:${pehkui_version}")
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
@@ -106,11 +120,11 @@ dependencies {
     implementation fg.deobf("net.tslat.smartbrainlib:SmartBrainLib-forge-${project.minecraft_version}:${project.sbl_version}")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     //LOTMC
-    implementation fg.deobf("curse.maven:lord-of-the-mysteries-craft-1095869:6809040")
-    //Ice and Fire
-    implementation fg.deobf("curse.maven:iceandfire-264231:5633453")
+    implementation fg.deobf("curse.maven:lord-of-the-mysteries-craft-1095869:6852065")
     //Legendary Monsters
     implementation fg.deobf("curse.maven:legendarymonsters-944035:6776766")
+    //Wither Reincarnated
+    implementation fg.deobf("curse.maven:witherreincarnated-1309246:6835382")
     //Arphex
     implementation fg.deobf("curse.maven:arphex-967672:6835837")
     //Alex's Caves
@@ -126,7 +140,7 @@ dependencies {
     //Marium's Soulslike Weaponry
     implementation fg.deobf("curse.maven:soulsweapons-632066:6509913")
     //Cataclysm
-    implementation fg.deobf("curse.maven:cataclysm-551586:6832543")
+    implementation fg.deobf("curse.maven:cataclysm-551586:6849032")
     //Mowzie's Mobs
     implementation fg.deobf("curse.maven:mowziesmobs-250498:6586086")
     //Aquamirae
@@ -162,7 +176,7 @@ dependencies {
     //Terrablender
     implementation fg.deobf("curse.maven:terrablender-563928:6290448")
     //Celestisynth
-    implementation fg.deobf("curse.maven:celestisynth-872712:5776930")
+    implementation fg.deobf("curse.maven:celestisynth-872712:6848015")
     //Bosses of Mass Destruction
     implementation fg.deobf("curse.maven:bomd-438365:4993305")
     //Awakened Bosses
@@ -183,7 +197,6 @@ dependencies {
     implementation fg.deobf("curse.maven:alexsmobs-238222:6600311")
     //JER
     implementation fg.deobf("curse.maven:jade-240630:5057220")
-
 }
 
 tasks.named('processResources', ProcessResources).configure {
@@ -201,9 +214,9 @@ tasks.named('processResources', ProcessResources).configure {
     }
 }
 
-
-
+// Configure jar task for shading
 tasks.named('jar', Jar).configure {
+    archiveClassifier = 'slim'  // Important for shading
     manifest {
         attributes([
                 'Specification-Title'     : mod_id,
@@ -217,6 +230,20 @@ tasks.named('jar', Jar).configure {
     }
 
     finalizedBy 'reobfJar'
+}
+
+// Configure Shadow plugin for shading Capability Syncer
+shadowJar {
+    archiveClassifier = ''
+    configurations = [project.configurations.shade]
+    relocate 'dev._100media.capabilitysyncer', "${project.group}.relocated.capabilitysyncer"
+    finalizedBy 'reobfShadowJar'
+}
+
+assemble.dependsOn shadowJar
+
+reobf {
+    shadowJar {}
 }
 
 publishing {

@@ -1,12 +1,6 @@
 package net.swimmingtuna.pathtodivinity.mixin.Celestisynth;
 
-import com.aqutheseal.celestisynth.common.entity.projectile.KeresShadow;
-import com.aqutheseal.celestisynth.common.entity.projectile.KeresSlash;
-import com.aqutheseal.celestisynth.common.entity.skillcast.SkillCastKeresSlashWave;
-import com.aqutheseal.celestisynth.common.registry.CSEntityTypes;
-import com.aqutheseal.celestisynth.common.registry.CSParticleTypes;
-import com.aqutheseal.celestisynth.common.registry.CSSoundEvents;
-import com.aqutheseal.celestisynth.util.ParticleUtil;
+
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
@@ -19,6 +13,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.thecelestialworkshop.celestisynth.common.entity.projectile.KeresShadow;
+import org.thecelestialworkshop.celestisynth.common.entity.projectile.KeresSlash;
+import org.thecelestialworkshop.celestisynth.common.entity.skillcast.SkillCastKeresSlashWave;
+import org.thecelestialworkshop.celestisynth.common.registry.CSEntityTypes;
+import org.thecelestialworkshop.celestisynth.common.registry.CSParticleTypes;
+import org.thecelestialworkshop.celestisynth.common.registry.CSSoundEvents;
+import org.thecelestialworkshop.celestisynth.util.ParticleUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,13 +37,13 @@ public class SkillCastKeresSlashWaveMixin {
         } else {
             self.moveTo(player.position());
             if (self.lifespan > 0) {
-                player.playSound((SoundEvent)CSSoundEvents.SLASH_WATER.get(), 0.1F, (float)(1.5 + player.getRandom().nextDouble() * 0.5));
+                player.playSound((SoundEvent) CSSoundEvents.SLASH_WATER.get(), 0.1F, (float)(1.5 + player.getRandom().nextDouble() * 0.5));
             }
 
             for(int i = 0; (double)i < 22.5; ++i) {
                 Vec3 particleDir = Vec3.ZERO.add((double)Mth.sin((float)i), (double)Mth.cos((float)i), 0.0).scale(0.9);
                 Vec3 rotated = particleDir.xRot(-player.getXRot() * 0.017453292F).yRot(-player.getYRot() * 0.017453292F);
-                ParticleUtil.sendParticle(self.level(), (SimpleParticleType)CSParticleTypes.KERES_OMEN.get(), player.getEyePosition().add(player.getLookAngle().scale(2.0)), rotated);
+                ParticleUtil.sendParticle(self.level(), (SimpleParticleType) CSParticleTypes.KERES_OMEN.get(), player.getEyePosition().add(player.getLookAngle().scale(2.0)), rotated);
             }
 
             if (!self.level().isClientSide) {
@@ -61,7 +62,7 @@ public class SkillCastKeresSlashWaveMixin {
                     Vector3f shootAngle = vec3.toVector3f().rotate(quaternionf);
                     slash.setRoll((float) (self.random.nextGaussian() * 360.0));
                     slash.moveTo(self.position().add(0.0, 1.0, 0.0));
-                    slash.baseDamage = self.damage * 1.1F;
+                    slash.baseDamage = self.damage * 0.6F;
                     slash.shoot((double) shootAngle.x, (double) shootAngle.y, (double) shootAngle.z, 6.0F, 0.0F);
                     self.level().addFreshEntity(slash);
                 }
@@ -71,7 +72,7 @@ public class SkillCastKeresSlashWaveMixin {
                     shadow.moveTo(player.getX(), shadow.getY() - 1.0, player.getZ());
                     shadow.shootFromRotation(player, (float)(self.level().random.nextGaussian() * 180.0), -15.0F - (float)(self.level().random.nextDouble() * 75.0), 0.0F, 1.0F, 0.0F);
                     shadow.setDeltaMovement(self.level().random.nextGaussian() * 0.25, 0.4, self.level().random.nextGaussian() * 0.25);
-                    shadow.damage = self.damage * 1.0F;
+                    shadow.damage = self.damage;
                     self.level().addFreshEntity(shadow);
                 }
             }

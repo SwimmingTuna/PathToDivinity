@@ -1,6 +1,5 @@
 package net.swimmingtuna.pathtodivinity.mixin.Terramity;
 
-import net.mcreator.terramity.procedures.AxeOfUnholyDivinityRightclickedProcedure;
 import net.mcreator.terramity.procedures.ImprisonedProjectileProcedure;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;

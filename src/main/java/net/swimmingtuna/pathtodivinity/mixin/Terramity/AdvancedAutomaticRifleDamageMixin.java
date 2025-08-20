@@ -1,7 +1,6 @@
 package net.swimmingtuna.pathtodivinity.mixin.Terramity;
 
 import net.mcreator.terramity.procedures.AdvancedAutomaticRifleRightclickedProcedure;
-import net.mcreator.terramity.procedures.AdvancedPistolRightclickedProcedure;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;

@@ -1,6 +1,5 @@
 package net.swimmingtuna.pathtodivinity.mixin.Cataclysm;
 
-import com.github.L_Ender.cataclysm.items.Astrape;
 import com.github.L_Ender.cataclysm.items.Ceraunus;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
