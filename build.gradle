@@ -108,7 +108,6 @@ dependencies {
         jarJar.ranged(it, "[0.4.1,)")
     }
 
-    // Capability Syncer - Add this dependency
     shade fg.deobf("dev._100media.capabilitysyncer:capabilitysyncer:1.20.1-4.0.1")
 
     //Pehkui
@@ -120,13 +119,13 @@ dependencies {
     implementation fg.deobf("net.tslat.smartbrainlib:SmartBrainLib-forge-${project.minecraft_version}:${project.sbl_version}")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     //LOTMC
-    implementation fg.deobf("curse.maven:lord-of-the-mysteries-craft-1095869:6852065")
+    implementation fg.deobf("curse.maven:lord-of-the-mysteries-craft-1095869:7035285")
     //Legendary Monsters
     implementation fg.deobf("curse.maven:legendarymonsters-944035:6776766")
     //Wither Reincarnated
     implementation fg.deobf("curse.maven:witherreincarnated-1309246:6835382")
     //Arphex
-    implementation fg.deobf("curse.maven:arphex-967672:6835837")
+    implementation fg.deobf("curse.maven:arphex-967672:7001168")
     //Alex's Caves
     implementation fg.deobf("curse.maven:alexscaves-924854:5848216")
     //Terramity
@@ -140,7 +139,7 @@ dependencies {
     //Marium's Soulslike Weaponry
     implementation fg.deobf("curse.maven:soulsweapons-632066:6509913")
     //Cataclysm
-    implementation fg.deobf("curse.maven:cataclysm-551586:6849032")
+    implementation fg.deobf("curse.maven:cataclysm-551586:6906993")
     //Mowzie's Mobs
     implementation fg.deobf("curse.maven:mowziesmobs-250498:6586086")
     //Aquamirae
@@ -176,13 +175,13 @@ dependencies {
     //Terrablender
     implementation fg.deobf("curse.maven:terrablender-563928:6290448")
     //Celestisynth
-    implementation fg.deobf("curse.maven:celestisynth-872712:6848015")
+    implementation fg.deobf("curse.maven:celestisynth-872712:6900952")
     //Bosses of Mass Destruction
     implementation fg.deobf("curse.maven:bomd-438365:4993305")
     //Awakened Bosses
     implementation fg.deobf("curse.maven:awakenedbosses-548167:5057212")
     //AME's Mobs Renew
-    implementation fg.deobf("curse.maven:amemobs-1080087:5773065")
+    implementation fg.deobf("curse.maven:amemobs-1080087:6869663")
     //Deeper Darker
     implementation fg.deobf("curse.maven:deeperdarker-659011:5906086")
     //Aether
@@ -192,11 +191,13 @@ dependencies {
     //Alex's Mobs
     implementation fg.deobf("curse.maven:alexsmobs-426558:5698791")
     //Jade
-    implementation fg.deobf("curse.maven:jade-324717:6271651")
+    implementation fg.deobf("curse.maven:jade-324717:6855440")
     //JEI
     implementation fg.deobf("curse.maven:alexsmobs-238222:6600311")
     //JER
-    implementation fg.deobf("curse.maven:jade-240630:5057220")
+    implementation fg.deobf("curse.maven:JER-240630:5057220")
+    //Dreamcat LIB
+    implementation fg.deobf("curse.maven:dreamcast-1323703:6869654")
 }
 
 tasks.named('processResources', ProcessResources).configure {

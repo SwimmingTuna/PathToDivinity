@@ -84,6 +84,7 @@ import net.soulsweaponry.entity.mobs.DayStalker;
 import net.soulsweaponry.entity.mobs.FreyrSwordEntity;
 import net.soulsweaponry.entity.mobs.NightProwler;
 import net.soulsweaponry.registry.EntityRegistry;
+import net.soulsweaponry.registry.ItemRegistry;
 import net.swimmingtuna.lotm.LOTM;
 import net.swimmingtuna.lotm.beyonder.api.BeyonderClass;
 import net.swimmingtuna.lotm.entity.PlayerMobEntity;
@@ -741,13 +742,26 @@ public class ModEvents {
                 itemEntity.teleportTo(entity.getX(), entity.getY(), entity.getZ());
                 itemEntity.setUnlimitedLifetime();
                 entity.level().addFreshEntity(itemEntity);
-            } else if (event.getEntity() instanceof DuskrokEntity) {
+            } else if (entity instanceof DuskrokEntity) {
                 ItemStack stack = new ItemStack(Items.NETHERITE_SCRAP);
                 ItemEntity itemEntity = new ItemEntity(entity.level(), entity.getX(), entity.getY(), entity.getZ(), stack);
                 itemEntity.setNoPickUpDelay();
                 itemEntity.teleportTo(entity.getX(), entity.getY(), entity.getZ());
                 itemEntity.setUnlimitedLifetime();
                 entity.level().addFreshEntity(itemEntity);
+            } else if (entity.getName().getString().equalsIgnoreCase("wither")) {
+                ItemStack lordSoul = new ItemStack(ItemRegistry.LORD_SOUL_DARK.get());
+                ItemEntity soulEntity = new ItemEntity(entity.level(), entity.getX(), entity.getY(), entity.getZ(), lordSoul);
+                soulEntity.setNoPickUpDelay();
+                soulEntity.teleportTo(entity.getX(), entity.getY(), entity.getZ());
+                soulEntity.setUnlimitedLifetime();
+                entity.level().addFreshEntity(soulEntity);
+                ItemStack shard = new ItemStack(ItemRegistry.SHARD_OF_UNCERTAINTY.get());
+                ItemEntity shardEntity = new ItemEntity(entity.level(), entity.getX(), entity.getY(), entity.getZ(), shard);
+                shardEntity.setNoPickUpDelay();
+                shardEntity.teleportTo(entity.getX(), entity.getY(), entity.getZ());
+                shardEntity.setUnlimitedLifetime();
+                entity.level().addFreshEntity(shardEntity);
             }
         }
     }

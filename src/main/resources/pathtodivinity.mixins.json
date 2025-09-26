@@ -100,6 +100,7 @@
     "Macabre.SymbioticArmorMixin",
     "Macabre.TheCleaveMixin",
     "Macabre.ValamonArmorMixin",
+    "Macabre.ValamonEye2ProjectileHitsPlayerProcedureMixin",
     "Macabre.ValamonSickleDamageMixin",
     "Macabre.ValamonSickleMixin",
     "Terramity.AdvancedAutomaticRifleDamageMixin",
