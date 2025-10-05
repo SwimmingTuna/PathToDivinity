@@ -89,10 +89,9 @@ import net.swimmingtuna.lotm.LOTM;
 import net.swimmingtuna.lotm.beyonder.api.BeyonderClass;
 import net.swimmingtuna.lotm.entity.PlayerMobEntity;
 import net.swimmingtuna.lotm.init.BeyonderClassInit;
-import net.swimmingtuna.lotm.item.BeyonderAbilities.Monster.ProbabilityManipulationFortune;
 import net.swimmingtuna.lotm.util.BeyonderUtil;
 import net.swimmingtuna.pathtodivinity.PTD;
-import net.swimmingtuna.pathtodivinity.PTDGameRules;
+import net.swimmingtuna.pathtodivinity.PTDConfig;
 import net.swimmingtuna.pathtodivinity.PTDUtil;
 import net.zoniex.init.ZoniexModEntities;
 import org.thecelestialworkshop.celestisynth.common.entity.projectile.CrescentiaDragon;
@@ -253,7 +252,20 @@ public class ModEvents {
         Player player = event.getEntity();
         if (!player.level().isClientSide()) {
             ItemStack craftedItem = event.getCrafting();
-            if (craftedItem.is(ArphexModItems.ABYSSAL_CRYSTAL.get())) {
+            if (craftedItem.is(ArphexModItems.SPIDER_SUPPLEMENT.get())) {
+                for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+                    ItemStack slot = player.getInventory().getItem(i);
+                    if (slot.is(ArphexModItems.SPIDER_SUPPLEMENT.get())) {
+                        player.getInventory().removeItem(i, 1);
+                        break;
+                    }
+                }
+                player.addItem(Items.GLASS_BOTTLE.getDefaultInstance());
+                player.addItem(Items.FERMENTED_SPIDER_EYE.getDefaultInstance());
+                player.addItem(ArphexModItems.COOKED_HEMOLYMPH.get().getDefaultInstance());
+                player.sendSystemMessage(Component.literal("You can't craft this item.").withStyle(ChatFormatting.RED));
+
+            } else if (craftedItem.is(ArphexModItems.ABYSSAL_CRYSTAL.get())) {
                 for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
                     ItemStack slot = player.getInventory().getItem(i);
                     if (slot.is(ArphexModItems.ABYSSAL_CRYSTAL.get())) {
@@ -395,6 +407,12 @@ public class ModEvents {
                     }
                 } else if (type == ACEntityRegistry.BRAINIAC.get()) {
                     multiplyDamage(living, 1.3);
+                } else if (type == ModEntities.Warped_Fungussus.get()) {
+                    multiplyMaxHealth(living, 1.5);
+                    multiplyDamage(living, 1.4);
+                } else if (type == ArphexModEntities.SPIDER_LUNGER.get()) {
+                    multiplyMaxHealth(living, 1.5);
+                    multiplyDamage(living, 2.0);
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.KOBOLEDIATOR.get()) {
                     multiplyDamage(living, 1.2);
                 } else if (type == AquamiraeEntities.MAW.get()) {
@@ -486,11 +504,14 @@ public class ModEvents {
                     multiplyDamage(living, 2.0);
                     multiplyMaxHealth(living, 1.4);
                 } else if (type == MacabreModEntities.THE_HOLLOW_MAN.get()) {
-                    multiplyDamage(living, 1.7);
+                    multiplyDamage(living, 3.2);
                 } else if (type == BornInChaosV1ModEntities.SIR_PUMPKINHEAD.get()) {
                     multiplyDamage(living, 2.8);
                 } else if (living.getName().getString().toLowerCase().contains("dyrolian")) {
                     multiplyDamage(living, 1.2);
+                } else if (type == ModEntities.Endersent.get()) {
+                    multiplyMaxHealth(living, 1.5);
+                    multiplyDamage(living, 4.0);
 
                     // Sequence 5
                 } else if (type == EntityRegistry.CHAOS_MONARCH.get()) {
@@ -517,7 +538,21 @@ public class ModEvents {
                 } else if (type == EntityRegistry.RETURNING_KNIGHT.get()) {
                     multiplyDamage(living, 1.6);
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.ENDER_GUARDIAN.get()) {
-                    multiplyDamage(living, 1.6);
+                    multiplyDamage(living, 1.1);
+                    multiplyMaxHealth(living, 0.75);
+                } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.NETHERITE_MONSTROSITY.get()) {
+                    multiplyDamage(living, 1.5);
+                    multiplyMaxHealth(living, 1.2);
+                } else if (type == ArphexModEntities.SPIDER_INFESTOR.get()) {
+                    multiplyMaxHealth(living, 1.5);
+                    multiplyDamage(living, 1.8);
+                } else if (type == ArphexModEntities.MANTIS_MUTILATOR.get()) {
+                    multiplyMaxHealth(living, 3.0);
+                    multiplyDamage(living, 2.5);
+                } else if (type == ModEntities.Posessed_Paladin.get()) {
+                    multiplyMaxHealth(living, 2.0);
+                    multiplyDamage(living, 1.2);
+
 
                     // Sequence 4
                 } else if (type == ACEntityRegistry.HULLBREAKER.get()) {
@@ -539,7 +574,7 @@ public class ModEvents {
                     BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
                     BeyonderUtil.setSequence(living, 7);
                 } else if (type == TerramityModEntities.GOB.get()) {
-                    multiplyDamage(living, 3.6);
+                    multiplyDamage(living, 1.8);
                     living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 40, 1, false, false));
                 } else if (type == ArphexModEntities.SPIDER_PROWLER.get()) {
                     multiplyDamage(living, 2.5);
@@ -552,6 +587,16 @@ public class ModEvents {
                 } else if (type == EntityInit.NAMELESS_GUARDIAN.get()) {
                     BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
                     BeyonderUtil.setSequence(living, 6);
+                } else if (type == ArphexModEntities.SPIDER_MATRIARCH.get()) {
+                    multiplyMaxHealth(living, 2.0);
+                    multiplyDamage(living, 1.8);
+                } else if (type == MacabreModEntities.MORPHEGOR.get()) {
+                    multiplyMaxHealth(living, 3.0);
+                    multiplyDamage(living, 9.0);
+                } else if (type == MacabreModEntities.MORPHEGOR_SPLIT.get()) {
+                    multiplyMaxHealth(living, 3.0);
+                    multiplyDamage(living, 9.0);
+
 
                     // Sequence 3
                 } else if (living.getName().getString().toLowerCase().contains("vessel")) {
@@ -671,7 +716,7 @@ public class ModEvents {
                 }
             }
             if (living instanceof Mob mob && PTDUtil.isBeyonderEntity(mob) && tickCount % 10 == 0) {
-                if (mob.getTarget() == null && combatTimer == 0 && mob.getHealth() < mob.getMaxHealth()) {
+                if (mob.getTarget() == null && combatTimer == 0 && mob.getHealth() < mob.getMaxHealth() && mob.isAlive() && !Float.isNaN(mob.getHealth())) {
                     mob.setHealth(Math.min(mob.getMaxHealth(), mob.getHealth() + (mob.getMaxHealth() * 0.02f)));
                 }
                 if (mob.getTarget() != null && mob.getTarget() instanceof Player) {
@@ -893,6 +938,9 @@ public class ModEvents {
                 } else if (type == ACEntityRegistry.BRAINIAC.get()) {
                     multiplyMaxHealth(living, 1.5);
                     multiplyDamage(living, 1.3);
+                } else if (type == ModEntities.Warped_Fungussus.get()) {
+                    multiplyMaxHealth(living, 1.5);
+                    multiplyDamage(living, 1.4);
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.KOBOLEDIATOR.get()) {
                     multiplyMaxHealth(living, 1.0);
                     multiplyDamage(living, 1.2);
@@ -974,6 +1022,9 @@ public class ModEvents {
                 } else if (type == ACEntityRegistry.FORSAKEN.get()) {
                     multiplyMaxHealth(living, 1.3);
                     multiplyDamage(living, 1.5);
+                } else if (type == ArphexModEntities.SPIDER_LUNGER.get()) {
+                    multiplyMaxHealth(living, 1.5);
+                    multiplyDamage(living, 2.0);
                 } else if (type == ModEntities.Ancient_Guardian.get()) {
                     multiplyMaxHealth(living, 1.3);
                 } else if (type == ArphexModEntities.SPIDER_SNATCHER.get()) {
@@ -1052,10 +1103,13 @@ public class ModEvents {
                     multiplyDamage(living, 1.2);
                 } else if (type == MacabreModEntities.THE_HOLLOW_MAN.get()) {
                     multiplyMaxHealth(living, 1.2);
-                    multiplyDamage(living, 1.7);
+                    multiplyDamage(living, 3.2);
                 } else if (type == BornInChaosV1ModEntities.SIR_PUMPKINHEAD.get()) {
                     multiplyMaxHealth(living, 2.2);
                     multiplyDamage(living, 2.8);
+                } else if (type == ModEntities.Endersent.get()) {
+                    multiplyMaxHealth(living, 1.5);
+                    multiplyDamage(living, 4.0);
                 } else if (living.getName().getString().toLowerCase().contains("dyrolian")) {
                     multiplyDamage(living, 1.3);
                     multiplyMaxHealth(living, 0.5);
@@ -1067,8 +1121,12 @@ public class ModEvents {
                     BeyonderUtil.setPathway(living, BeyonderClassInit.MONSTER.get());
                     BeyonderUtil.setSequence(living, 7);
                     living.getPersistentData().putDouble("luck", 500);
+                } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.NETHERITE_MONSTROSITY.get()) {
+                    multiplyDamage(living, 1.5);
+                    multiplyMaxHealth(living, 1.2);
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.THE_HARBINGER.get()) {
-                    multiplyMaxHealth(living, 1.3);
+                    multiplyMaxHealth(living, 2.0);
+                    multiplyDamage(living, 1.8);
                 } else if (type == ArphexModEntities.CRAB_CONSTRICTOR.get()) {
                     multiplyMaxHealth(living, 2.0);
                     multiplyDamage(living, 2.0);
@@ -1097,6 +1155,15 @@ public class ModEvents {
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.ENDER_GUARDIAN.get()) {
                     multiplyMaxHealth(living, 1.7);
                     multiplyDamage(living, 1.6);
+                } else if (type == ArphexModEntities.SPIDER_INFESTOR.get()) {
+                    multiplyMaxHealth(living, 1.5);
+                    multiplyDamage(living, 1.8);
+                } else if (type == ArphexModEntities.MANTIS_MUTILATOR.get()) {
+                    multiplyMaxHealth(living, 3.0);
+                    multiplyDamage(living, 2.5);
+                } else if (type == ModEntities.Posessed_Paladin.get()) {
+                    multiplyMaxHealth(living, 2.0);
+                    multiplyDamage(living, 1.2);
 
                     // Sequence 4
                 } else if (type == ACEntityRegistry.HULLBREAKER.get()) {
@@ -1132,7 +1199,7 @@ public class ModEvents {
                     BeyonderUtil.setSequence(living, 7);
                 } else if (type == TerramityModEntities.GOB.get()) {
                     multiplyMaxHealth(living, 3.0);
-                    multiplyDamage(living, 3.6);
+                    multiplyDamage(living, 1.8);
                 } else if (type == ArphexModEntities.SPIDER_PROWLER.get()) {
                     multiplyMaxHealth(living, 4.0);
                     multiplyDamage(living, 2.5);
@@ -1143,6 +1210,12 @@ public class ModEvents {
                 } else if (type == MacabreModEntities.VALAMON.get()) {
                     multiplyMaxHealth(living, 1.4);
                     multiplyDamage(living, 1.6);
+                } else if (type == MacabreModEntities.MORPHEGOR.get()) {
+                    multiplyMaxHealth(living, 3.0);
+                    multiplyDamage(living, 9.0);
+                } else if (type == MacabreModEntities.MORPHEGOR_SPLIT.get()) {
+                    multiplyMaxHealth(living, 3.0);
+                    multiplyDamage(living, 9.0);
                 } else if (type == EntityInit.NAMELESS_GUARDIAN.get()) {
                     multiplyMaxHealth(living, 1.7);
                     multiplyDamage(living, 2.2);
@@ -1153,17 +1226,19 @@ public class ModEvents {
                     multiplyDamage(living, 2.5);
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.ANCIENT_ANCIENT_REMNANT.get()) {
                     multiplyMaxHealth(living, 4.0);
-                    multiplyDamage(living, 2.5);
+                    multiplyDamage(living, 1.1);
+                } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.ANCIENT_REMNANT.get()) {
+                    multiplyMaxHealth(living, 4.0);
+                    multiplyDamage(living, 1.1);
+                } else if (type == ArphexModEntities.SPIDER_MATRIARCH.get()) {
+                    multiplyMaxHealth(living, 2.0);
+                    multiplyDamage(living, 1.8);
 
 
                     // Sequence 3
                 } else if (living.getName().getString().toLowerCase().contains("vessel")) { //Vessel of Calamity
                     multiplyMaxHealth(living, 4.0);
                     multiplyDamage(living, 2.5);
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.MONSTER.get());
-                    BeyonderUtil.setSequence(living, 5);
-                    ProbabilityManipulationFortune.giveFortuneEvents(living);
-                    living.getPersistentData().putDouble("luck", 3000);
                 } else if (type == ArphexModEntities.SPIDER_MOTH.get()) {
                     multiplyMaxHealth(living, 4.0);
                     multiplyDamage(living, 2.0);
@@ -1229,7 +1304,7 @@ public class ModEvents {
             commands.performPrefixedCommand(commandSource, "beyonderrecipe load");
             commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:chaos_monarch lotm:monster 7");
             commands.performPrefixedCommand(commandSource, "beyonderentity add legendary_monsters:cloud_golem lotm:sailor 6");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add faded_conquest_2:vessel_of_calamity lotm:monster 5");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add faded_conquest_2:vessel_of_calamity lotm:warrior 5");
             commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:day_stalker lotm:warrior 4");
             commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:draugr_boss lotm:spectator 7");
             commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:night_shade lotm:warrior 7");
@@ -1242,13 +1317,15 @@ public class ModEvents {
             commands.performPrefixedCommand(commandSource, "beyonderentity add terramity:trial_guardian lotm:sailor 5");
             commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:chaos_monarch lotm:monster 7");
             commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:chaos_monarch lotm:monster 7");
-            int random = (int) BeyonderUtil.getPositiveRandomInRange(4);
+            int random = (int) BeyonderUtil.getPositiveRandomInRange(5);
             if (random == 0) {
                 commands.performPrefixedCommand(commandSource, "beyonderentity add terramity:ultra_sniffer lotm:spectator 3");
             } else if (random == 1) {
                 commands.performPrefixedCommand(commandSource, "beyonderentity add terramity:ultra_sniffer lotm:warrior 3");
             } else if (random == 2) {
                 commands.performPrefixedCommand(commandSource, "beyonderentity add terramity:ultra_sniffer lotm:sailor 3");
+            } else if (random == 3) {
+                commands.performPrefixedCommand(commandSource, "beyonderentity add terramity:ultra_sniffer lotm:apprentice 3");
             } else {
                 commands.performPrefixedCommand(commandSource, "beyonderentity add terramity:ultra_sniffer lotm:monster 3");
             }
@@ -1270,9 +1347,33 @@ public class ModEvents {
                     }
                 }
             }
+            Commands commands = server.getCommands();
+            CommandSourceStack commandSource = server.createCommandSourceStack();
+            commands.performPrefixedCommand(commandSource, "beyonderrecipe load");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:chaos_monarch lotm:monster 7");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add cataclysm:ender_guardian lotm:apprentice 8");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add legendary_monsters:cloud_golem lotm:sailor 6");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add cataclysm:ancient_ancient_remnant lotm:spectator 6");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add faded_conquest_2:vessel_of_calamity lotm:warrior 5");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:night_prowler lotm:sailor 4");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:returning_knight lotm:sailor 7");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add aquamirae:captain_cornelia lotm:warrior 7");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add cataclysm:the_leviathan lotm:monster 6");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add sleepy_hollows:horseman lotm:spectator 6");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add born_in_chaos_v1:lord_pumpkinhead lotm:spectator 5");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:day_stalker lotm:warrior 4");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:draugr_boss lotm:spectator 7");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add arphex:spider_matriarch lotm:apprentice 6");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add eeeabsmobs:nameless_guardian lotm:sailor 6");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:moonknight lotm:warrior 5");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add cataclysm:the_harbinger lotm:warrior 7");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add deeperdarker:stalker lotm:spectator 5");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add arphex:spider_matriarch lotm:apprentice 6");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add terramity:gob lotm:monster 6");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add terramity:trial_guardian lotm:sailor 5");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add legendary_monsters:posessed_paladin lotm:apprentice 7");
+
             if (foundSniffers == 0) {
-                Commands commands = server.getCommands();
-                CommandSourceStack commandSource = server.createCommandSourceStack();
                 int random = (int) BeyonderUtil.getPositiveRandomInRange(4);
                 if (random == 0) {
                     commands.performPrefixedCommand(commandSource, "beyonderentity add terramity:ultra_sniffer lotm:spectator 3");
@@ -1298,7 +1399,7 @@ public class ModEvents {
 
     public static void multiplyMaxHealth(LivingEntity living, double multiplier) {
         if (!living.getPersistentData().getBoolean("maxHealthMultiplied")) {
-            float multiplierAmount = (float) multiplier;
+            float multiplierAmount = (float) multiplier * PTDConfig.COMMON.healthMultiplier.get();
             float maxHealth = living.getMaxHealth();
             AttributeInstance maxHealthAttribute = living.getAttribute(Attributes.MAX_HEALTH);
             if (maxHealthAttribute != null) {
@@ -1308,14 +1409,13 @@ public class ModEvents {
             }
             living.setHealth(maxHealth * multiplierAmount);
             living.getPersistentData().putBoolean("maxHealthMultiplied", true);
-            LOTM.LOGGER.info("Multiplied{}'s health by {}", living.getName().getString(), multiplier);
+            LOTM.LOGGER.info("Multiplied {}'s health by {}", living.getName().getString(), multiplier);
         }
     }
 
     public static void multiplyMaxHealthUltraSniffer(LivingEntity living, double multiplier) {
         if (!living.getPersistentData().getBoolean("maxHealthMultiplied")) {
-
-            float multiplierAmount = (float) multiplier;
+            float multiplierAmount = (float) multiplier * PTDConfig.COMMON.healthMultiplier.get();
             float maxHealth = living.getMaxHealth();
             AttributeInstance maxHealthAttribute = living.getAttribute(Attributes.MAX_HEALTH);
             if (maxHealthAttribute != null) {
@@ -1323,15 +1423,16 @@ public class ModEvents {
             }
             living.setHealth(maxHealth * multiplierAmount);
             living.getPersistentData().putBoolean("maxHealthMultiplied", true);
-            LOTM.LOGGER.info("Multiplied{}'s health by {}", living.getName().getString(), multiplier);
+            LOTM.LOGGER.info("Multiplied {}'s health by {}", living.getName().getString(), multiplier);
         }
     }
 
     private static void multiplyDamage(LivingEntity entity, double multiplier) {
         if (!entity.getPersistentData().getBoolean("damageMultiplied")) {
             CompoundTag tag = entity.getPersistentData();
-            tag.putDouble("PTDDamageMultiplier", multiplier);
+            tag.putDouble("PTDDamageMultiplier", multiplier * PTDConfig.COMMON.damageMultiplier.get());
             entity.getPersistentData().putBoolean("damageMultiplied", true);
+            LOTM.LOGGER.info("Multiplied {}'s damage by {}", entity.getName().getString(), multiplier);
         }
     }
 }

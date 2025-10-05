@@ -2,7 +2,10 @@ package net.swimmingtuna.pathtodivinity;
 
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
+import net.swimmingtuna.lotm.client.Configs;
 import org.slf4j.Logger;
 
 import java.util.function.Supplier;
@@ -26,6 +29,7 @@ public class PTD {
     public PTD() {
         MinecraftForge.EVENT_BUS.register(new PTDGameRules());
         MinecraftForge.EVENT_BUS.register(this);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, PTDConfig.COMMON_SPEC);
         MinecraftForge.EVENT_BUS.addListener(PTDCommands::onCommandRegistration);
     }
 }

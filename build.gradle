@@ -119,7 +119,7 @@ dependencies {
     implementation fg.deobf("net.tslat.smartbrainlib:SmartBrainLib-forge-${project.minecraft_version}:${project.sbl_version}")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     //LOTMC
-    implementation fg.deobf("curse.maven:lord-of-the-mysteries-craft-1095869:7035285")
+    implementation fg.deobf("curse.maven:lord-of-the-mysteries-craft-1095869:7071033")
     //Legendary Monsters
     implementation fg.deobf("curse.maven:legendarymonsters-944035:6776766")
     //Wither Reincarnated
@@ -143,7 +143,7 @@ dependencies {
     //Mowzie's Mobs
     implementation fg.deobf("curse.maven:mowziesmobs-250498:6586086")
     //Aquamirae
-    implementation fg.deobf("curse.maven:aquamirae-536254:4616373")
+    implementation fg.deobf("curse.maven:aquamirae-536254:7039863")
     //Born in Chaos
     implementation fg.deobf("curse.maven:borninchaos-686437:6833957")
     //EEEAB's Mobs

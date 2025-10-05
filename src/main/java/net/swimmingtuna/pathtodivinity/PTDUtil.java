@@ -48,6 +48,7 @@ public class PTDUtil {
     private static void initializeBeyonderEntityTypes() {
         // Sequence 9 entities
         BEYONDER_ENTITY_TYPES.add(ModEntities.Overgrown_colossus.get());
+        BEYONDER_ENTITY_TYPES.add(ModEntities.Warped_Fungussus.get());
         BEYONDER_ENTITY_TYPES.add(ACEntityRegistry.BRAINIAC.get());
         BEYONDER_ENTITY_TYPES.add(com.github.L_Ender.cataclysm.init.ModEntities.KOBOLEDIATOR.get());
         BEYONDER_ENTITY_TYPES.add(EntityHandler.UMVUTHI.get());
@@ -56,6 +57,7 @@ public class PTDUtil {
         //BEYONDER_ENTITY_TYPES.add(ArphexModEntities.LONG_LEGS_FLY.get());
         BEYONDER_ENTITY_TYPES.add(ModEntities.Skeletosaurus.get());
         BEYONDER_ENTITY_TYPES.add(BornInChaosV1ModEntities.NIGHTMARE_STALKER.get());
+        BEYONDER_ENTITY_TYPES.add(BornInChaosV1ModEntities.GLUTTON_FISH.get());
         BEYONDER_ENTITY_TYPES.add(ArphexModEntities.SCORPION_STRIKER.get());
         BEYONDER_ENTITY_TYPES.add(ZoniexModEntities.BRUTALISER.get());
         BEYONDER_ENTITY_TYPES.add(EntityHandler.WROUGHTNAUT.get());
@@ -65,6 +67,7 @@ public class PTDUtil {
         // Sequence 8 entities
         BEYONDER_ENTITY_TYPES.add(ModEntities.BlastCannon.get());
         BEYONDER_ENTITY_TYPES.add(ModEntities.Frostbitten_Golem.get());
+        BEYONDER_ENTITY_TYPES.add(ModEntities.Endersent.get());
         BEYONDER_ENTITY_TYPES.add(ACEntityRegistry.GUM_WORM.get());
         BEYONDER_ENTITY_TYPES.add(TerramityModEntities.DUSKROK.get());
         BEYONDER_ENTITY_TYPES.add(ModRegistry.MUTANT_SKELETON_ENTITY_TYPE.get());
@@ -104,6 +107,7 @@ public class PTDUtil {
         BEYONDER_ENTITY_TYPES.add(ModEntityTypes.Ragno.get());
         BEYONDER_ENTITY_TYPES.add(ArphexModEntities.WASP_NEMESIS.get());
         BEYONDER_ENTITY_TYPES.add(ModEntityTypes.Magispeller.get());
+        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.SPIDER_LURKER.get());
         BEYONDER_ENTITY_TYPES.add(AwakenedBossesModEntities.HEROBRINE.get());
         BEYONDER_ENTITY_TYPES.add(BornInChaosV1ModEntities.LIFESTEALER.get());
         BEYONDER_ENTITY_TYPES.add(ModEntities.Lava_eater.get());
@@ -115,8 +119,11 @@ public class PTDUtil {
         BEYONDER_ENTITY_TYPES.add(ArphexModEntities.CRAB_CONSTRICTOR.get());
         BEYONDER_ENTITY_TYPES.add(ArphexModEntities.SPIDER_REAPER.get());
         BEYONDER_ENTITY_TYPES.add(AquamiraeEntities.CAPTAIN_CORNELIA.get());
+        BEYONDER_ENTITY_TYPES.add(ModEntities.Posessed_Paladin.get());
         BEYONDER_ENTITY_TYPES.add(EntityRegistry.ACCURSED_LORD_BOSS.get()); //Decaying King
         BEYONDER_ENTITY_TYPES.add(EntityRegistry.RETURNING_KNIGHT.get());
+        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.SPIDER_LUNGER.get());
+        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.MANTIS_MUTILATOR.get());
         BEYONDER_ENTITY_TYPES.add(com.github.L_Ender.cataclysm.init.ModEntities.ENDER_GUARDIAN.get());
         BEYONDER_ENTITY_TYPES.add(EntityRegistry.MOONKNIGHT.get()); //Fallen Icon
         BEYONDER_ENTITY_TYPES.add(EntityRegistry.CHAOS_MONARCH.get()); //Monarch of Chaos
@@ -126,17 +133,21 @@ public class PTDUtil {
         // Sequence 4 entities
         BEYONDER_ENTITY_TYPES.add(ModEntities.Cloud_golem.get());
         BEYONDER_ENTITY_TYPES.add(ACEntityRegistry.HULLBREAKER.get());
+        BEYONDER_ENTITY_TYPES.add(AMEntityRegistry.VOID_WORM.get());
         BEYONDER_ENTITY_TYPES.add(MacabreModEntities.GOMORIA.get());
         BEYONDER_ENTITY_TYPES.add(MacabreModEntities.GARGAMAW.get());
+        BEYONDER_ENTITY_TYPES.add(MacabreModEntities.MORPHEGOR.get());
         BEYONDER_ENTITY_TYPES.add(com.github.L_Ender.cataclysm.init.ModEntities.IGNIS.get());
         BEYONDER_ENTITY_TYPES.add(MacabreModEntities.BAAL.get());
         BEYONDER_ENTITY_TYPES.add(ACEntityRegistry.LUXTRUCTOSAURUS.get());
+        BEYONDER_ENTITY_TYPES.add(com.github.L_Ender.cataclysm.init.ModEntities.ANCIENT_ANCIENT_REMNANT.get());
 
         BEYONDER_ENTITY_TYPES.add(com.github.L_Ender.cataclysm.init.ModEntities.SCYLLA.get()); //ADD TO SEQUENCE 4
         BEYONDER_ENTITY_TYPES.add(com.github.L_Ender.cataclysm.init.ModEntities.MALEDICTUS.get()); //ADD TO SEQUENCE 4
 
         BEYONDER_ENTITY_TYPES.add(TerramityModEntities.GOB.get());
         BEYONDER_ENTITY_TYPES.add(ArphexModEntities.SPIDER_PROWLER.get());
+        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.SPIDER_MATRIARCH.get());
         BEYONDER_ENTITY_TYPES.add(MacabreModEntities.VALAMON.get());
         BEYONDER_ENTITY_TYPES.add(com.github.L_Ender.cataclysm.init.ModEntities.THE_LEVIATHAN.get());
         BEYONDER_ENTITY_TYPES.add(EntityInit.NAMELESS_GUARDIAN.get());
@@ -154,6 +165,8 @@ public class PTDUtil {
         BEYONDER_ENTITY_TYPES.add(TerramityModEntities.GUNDALF.get());
         BEYONDER_ENTITY_TYPES.add(EntityRegistry.DAY_STALKER.get());
         BEYONDER_ENTITY_TYPES.add(EntityRegistry.NIGHT_PROWLER.get());
+        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.DRACONIC_VOIDLASHER.get());
+        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.SCORPIOID_BLOODLUSTER.get());
 
         // Sequence 1 entities
         BEYONDER_ENTITY_TYPES.add(TerramityModEntities.ULTRA_SNIFFER.get());
@@ -162,17 +175,17 @@ public class PTDUtil {
 
     private static boolean matchesNameBasedConditions(Entity entity) {
         String entityName = entity.getName().getString().toLowerCase();
-        String className = entity.getClass().getSimpleName();
-        if (entityName.contains("vessel")) return true;
-        if (entityName.equalsIgnoreCase("horseman")) return true;
-        if (entityName.contains("doomharbor")) return true;
-        if (entityName.contains("terrible") || entityName.contains("puny")) return true;
-        if (entityName.contains("plague_bringer")) return true;
-        if (entityName.contains("aero_guardian")) return true;
-        if (entityName.contains("dyrolian")) return true;
-        if (className.equals("VoidBlossomEntity")) return true;
-        if (className.equals("LichEntity")) return true;
-        return className.equals("GauntletEntity");
+        String className = entity.getClass().getSimpleName(); //Comments are equal to sequence
+        if (entityName.contains("vessel")) return true; //3
+        if (entityName.equalsIgnoreCase("horseman")) return true;  //4
+        if (entityName.contains("doomharbor")) return true; //7
+        if (entityName.contains("terrible") || entityName.contains("puny")) return true; //8
+        if (entityName.contains("plague_bringer")) return true; //7
+        if (entityName.contains("aero_guardian")) return true; //8
+        if (entityName.contains("dyrolian")) return true; //6
+        if (className.equals("VoidBlossomEntity")) return true; //6
+        if (className.equals("LichEntity")) return true; //7
+        return className.equals("GauntletEntity"); //7
     }
 
     // Main method that checks both Set and name-based conditions
