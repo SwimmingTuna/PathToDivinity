@@ -14,11 +14,8 @@ import com.github.L_Ender.cataclysm.entity.effect.Void_Vortex_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.*;
 import com.github.L_Ender.cataclysm.init.ModItems;
-import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
-import com.github.alexthe666.alexsmobs.entity.AMEntityRegistry;
 import com.kyanite.deeperdarker.content.DDEntities;
 import com.obscuria.aquamirae.registry.AquamiraeEntities;
-import com.yellowbrossproductions.illageandspillage.init.ModEntityTypes;
 import fuzs.mutantmonsters.init.ModRegistry;
 import net.arphex.configuration.ConfigurationSettingsConfiguration;
 import net.arphex.entity.CentipedeEvictorEntity;
@@ -27,7 +24,6 @@ import net.arphex.init.ArphexModBlocks;
 import net.arphex.init.ArphexModEntities;
 import net.arphex.init.ArphexModItems;
 import net.cursedwarrior.awakenedbosses.init.AwakenedBossesModEntities;
-import net.mcreator.animatedmobsmod.init.AnimatedmobsmodModEntities;
 import net.mcreator.borninchaosv.entity.PumpkinPistolProjectileEntity;
 import net.mcreator.borninchaosv.init.BornInChaosV1ModEntities;
 import net.mcreator.terramity.entity.DuskrokEntity;
@@ -87,7 +83,7 @@ import net.soulsweaponry.registry.EntityRegistry;
 import net.soulsweaponry.registry.ItemRegistry;
 import net.swimmingtuna.lotm.LOTM;
 import net.swimmingtuna.lotm.beyonder.api.BeyonderClass;
-import net.swimmingtuna.lotm.entity.PlayerMobEntity;
+import net.swimmingtuna.lotm.entity.Mobs.PlayerMobEntity;
 import net.swimmingtuna.lotm.init.BeyonderClassInit;
 import net.swimmingtuna.lotm.util.BeyonderUtil;
 import net.swimmingtuna.pathtodivinity.PTD;
@@ -333,35 +329,35 @@ public class ModEvents {
 
             if (living.tickCount % 40 == 0) {
                 if (type == EntityRegistry.CHAOS_MONARCH.get()) {
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.MONSTER.get());
-                    BeyonderUtil.setSequence(living, 7);
+                    
+                    
                 } else if (type == EntityRegistry.DRAUGR_BOSS.get()) {
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.SPECTATOR.get());
-                    BeyonderUtil.setSequence(living, 7);
+                    
+                    
                 } else if (type == EntityRegistry.NIGHT_SHADE.get()) {
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
-                    BeyonderUtil.setSequence(living, 7);
+                    
+                    
                 } else if (type == ModEntities.Cloud_golem.get()) {
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.SAILOR.get());
-                    BeyonderUtil.setSequence(living, 6);
+                    
+                    
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.THE_LEVIATHAN.get()) {
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.MONSTER.get());
-                    BeyonderUtil.setSequence(living, 6);
+                    
+                    
                 } else if (living.getName().getString().equalsIgnoreCase("horseman")) {
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.SPECTATOR.get());
-                    BeyonderUtil.setSequence(living, 6);
+                    
+                    
                 } else if (type == EntityInit.NAMELESS_GUARDIAN.get()) {
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
-                    BeyonderUtil.setSequence(living, 6);
+                    
+                    
                 } else if (type == EntityRegistry.MOONKNIGHT.get()) {
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
-                    BeyonderUtil.setSequence(living, 5);
+                    
+                    
                 } else if (type == BornInChaosV1ModEntities.LORD_PUMPKINHEAD.get()) {
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.SPECTATOR.get());
-                    BeyonderUtil.setSequence(living, 5);
+                    
+                    
                 } else if (type == TerramityModEntities.TRIAL_GUARDIAN.get()) {
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.SAILOR.get());
-                    BeyonderUtil.setSequence(living, 5);
+                    
+                    
                 } else if (type == EntityRegistry.DAY_STALKER.get()) {
                     if (living.tickCount % 4 == 0) {
                         for (Mob mob : living.level().getEntitiesOfClass(Mob.class, living.getBoundingBox().inflate(25))) {
@@ -378,8 +374,8 @@ public class ModEvents {
                         }
                         multiplyDamage(dayStalker, 2.6);
                     }
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
-                    BeyonderUtil.setSequence(living, 4);
+                    
+                    
                 } else if (type == EntityRegistry.NIGHT_PROWLER.get()) {
                     if (living.tickCount % 4 == 0) {
                         for (Mob mob : living.level().getEntitiesOfClass(Mob.class, living.getBoundingBox().inflate(25))) {
@@ -396,17 +392,12 @@ public class ModEvents {
                             multiplyMaxHealth(living, 2);
                         }
                     }
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.SAILOR.get());
-                    BeyonderUtil.setSequence(living, 4);
+                    
+                    
                 } else if (type == TerramityModEntities.ULTRA_SNIFFER.get()) {
                     if (BeyonderUtil.getPathway(living) == null) {
                         BeyonderClass[] pathways = {BeyonderClassInit.MONSTER.get(), BeyonderClassInit.WARRIOR.get(), BeyonderClassInit.SPECTATOR.get(), BeyonderClassInit.SAILOR.get()};
-                        BeyonderClass randomPathway = pathways[living.getRandom().nextInt(pathways.length)];
-                        BeyonderUtil.setPathway(living, randomPathway);
-                        BeyonderUtil.setSequence(living, 3);
                     }
-                } else if (type == ACEntityRegistry.BRAINIAC.get()) {
-                    multiplyDamage(living, 1.3);
                 } else if (type == ModEntities.Warped_Fungussus.get()) {
                     multiplyMaxHealth(living, 1.5);
                     multiplyDamage(living, 1.4);
@@ -431,15 +422,11 @@ public class ModEvents {
                     multiplyDamage(living, 1.5);
 
                     // Sequence 8
-                } else if (type == ACEntityRegistry.GUM_WORM.get()) {
-                    multiplyDamage(living, 1.25);
                 } else if (type == TerramityModEntities.DUSKROK.get()) {
                     multiplyDamage(living, 1.3);
                 } else if (type == ModRegistry.MUTANT_SKELETON_ENTITY_TYPE.get()) {
                     multiplyDamage(living, 1.2);
                 } else if (living.getName().getString().toLowerCase().contains("terrible") || living.getName().getString().toLowerCase().contains("puny")) {
-                    multiplyDamage(living, 1.3);
-                } else if (type == AMEntityRegistry.WARPED_MOSCO.get()) {
                     multiplyDamage(living, 1.3);
                 } else if (type == EntityType.ELDER_GUARDIAN) {
                     multiplyDamage(living, 1.3);
@@ -457,9 +444,7 @@ public class ModEvents {
                 }
 
                 // Sequence 7
-                else if (type == ACEntityRegistry.FORSAKEN.get()) {
-                    multiplyDamage(living, 1.5);
-                } else if (type == ArphexModEntities.SPIDER_SNATCHER.get()) {
+                else if (type == ArphexModEntities.SPIDER_SNATCHER.get()) {
                     multiplyDamage(living, 1.6);
                 } else if (type == MacabreModEntities.CRAWLER.get()) {
                     multiplyDamage(living, 6.0);
@@ -476,8 +461,6 @@ public class ModEvents {
                 } else if (type == DDEntities.STALKER.get()) {
                     multiplyDamage(living, 0.8);
                     multiplyMaxHealth(living, 1.5);
-                } else if (type == AnimatedmobsmodModEntities.ENDER_KING.get()) {
-                    multiplyDamage(living, 0.8);
                 } else if (living.getClass().getSimpleName().equals("LichEntity")) {
                     multiplyDamage(living, 1.1);
                 } else if (type == AetherEntityTypes.SUN_SPIRIT.get()) {
@@ -494,12 +477,8 @@ public class ModEvents {
                     multiplyDamage(living, 1.1);
                 } else if (living.getClass().getSimpleName().equals("VoidBlossomEntity")) {
                     multiplyDamage(living, 1.3);
-                } else if (type == ModEntityTypes.Freakager.get()) {
-                    multiplyDamage(living, 1.5);
                 } else if (type == ArphexModEntities.WASP_NEMESIS.get()) {
                     multiplyDamage(living, 1.6);
-                } else if (type == ModEntityTypes.Magispeller.get()) {
-                    multiplyDamage(living, 1.5);
                 } else if (type == BornInChaosV1ModEntities.LIFESTEALER.get()) {
                     multiplyDamage(living, 2.0);
                     multiplyMaxHealth(living, 1.4);
@@ -516,8 +495,9 @@ public class ModEvents {
                     // Sequence 5
                 } else if (type == EntityRegistry.CHAOS_MONARCH.get()) {
                     multiplyDamage(living, 4.5);
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.MONSTER.get());
-                    BeyonderUtil.setSequence(living, 7);
+                } else if (type == net.swimmingtuna.lotm.init.EntityInit.SHADOWLESS_DEMONIC_WOLF.get()) {
+                    multiplyMaxHealth(living, 3.0);
+                    multiplyDamage(living, 1.1);
                 } else if (type == ArphexModEntities.CRAB_CONSTRICTOR.get()) {
                     multiplyDamage(living, 2.0);
                 } else if (type == ArphexModEntities.SPIDER_REAPER.get()) {
@@ -527,12 +507,12 @@ public class ModEvents {
                     multiplyMaxHealth(living, 1.3);
                 } else if (type == EntityRegistry.DRAUGR_BOSS.get()) {
                     multiplyDamage(living, 1.2);
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.SPECTATOR.get());
-                    BeyonderUtil.setSequence(living, 7);
+                    
+                    
                 } else if (type == EntityRegistry.NIGHT_SHADE.get()) {
                     multiplyDamage(living, 1.5);
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
-                    BeyonderUtil.setSequence(living, 7);
+                    
+                    
                 } else if (type == EntityRegistry.ACCURSED_LORD_BOSS.get()) {
                     multiplyDamage(living, 2.0);
                 } else if (type == EntityRegistry.RETURNING_KNIGHT.get()) {
@@ -555,24 +535,20 @@ public class ModEvents {
 
 
                     // Sequence 4
-                } else if (type == ACEntityRegistry.HULLBREAKER.get()) {
-                    multiplyDamage(living, 2.0);
                 } else if (type == MacabreModEntities.GOMORIA.get()) {
                     multiplyDamage(living, 1.3);
                 } else if (type == ModEntities.Cloud_golem.get()) {
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.SAILOR.get());
-                    BeyonderUtil.setSequence(living, 6);
+                    
+                    
                 } else if (type == MacabreModEntities.BAAL.get()) {
                     multiplyDamage(living, 1.7);
-                } else if (type == ACEntityRegistry.LUXTRUCTOSAURUS.get()) {
-                    multiplyDamage(living, 4.0);
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.THE_LEVIATHAN.get()) {
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.MONSTER.get());
-                    BeyonderUtil.setSequence(living, 6);
+                    
+                    
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.SCYLLA.get()) {
                     multiplyDamage(living, 2.0);
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
-                    BeyonderUtil.setSequence(living, 7);
+                    
+                    
                 } else if (type == TerramityModEntities.GOB.get()) {
                     multiplyDamage(living, 1.8);
                     living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 40, 1, false, false));
@@ -580,13 +556,13 @@ public class ModEvents {
                     multiplyDamage(living, 2.5);
                     multiplyMaxHealth(living, 1.4);
                 } else if (living.getName().getString().equalsIgnoreCase("horseman")) {
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.SPECTATOR.get());
-                    BeyonderUtil.setSequence(living, 6);
+                    
+                    
                 } else if (type == MacabreModEntities.VALAMON.get()) {
                     multiplyDamage(living, 2.1);
                 } else if (type == EntityInit.NAMELESS_GUARDIAN.get()) {
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
-                    BeyonderUtil.setSequence(living, 6);
+                    
+                    
                 } else if (type == ArphexModEntities.SPIDER_MATRIARCH.get()) {
                     multiplyMaxHealth(living, 2.0);
                     multiplyDamage(living, 1.8);
@@ -600,36 +576,36 @@ public class ModEvents {
 
                     // Sequence 3
                 } else if (living.getName().getString().toLowerCase().contains("vessel")) {
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.MONSTER.get());
-                    BeyonderUtil.setSequence(living, 5);
+                    
+                    
                     multiplyDamage(living, 2.5);
                 } else if (type == ArphexModEntities.SPIDER_MOTH.get()) {
                     multiplyDamage(living, 2.0);
                 } else if (type == EntityRegistry.MOONKNIGHT.get()) {
                     multiplyDamage(living, 2.0);
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
-                    BeyonderUtil.setSequence(living, 5);
+                    
+                    
                 } else if (type == ArphexModEntities.DRACONIC_VOIDLASHER.get()) {
                     multiplyDamage(living, 2.0);
                 } else if (type == BornInChaosV1ModEntities.LORD_PUMPKINHEAD.get()) {
                     multiplyDamage(living, 1.2);
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.SPECTATOR.get());
-                    BeyonderUtil.setSequence(living, 5);
+                    
+                    
                 } else if (type == ArphexModEntities.SCORPIOID_BLOODLUSTER.get()) {
                     multiplyDamage(living, 2.0);
                 } else if (type == TerramityModEntities.TRIAL_GUARDIAN.get()) {
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.SAILOR.get());
-                    BeyonderUtil.setSequence(living, 5);
+                    
+                    
 
                     // Sequence 2
                 } else if (type == TerramityModEntities.SUPER_SNIFFER.get()) {
                     multiplyDamage(living, 1.2);
                 } else if (type == EntityRegistry.DAY_STALKER.get()) {
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
-                    BeyonderUtil.setSequence(living, 4);
+                    
+                    
                 } else if (type == EntityRegistry.NIGHT_PROWLER.get()) {
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.SAILOR.get());
-                    BeyonderUtil.setSequence(living, 4);
+                    
+                    
                 } else if (type == TerramityModEntities.GUNDALF.get()) {
                     multiplyDamage(living, 1.5);
                 }
@@ -935,10 +911,11 @@ public class ModEvents {
                 // Sequence 9
                 if (type == ModEntities.Overgrown_colossus.get()) {
                     multiplyMaxHealth(living, 1.5);
-                } else if (type == ACEntityRegistry.BRAINIAC.get()) {
-                    multiplyMaxHealth(living, 1.5);
+                } else if (type == net.swimmingtuna.lotm.init.EntityInit.GEM_DEVOURING_WORM.get()) {
+                    multiplyMaxHealth(living, 2.0);
                     multiplyDamage(living, 1.3);
-                } else if (type == ModEntities.Warped_Fungussus.get()) {
+                }
+                else if (type == ModEntities.Warped_Fungussus.get()) {
                     multiplyMaxHealth(living, 1.5);
                     multiplyDamage(living, 1.4);
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.KOBOLEDIATOR.get()) {
@@ -978,9 +955,6 @@ public class ModEvents {
                     multiplyMaxHealth(living, 1.25);
                 } else if (type == ModEntities.Frostbitten_Golem.get()) {
                     multiplyMaxHealth(living, 1.3);
-                } else if (type == ACEntityRegistry.GUM_WORM.get()) {
-                    multiplyMaxHealth(living, 1.0);
-                    multiplyDamage(living, 1.25);
                 } else if (type == TerramityModEntities.DUSKROK.get()) {
                     multiplyMaxHealth(living, 1.3);
                     multiplyDamage(living, 1.3);
@@ -990,9 +964,9 @@ public class ModEvents {
                 } else if (living.getName().getString().toLowerCase().contains("terrible") || living.getName().getString().toLowerCase().contains("puny")) { //Terrible Ten
                     multiplyMaxHealth(living, 1.0);
                     multiplyDamage(living, 1.3);
-                } else if (type == AMEntityRegistry.WARPED_MOSCO.get()) {
-                    multiplyMaxHealth(living, 1.0);
-                    multiplyDamage(living, 1.3);
+                //} else if (type == AMEntityRegistry.WARPED_MOSCO.get()) {
+                //    multiplyMaxHealth(living, 1.0);
+                //    multiplyDamage(living, 1.3);
                 } else if (type == EntityType.ELDER_GUARDIAN) {
                     multiplyMaxHealth(living, 1.0);
                     multiplyDamage(living, 1.3);
@@ -1002,8 +976,6 @@ public class ModEvents {
                 } else if (living.getName().getString().toLowerCase().contains("aero_guardian")) { //Aero Guardian
                     multiplyMaxHealth(living, 1.0);
                     multiplyDamage(living, 1.6);
-                } else if (type == ACEntityRegistry.TREMORSAURUS.get()) {
-                    multiplyMaxHealth(living, 1.2);
                 } else if (type == BornInChaosV1ModEntities.SPIRITOF_CHAOS.get()) {
                     multiplyMaxHealth(living, 4.0);
                 } else if (type == BornInChaosV1ModEntities.MOTHER_SPIDER.get()) {
@@ -1015,17 +987,23 @@ public class ModEvents {
                 } else if (type == TerramityModEntities.HELLROK.get()) {
                     multiplyMaxHealth(living, 1.3);
                     multiplyDamage(living, 1.4);
+                } else if (type == net.swimmingtuna.lotm.init.EntityInit.SPIRIT_EATER.get()) {
+                    multiplyMaxHealth(living, 2.5);
+                    multiplyDamage(living, 1.2);
+                } else if (type == net.swimmingtuna.lotm.init.EntityInit.DEEP_SEA_MARLIN.get()) {
+                    multiplyMaxHealth(living, 2.5);
+                    multiplyDamage(living, 1.2);
                 } else if (type == ModRegistry.MUTANT_ZOMBIE_ENTITY_TYPE.get()) {
                     multiplyMaxHealth(living, 1.5);
 
                     // Sequence 7
-                } else if (type == ACEntityRegistry.FORSAKEN.get()) {
-                    multiplyMaxHealth(living, 1.3);
-                    multiplyDamage(living, 1.5);
                 } else if (type == ArphexModEntities.SPIDER_LUNGER.get()) {
                     multiplyMaxHealth(living, 1.5);
                     multiplyDamage(living, 2.0);
-                } else if (type == ModEntities.Ancient_Guardian.get()) {
+                } else if (type == ModEntities.Warped_Fungussus.get()) {
+                    multiplyMaxHealth(living, 1.8);
+                }
+                else if (type == ModEntities.Ancient_Guardian.get()) {
                     multiplyMaxHealth(living, 1.3);
                 } else if (type == ArphexModEntities.SPIDER_SNATCHER.get()) {
                     multiplyMaxHealth(living, 1.0);
@@ -1051,9 +1029,6 @@ public class ModEvents {
                 } else if (type == DDEntities.STALKER.get()) {
                     multiplyMaxHealth(living, 1.0);
                     multiplyDamage(living, 1.2);
-                } else if (type == AnimatedmobsmodModEntities.ENDER_KING.get()) {
-                    multiplyMaxHealth(living, 0.8);
-                    multiplyDamage(living, 0.8);
                 } else if (entity.getClass().getSimpleName().equals("LichEntity")) { //Lich (Bosses of Mass Destruction)
                     multiplyMaxHealth(living, 1.0);
                     multiplyDamage(living, 1.1);
@@ -1073,25 +1048,15 @@ public class ModEvents {
                     multiplyDamage(living, 1.2);
 
                     //Sequence 6
-                } else if (type == ModEntityTypes.Spiritcaller.get()) {
-                    multiplyMaxHealth(living, 1.3);
                 } else if (type == EntityType.WITHER) {
                     multiplyMaxHealth(living, 1.0);
                     multiplyDamage(living, 1.1);
                 } else if (entity.getClass().getSimpleName().equals("VoidBlossomEntity")) { //Void Blossom
                     multiplyMaxHealth(living, 1.2);
                     multiplyDamage(living, 1.3);
-                } else if (type == ModEntityTypes.Freakager.get()) {
-                    multiplyMaxHealth(living, 1.5);
-                    multiplyDamage(living, 1.5);
-                } else if (type == ModEntityTypes.Ragno.get()) {
-                    multiplyMaxHealth(living, 1.5);
                 } else if (type == ArphexModEntities.WASP_NEMESIS.get()) {
                     multiplyMaxHealth(living, 1.5);
                     multiplyDamage(living, 1.9);
-                } else if (type == ModEntityTypes.Magispeller.get()) {
-                    multiplyMaxHealth(living, 1.5);
-                    multiplyDamage(living, 1.5);
                 } else if (type == AwakenedBossesModEntities.HEROBRINE.get()) {
                     multiplyMaxHealth(living, 1.0);
                     multiplyDamage(living, 1.2);
@@ -1110,7 +1075,10 @@ public class ModEvents {
                 } else if (type == ModEntities.Endersent.get()) {
                     multiplyMaxHealth(living, 1.5);
                     multiplyDamage(living, 4.0);
-                } else if (living.getName().getString().toLowerCase().contains("dyrolian")) {
+                } else if (type == net.swimmingtuna.lotm.init.EntityInit.SHADOWLESS_DEMONIC_WOLF.get()) {
+                    multiplyMaxHealth(living, 1.5);
+                }
+                else if (living.getName().getString().toLowerCase().contains("dyrolian")) {
                     multiplyDamage(living, 1.3);
                     multiplyMaxHealth(living, 0.5);
 
@@ -1118,8 +1086,8 @@ public class ModEvents {
                 } else if (type == EntityRegistry.CHAOS_MONARCH.get()) {
                     multiplyMaxHealth(living, 1.8);
                     multiplyDamage(living, 4.5);
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.MONSTER.get());
-                    BeyonderUtil.setSequence(living, 7);
+                    
+                    
                     living.getPersistentData().putDouble("luck", 500);
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.NETHERITE_MONSTROSITY.get()) {
                     multiplyDamage(living, 1.5);
@@ -1139,13 +1107,13 @@ public class ModEvents {
                 } else if (type == EntityRegistry.DRAUGR_BOSS.get()) {
                     multiplyMaxHealth(living, 1.5);
                     multiplyDamage(living, 1.2);
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.SPECTATOR.get());
-                    BeyonderUtil.setSequence(living, 7);
+                    
+                    
                 } else if (type == EntityRegistry.NIGHT_SHADE.get()) {
                     multiplyMaxHealth(living, 2.5);
                     multiplyDamage(living, 1.5);
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
-                    BeyonderUtil.setSequence(living, 7);
+                    
+                    
                 } else if (type == EntityRegistry.ACCURSED_LORD_BOSS.get()) {
                     multiplyMaxHealth(living, 2.0);
                     multiplyDamage(living, 1.7);
@@ -1166,9 +1134,6 @@ public class ModEvents {
                     multiplyDamage(living, 1.2);
 
                     // Sequence 4
-                } else if (type == ACEntityRegistry.HULLBREAKER.get()) {
-                    multiplyMaxHealth(living, 2.0);
-                    multiplyDamage(living, 2.0);
                 } else if (type == MacabreModEntities.GOMORIA.get()) {
                     multiplyMaxHealth(living, 1.5);
                     multiplyDamage(living, 1.3);
@@ -1180,23 +1145,20 @@ public class ModEvents {
                     multiplyMaxHealth(living, 1.2);
                 } else if (type == ModEntities.Cloud_golem.get()) {
                     multiplyMaxHealth(living, 2.0);
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.SAILOR.get());
-                    BeyonderUtil.setSequence(living, 6);
+                    
+                    
                 } else if (type == MacabreModEntities.BAAL.get()) {
                     multiplyMaxHealth(living, 1.8);
                     multiplyDamage(living, 1.2);
-                } else if (type == ACEntityRegistry.LUXTRUCTOSAURUS.get()) {
-                    multiplyMaxHealth(living, 2.5);
-                    multiplyDamage(living, 4.0);
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.THE_LEVIATHAN.get()) {
                     multiplyMaxHealth(living, 1.0);
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.MONSTER.get());
-                    BeyonderUtil.setSequence(living, 6);
+                    
+                    
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.SCYLLA.get()) {
                     multiplyMaxHealth(living, 4.0);
                     multiplyDamage(living, 2.0);
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
-                    BeyonderUtil.setSequence(living, 7);
+                    
+                    
                 } else if (type == TerramityModEntities.GOB.get()) {
                     multiplyMaxHealth(living, 3.0);
                     multiplyDamage(living, 1.8);
@@ -1205,8 +1167,8 @@ public class ModEvents {
                     multiplyDamage(living, 2.5);
                 } else if (living.getName().getString().equalsIgnoreCase("horseman")) { //Pumpkin Horseman
                     multiplyMaxHealth(living, 1.5);
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.SPECTATOR.get());
-                    BeyonderUtil.setSequence(living, 6);
+                    
+                    
                 } else if (type == MacabreModEntities.VALAMON.get()) {
                     multiplyMaxHealth(living, 1.4);
                     multiplyDamage(living, 1.6);
@@ -1219,8 +1181,8 @@ public class ModEvents {
                 } else if (type == EntityInit.NAMELESS_GUARDIAN.get()) {
                     multiplyMaxHealth(living, 1.7);
                     multiplyDamage(living, 2.2);
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
-                    BeyonderUtil.setSequence(living, 6);
+                    
+                    
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.MALEDICTUS.get()) {
                     multiplyMaxHealth(living, 4.0);
                     multiplyDamage(living, 2.5);
@@ -1245,23 +1207,22 @@ public class ModEvents {
                 } else if (type == EntityRegistry.MOONKNIGHT.get()) {
                     multiplyMaxHealth(living, 4.0);
                     multiplyDamage(living, 2.0);
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
-                    BeyonderUtil.setSequence(living, 5);
+                    
+                    
                 } else if (type == ArphexModEntities.DRACONIC_VOIDLASHER.get()) {
                     multiplyMaxHealth(living, 4.0);
                     multiplyDamage(living, 2.0);
                 } else if (type == BornInChaosV1ModEntities.LORD_PUMPKINHEAD.get()) {
                     multiplyMaxHealth(living, 5.0);
                     multiplyDamage(living, 1.2);
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.SPECTATOR.get());
-                    BeyonderUtil.setSequence(living, 5);
+                    
+                    
                 } else if (type == ArphexModEntities.SCORPIOID_BLOODLUSTER.get()) {
                     multiplyMaxHealth(living, 4.0);
                     multiplyDamage(living, 2.0);
                 } else if (type == TerramityModEntities.TRIAL_GUARDIAN.get()) {
                     multiplyMaxHealth(living, 4.0);
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.SAILOR.get());
-                    BeyonderUtil.setSequence(living, 5);
+                    
 
                     // Sequence 2
                 } else if (type == TerramityModEntities.SUPER_SNIFFER.get()) {
@@ -1270,13 +1231,11 @@ public class ModEvents {
                 } else if (type == EntityRegistry.DAY_STALKER.get()) {
                     multiplyMaxHealth(living, 4.0);
                     multiplyDamage(living, 1.1);
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.WARRIOR.get());
-                    BeyonderUtil.setSequence(living, 4);
+                    
                 } else if (type == EntityRegistry.NIGHT_PROWLER.get()) {
                     multiplyMaxHealth(living, 3.0);
                     multiplyDamage(living, 0.4);
-                    BeyonderUtil.setPathway(living, BeyonderClassInit.SAILOR.get());
-                    BeyonderUtil.setSequence(living, 4);
+                    
                 } else if (type == TerramityModEntities.GUNDALF.get()) {
                     multiplyMaxHealth(living, 6.0);
                     multiplyDamage(living, 1.5);
@@ -1284,12 +1243,6 @@ public class ModEvents {
                     // Sequence 1
                 } else if (type == TerramityModEntities.ULTRA_SNIFFER.get()) {
                     multiplyMaxHealthUltraSniffer(living, 10.0);
-                    if (BeyonderUtil.getPathway(living) == null) {
-                        BeyonderClass[] pathways = {BeyonderClassInit.MONSTER.get(), BeyonderClassInit.WARRIOR.get(), BeyonderClassInit.SPECTATOR.get(), BeyonderClassInit.SAILOR.get()};
-                        BeyonderClass randomPathway = pathways[living.getRandom().nextInt(pathways.length)];
-                        BeyonderUtil.setPathway(living, randomPathway);
-                        BeyonderUtil.setSequence(living, 3);
-                    }
                 }
             }
         }

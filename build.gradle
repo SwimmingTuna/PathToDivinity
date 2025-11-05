@@ -119,23 +119,19 @@ dependencies {
     implementation fg.deobf("net.tslat.smartbrainlib:SmartBrainLib-forge-${project.minecraft_version}:${project.sbl_version}")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     //LOTMC
-    implementation fg.deobf("curse.maven:lord-of-the-mysteries-craft-1095869:7071033")
+    implementation fg.deobf("curse.maven:lord-of-the-mysteries-craft-1095869:7190289")
     //Legendary Monsters
     implementation fg.deobf("curse.maven:legendarymonsters-944035:6776766")
     //Wither Reincarnated
     implementation fg.deobf("curse.maven:witherreincarnated-1309246:6835382")
     //Arphex
-    implementation fg.deobf("curse.maven:arphex-967672:7001168")
-    //Alex's Caves
-    implementation fg.deobf("curse.maven:alexscaves-924854:5848216")
+    implementation fg.deobf("curse.maven:arphex-967672:7108032")
     //Terramity
     implementation fg.deobf("curse.maven:terramity-1084134:6054971")
     //Mutant Monsters
     implementation fg.deobf("curse.maven:mutantmonsters-852665:5107399")
     //Macabre
     implementation fg.deobf("curse.maven:macabre-933001:6442644")
-    //Illage and Spillage
-    implementation fg.deobf("curse.maven:illageandspillage-1079714:6156035")
     //Marium's Soulslike Weaponry
     implementation fg.deobf("curse.maven:soulsweapons-632066:6509913")
     //Cataclysm
@@ -153,7 +149,7 @@ dependencies {
     //Better Combat
     implementation fg.deobf("curse.maven:bettercombat-639842:5625757")
     //Obscure API
-    implementation fg.deobf("curse.maven:obscureapi-638417:4616364")
+    implementation fg.deobf("curse.maven:obscureapi-638417:7171906")
     //Lionfish API
     implementation fg.deobf("curse.maven:lionfishapi-1001614:5922047")
     //AttributeFix
@@ -180,20 +176,16 @@ dependencies {
     implementation fg.deobf("curse.maven:bomd-438365:4993305")
     //Awakened Bosses
     implementation fg.deobf("curse.maven:awakenedbosses-548167:5057212")
-    //AME's Mobs Renew
-    implementation fg.deobf("curse.maven:amemobs-1080087:6869663")
     //Deeper Darker
     implementation fg.deobf("curse.maven:deeperdarker-659011:5906086")
     //Aether
     implementation fg.deobf("curse.maven:aether-255308:6134920")
     //Zoniex
     implementation fg.deobf("curse.maven:zoniex-1171163:6276844")
-    //Alex's Mobs
-    implementation fg.deobf("curse.maven:alexsmobs-426558:5698791")
     //Jade
     implementation fg.deobf("curse.maven:jade-324717:6855440")
     //JEI
-    implementation fg.deobf("curse.maven:alexsmobs-238222:6600311")
+    implementation fg.deobf("curse.maven:JEI-238222:6600311")
     //JER
     implementation fg.deobf("curse.maven:JER-240630:5057220")
     //Dreamcat LIB

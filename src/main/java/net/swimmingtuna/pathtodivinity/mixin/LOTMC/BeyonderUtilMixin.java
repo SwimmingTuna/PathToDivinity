@@ -4,20 +4,17 @@ import com.aetherteam.aether.entity.AetherEntityTypes;
 import com.bobmowzie.mowziesmobs.server.entity.EntityHandler;
 import com.curseforge.macabre.init.MacabreModEntities;
 import com.eeeab.eeeabsmobs.sever.init.EntityInit;
-import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
-import com.github.alexthe666.alexsmobs.entity.AMEntityRegistry;
 import com.kyanite.deeperdarker.content.DDEntities;
 import com.obscuria.aquamirae.registry.AquamiraeEntities;
-import com.yellowbrossproductions.illageandspillage.init.ModEntityTypes;
 import fuzs.mutantmonsters.init.ModRegistry;
 import net.arphex.init.ArphexModEntities;
 import net.cursedwarrior.awakenedbosses.init.AwakenedBossesModEntities;
-import net.mcreator.animatedmobsmod.init.AnimatedmobsmodModEntities;
 import net.mcreator.borninchaosv.init.BornInChaosV1ModEntities;
 import net.mcreator.terramity.init.TerramityModEntities;
 import net.miauczel.legendary_monsters.entity.ModEntities;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.soulsweaponry.registry.EntityRegistry;
 import net.swimmingtuna.lotm.util.BeyonderUtil;
@@ -25,6 +22,7 @@ import net.zoniex.init.ZoniexModEntities;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -57,7 +55,6 @@ public class BeyonderUtilMixin {
         // Sequence 9 entities
         ENTITY_SEQUENCE_MAP.put(ModEntities.Overgrown_colossus.get(), 9);
         ENTITY_SEQUENCE_MAP.put(ModEntities.Warped_Fungussus.get(), 9);
-        ENTITY_SEQUENCE_MAP.put(ACEntityRegistry.BRAINIAC.get(), 9);
         ENTITY_SEQUENCE_MAP.put(com.github.L_Ender.cataclysm.init.ModEntities.KOBOLEDIATOR.get(), 9);
         ENTITY_SEQUENCE_MAP.put(EntityHandler.UMVUTHI.get(), 9);
         ENTITY_SEQUENCE_MAP.put(AquamiraeEntities.MAW.get(), 9);
@@ -73,13 +70,11 @@ public class BeyonderUtilMixin {
         ENTITY_SEQUENCE_MAP.put(ModEntities.BlastCannon.get(), 8);
         ENTITY_SEQUENCE_MAP.put(ModEntities.Frostbitten_Golem.get(), 8);
         ENTITY_SEQUENCE_MAP.put(ModEntities.Endersent.get(), 8);
-        ENTITY_SEQUENCE_MAP.put(ACEntityRegistry.GUM_WORM.get(), 8);
         ENTITY_SEQUENCE_MAP.put(TerramityModEntities.DUSKROK.get(), 8);
         ENTITY_SEQUENCE_MAP.put(ModRegistry.MUTANT_SKELETON_ENTITY_TYPE.get(), 8);
         ENTITY_SEQUENCE_MAP.put(ModRegistry.MUTANT_ENDERMAN_ENTITY_TYPE.get(), 8);
-        ENTITY_SEQUENCE_MAP.put(AMEntityRegistry.WARPED_MOSCO.get(), 8);
+        //ENTITY_SEQUENCE_MAP.put(AMEntityRegistry.WARPED_MOSCO.get(), 8);
         ENTITY_SEQUENCE_MAP.put(EntityType.ELDER_GUARDIAN, 8);
-        ENTITY_SEQUENCE_MAP.put(ACEntityRegistry.TREMORSAURUS.get(), 8);
         ENTITY_SEQUENCE_MAP.put(BornInChaosV1ModEntities.SPIRITOF_CHAOS.get(), 8);
         ENTITY_SEQUENCE_MAP.put(BornInChaosV1ModEntities.MOTHER_SPIDER.get(), 8);
         ENTITY_SEQUENCE_MAP.put(TerramityModEntities.HELLROK.get(), 8);
@@ -87,7 +82,6 @@ public class BeyonderUtilMixin {
         ENTITY_SEQUENCE_MAP.put(AetherEntityTypes.VALKYRIE_QUEEN.get(), 8);
 
         // Sequence 7 entities
-        ENTITY_SEQUENCE_MAP.put(ACEntityRegistry.FORSAKEN.get(), 7);
         ENTITY_SEQUENCE_MAP.put(ModEntities.Ancient_Guardian.get(), 7);
         ENTITY_SEQUENCE_MAP.put(ArphexModEntities.SPIDER_SNATCHER.get(), 7);
         ENTITY_SEQUENCE_MAP.put(MacabreModEntities.CRAWLER.get(), 7);
@@ -96,7 +90,6 @@ public class BeyonderUtilMixin {
         ENTITY_SEQUENCE_MAP.put(AquamiraeEntities.MAZE_MOTHER.get(), 7);
         ENTITY_SEQUENCE_MAP.put(ArphexModEntities.CENTIPEDE_EVICTOR.get(), 7);
         ENTITY_SEQUENCE_MAP.put(DDEntities.STALKER.get(), 7);
-        ENTITY_SEQUENCE_MAP.put(AnimatedmobsmodModEntities.ENDER_KING.get(), 7);
         ENTITY_SEQUENCE_MAP.put(ModEntities.Withered_Abomination.get(), 7);
         ENTITY_SEQUENCE_MAP.put(AetherEntityTypes.SUN_SPIRIT.get(), 7);
         ENTITY_SEQUENCE_MAP.put(ArphexModEntities.SOLIFUGE_SKULKER.get(), 7);
@@ -104,12 +97,8 @@ public class BeyonderUtilMixin {
 
         // Sequence 6 entities
         ENTITY_SEQUENCE_MAP.put(com.github.L_Ender.cataclysm.init.ModEntities.NETHERITE_MONSTROSITY.get(), 6);
-        ENTITY_SEQUENCE_MAP.put(ModEntityTypes.Spiritcaller.get(), 6);
         ENTITY_SEQUENCE_MAP.put(EntityType.WITHER, 6);
-        ENTITY_SEQUENCE_MAP.put(ModEntityTypes.Freakager.get(), 6);
-        ENTITY_SEQUENCE_MAP.put(ModEntityTypes.Ragno.get(), 6);
         ENTITY_SEQUENCE_MAP.put(ArphexModEntities.WASP_NEMESIS.get(), 6);
-        ENTITY_SEQUENCE_MAP.put(ModEntityTypes.Magispeller.get(), 6);
         ENTITY_SEQUENCE_MAP.put(ArphexModEntities.SPIDER_LURKER.get(), 6);
         ENTITY_SEQUENCE_MAP.put(AwakenedBossesModEntities.HEROBRINE.get(), 6);
         ENTITY_SEQUENCE_MAP.put(BornInChaosV1ModEntities.LIFESTEALER.get(), 6);
@@ -135,14 +124,11 @@ public class BeyonderUtilMixin {
 
         // Sequence 4 entities
         ENTITY_SEQUENCE_MAP.put(ModEntities.Cloud_golem.get(), 4);
-        ENTITY_SEQUENCE_MAP.put(ACEntityRegistry.HULLBREAKER.get(), 4);
-        ENTITY_SEQUENCE_MAP.put(AMEntityRegistry.VOID_WORM.get(), 4);
         ENTITY_SEQUENCE_MAP.put(MacabreModEntities.GOMORIA.get(), 4);
         ENTITY_SEQUENCE_MAP.put(MacabreModEntities.GARGAMAW.get(), 4);
         ENTITY_SEQUENCE_MAP.put(MacabreModEntities.MORPHEGOR.get(), 4);
         ENTITY_SEQUENCE_MAP.put(com.github.L_Ender.cataclysm.init.ModEntities.IGNIS.get(), 4);
         ENTITY_SEQUENCE_MAP.put(MacabreModEntities.BAAL.get(), 4);
-        ENTITY_SEQUENCE_MAP.put(ACEntityRegistry.LUXTRUCTOSAURUS.get(), 4);
         ENTITY_SEQUENCE_MAP.put(com.github.L_Ender.cataclysm.init.ModEntities.ANCIENT_ANCIENT_REMNANT.get(), 4);
         ENTITY_SEQUENCE_MAP.put(com.github.L_Ender.cataclysm.init.ModEntities.SCYLLA.get(), 4);
         ENTITY_SEQUENCE_MAP.put(com.github.L_Ender.cataclysm.init.ModEntities.MALEDICTUS.get(), 4);
@@ -184,33 +170,35 @@ public class BeyonderUtilMixin {
         String entityName = living.getName().getString().toLowerCase();
         String className = living.getClass().getSimpleName();
 
-        if (entityName.contains("vessel")) {
-            cir.setReturnValue(3);
-            return;
-        }
-        if (entityName.equalsIgnoreCase("horseman")) {
-            cir.setReturnValue(4);
-            return;
-        }
-        if (entityName.contains("doomharbor")) {
-            cir.setReturnValue(7);
-            return;
-        }
-        if (entityName.contains("terrible") || entityName.contains("puny")) {
-            cir.setReturnValue(8);
-            return;
-        }
-        if (entityName.contains("plague_bringer")) {
-            cir.setReturnValue(7);
-            return;
-        }
-        if (entityName.contains("aero_guardian")) {
-            cir.setReturnValue(8);
-            return;
-        }
-        if (entityName.contains("dyrolian")) {
-            cir.setReturnValue(6);
-            return;
+        if (living instanceof Mob) {
+            if (entityName.contains("vessel")) {
+                cir.setReturnValue(3);
+                return;
+            }
+            if (entityName.equalsIgnoreCase("horseman")) {
+                cir.setReturnValue(4);
+                return;
+            }
+            if (entityName.contains("doomharbor")) {
+                cir.setReturnValue(7);
+                return;
+            }
+            if (entityName.contains("terrible") || entityName.contains("puny")) {
+                cir.setReturnValue(8);
+                return;
+            }
+            if (entityName.contains("plague_bringer")) {
+                cir.setReturnValue(7);
+                return;
+            }
+            if (entityName.contains("aero_guardian")) {
+                cir.setReturnValue(8);
+                return;
+            }
+            if (entityName.contains("dyrolian")) {
+                cir.setReturnValue(6);
+                return;
+            }
         }
         if (className.equals("VoidBlossomEntity")) {
             cir.setReturnValue(6);
