@@ -74,6 +74,7 @@
     "Celestisynth.SolarisSoulDashAttackMixin",
     "DeeperDarker.DDTiersMixin",
     "LOTMC.BeyonderUtilMixin",
+    "LOTMC.PotionCauldronBlockEntityMixin",
     "Macabre.AbhorrentArmorMixin",
     "Macabre.BaalArmorMixin",
     "Macabre.BloodclotArmorMixin",

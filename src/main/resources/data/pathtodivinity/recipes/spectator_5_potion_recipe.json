@@ -1,0 +1,27 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "spectator",
+  "sequence": 5,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "soulsweapons:essence_of_eventide"
+    },
+    {
+      "item": "macabre:rootofinfestation"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "aquamirae:frozen_key"
+    },
+    {
+      "item": "arphex:crusher_claw"
+    },
+    {
+      "item": "arphex:void_geode_shard"
+    }
+  ]
+}

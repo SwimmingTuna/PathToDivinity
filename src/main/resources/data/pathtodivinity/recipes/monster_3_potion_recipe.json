@@ -1,0 +1,21 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "monster",
+  "sequence": 3,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "terramity:pocket_universe"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "cataclysm:cursium_ingot"
+    },
+    {
+      "item": "arphex:void_geode"
+    }
+  ]
+}

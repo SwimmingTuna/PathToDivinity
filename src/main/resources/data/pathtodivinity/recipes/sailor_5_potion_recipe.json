@@ -1,0 +1,27 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "sailor",
+  "sequence": 5,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "soulsweapons:lord_soul_rose"
+    },
+    {
+      "item": "aquamirae:frozen_key"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "soulsweapons:darkin_blade"
+    },
+    {
+      "item": "arphex:void_geode_shard"
+    },
+    {
+      "item": "cataclysm:monstrous_horn"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "sailor",
+  "sequence": 6,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "legendary_monsters:chorus_crystal"
+    },
+    {
+      "item": "lotm:adult_mind_dragon_brain"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "arphex:oversized_stinger"
+    },
+    {
+      "item": "minecraft:nether_star"
+    },
+    {
+      "item": "bosses_of_mass_destruction:void_thorn"
+    }
+  ]
+}

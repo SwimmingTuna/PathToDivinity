@@ -991,8 +991,8 @@ public class ModEvents {
                     multiplyMaxHealth(living, 2.5);
                     multiplyDamage(living, 1.2);
                 } else if (type == net.swimmingtuna.lotm.init.EntityInit.DEEP_SEA_MARLIN.get()) {
-                    multiplyMaxHealth(living, 2.5);
-                    multiplyDamage(living, 1.2);
+                    multiplyMaxHealth(living, 1.3);
+                    multiplyDamage(living, 1.3);
                 } else if (type == ModRegistry.MUTANT_ZOMBIE_ENTITY_TYPE.get()) {
                     multiplyMaxHealth(living, 1.5);
 
@@ -1254,7 +1254,6 @@ public class ModEvents {
         Commands commands = server.getCommands();
         CommandSourceStack commandSource = server.createCommandSourceStack();
         try {
-            commands.performPrefixedCommand(commandSource, "beyonderrecipe load");
             commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:chaos_monarch lotm:monster 7");
             commands.performPrefixedCommand(commandSource, "beyonderentity add legendary_monsters:cloud_golem lotm:sailor 6");
             commands.performPrefixedCommand(commandSource, "beyonderentity add faded_conquest_2:vessel_of_calamity lotm:warrior 5");
@@ -1302,7 +1301,6 @@ public class ModEvents {
             }
             Commands commands = server.getCommands();
             CommandSourceStack commandSource = server.createCommandSourceStack();
-            commands.performPrefixedCommand(commandSource, "beyonderrecipe load");
             commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:chaos_monarch lotm:monster 7");
             commands.performPrefixedCommand(commandSource, "beyonderentity add cataclysm:ender_guardian lotm:apprentice 8");
             commands.performPrefixedCommand(commandSource, "beyonderentity add legendary_monsters:cloud_golem lotm:sailor 6");

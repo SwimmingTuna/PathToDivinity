@@ -1,0 +1,27 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "spectator",
+  "sequence": 7,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "legendary_monsters:anchor_handle"
+    },
+    {
+      "item": "lotm:asmann_brain"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "arphex:mangled_spider_flesh"
+    },
+    {
+      "item": "legendary_monsters:withered_bone"
+    },
+    {
+      "item": "bosses_of_mass_destruction:ancient_anima"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "apprentice",
+  "sequence": 7,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "bosses_of_mass_destruction:blazing_eye"
+    },
+    {
+      "item": "mowziesmobs:ice_crystal"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "bosses_of_mass_destruction:ancient_anima"
+    },
+    {
+      "item": "arphex:spider_supplement"
+    },
+    {
+      "item": "bosses_of_mass_destruction:obsidian_heart"
+    }
+  ]
+}

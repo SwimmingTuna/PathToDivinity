@@ -1,0 +1,27 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "warrior",
+  "sequence": 7,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "aether:gold_dungeon_key"
+    },
+    {
+      "item": "bosses_of_mass_destruction:blazing_eye"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "macabre:mortis_essence"
+    },
+    {
+      "item": "arphex:scarab_seal"
+    },
+    {
+      "item": "bosses_of_mass_destruction:obsidian_heart"
+    }
+  ]
+}

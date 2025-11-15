@@ -1,0 +1,27 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "warrior",
+  "sequence": 8,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "aether:silver_dungeon_key"
+    },
+    {
+      "item": "lotm:spirit_eater_stomach_pouch"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "terramity:spiteful_soul"
+    },
+    {
+      "item": "mutantmonsters:hulk_hammer"
+    },
+    {
+      "item": "macabre:blindbaloon_item"
+    }
+  ]
+}

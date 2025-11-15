@@ -1,0 +1,27 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "spectator",
+  "sequence": 8,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "lotm:deep_sea_marlins_blood"
+    },
+    {
+      "item": "born_in_chaos_v1:seedof_chaos"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "born_in_chaos_v1:spider_mandible"
+    },
+    {
+      "item": "mutantmonsters:endersoul_hand"
+    },
+    {
+      "item": "faded_conquest_2:stormclasher_katana"
+    }
+  ]
+}

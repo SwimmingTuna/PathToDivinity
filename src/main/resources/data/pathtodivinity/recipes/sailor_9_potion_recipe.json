@@ -1,0 +1,27 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "sailor",
+  "sequence": 9,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "cataclysm:kobolediator_skull"
+    },
+    {
+      "item": "mowziesmobs:sol_visage"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "aquamirae:fin"
+    },
+    {
+      "item": "arphex:roach_nymph"
+    },
+    {
+      "item": "arphex:fly_appendage"
+    }
+  ]
+}

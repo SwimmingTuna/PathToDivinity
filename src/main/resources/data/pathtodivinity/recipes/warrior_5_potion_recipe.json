@@ -1,0 +1,27 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "warrior",
+  "sequence": 5,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "cataclysm:witherite_ingot"
+    },
+    {
+      "item": "macabre:rootofinfestation"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "deeperdarker:soul_crystal"
+    },
+    {
+      "item": "arphex:time_prism_shard"
+    },
+    {
+      "item": "arphex:mantis_machete"
+    }
+  ]
+}

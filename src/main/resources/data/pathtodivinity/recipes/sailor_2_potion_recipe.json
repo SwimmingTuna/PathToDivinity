@@ -1,0 +1,21 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "sailor",
+  "sequence": 2,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "terramity:music_sheet_of_the_legendary_super_sniffer"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "soulsweapons:lord_soul_day_stalker"
+    },
+    {
+      "item": "minecraft:lightning_rod"
+    }
+  ]
+}

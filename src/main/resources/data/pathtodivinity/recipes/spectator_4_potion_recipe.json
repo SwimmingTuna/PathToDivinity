@@ -1,0 +1,27 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "spectator",
+  "sequence": 4,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "macabre:gomoria_heart"
+    },
+    {
+      "item": "cataclysm:ignitium_ingot"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "arphex:entropy_matrix_shard"
+    },
+    {
+      "item": "eeeabsmobs:guardian_core"
+    },
+    {
+      "item": "cataclysm:remnant_skull"
+    }
+  ]
+}

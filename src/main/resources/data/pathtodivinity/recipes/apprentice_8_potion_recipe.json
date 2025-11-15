@@ -1,0 +1,20 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "apprentice",
+  "sequence": 8,
+
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+
+  "main": [
+    { "item": "legendary_monsters:large_shulker_shell" },
+    { "item": "aether:silver_dungeon_key" }
+  ],
+
+  "supplementary": [
+    { "item": "born_in_chaos_v1:spider_mandible" },
+    { "item": "terramity:conjuror_helmet" },
+    { "item": "mutantmonsters:endersoul_hand" }
+  ]
+}

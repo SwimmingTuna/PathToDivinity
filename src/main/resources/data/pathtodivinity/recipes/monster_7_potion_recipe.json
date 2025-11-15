@@ -1,0 +1,27 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "monster",
+  "sequence": 7,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "lotm:asmann_brain"
+    },
+    {
+      "item": "legendary_monsters:anchor_handle"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "arphex:giant_spinneret"
+    },
+    {
+      "item": "macabre:mortis_essence"
+    },
+    {
+      "item": "faded_conquest_2:key_of_death"
+    }
+  ]
+}

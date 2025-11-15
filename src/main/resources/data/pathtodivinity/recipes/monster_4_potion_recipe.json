@@ -1,0 +1,27 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "monster",
+  "sequence": 4,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "macabre:gargamaw_heart"
+    },
+    {
+      "item": "cataclysm:ignitium_ingot"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "legendary_monsters:air_rune"
+    },
+    {
+      "item": "lotm:elderly_mind_dragon_brain"
+    },
+    {
+      "item": "cataclysm:remnant_skull"
+    }
+  ]
+}

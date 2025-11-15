@@ -119,7 +119,7 @@ dependencies {
     implementation fg.deobf("net.tslat.smartbrainlib:SmartBrainLib-forge-${project.minecraft_version}:${project.sbl_version}")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     //LOTMC
-    implementation fg.deobf("curse.maven:lord-of-the-mysteries-craft-1095869:7190289")
+    implementation fg.deobf("curse.maven:lord-of-the-mysteries-craft-1095869:7192959")
     //Legendary Monsters
     implementation fg.deobf("curse.maven:legendarymonsters-944035:6776766")
     //Wither Reincarnated

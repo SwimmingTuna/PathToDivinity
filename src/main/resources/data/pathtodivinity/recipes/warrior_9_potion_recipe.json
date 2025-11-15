@@ -1,0 +1,27 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "warrior",
+  "sequence": 9,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "mowziesmobs:sol_visage"
+    },
+    {
+      "item": "zoniex:deathly_onyx"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "mowziesmobs:wrought_axe"
+    },
+    {
+      "item": "macabre:rattails"
+    },
+    {
+      "item": "born_in_chaos_v1:fangofthe_hound_leader"
+    }
+  ]
+}

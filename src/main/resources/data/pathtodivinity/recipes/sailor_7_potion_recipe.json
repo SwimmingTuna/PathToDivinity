@@ -1,0 +1,27 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "sailor",
+  "sequence": 7,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "eeeabsmobs:heart_of_pagan"
+    },
+    {
+      "item": "mowziesmobs:ice_crystal"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "aquamirae:abyssal_amethyst"
+    },
+    {
+      "item": "arphex:abyssal_shard"
+    },
+    {
+      "item": "faded_conquest_2:keyof_pestilence"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "apprentice",
+  "sequence": 1,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "terramity:music_sheet_of_the_omnipotent_ultra_sniffer"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "minecraft:iron_block"
+    }
+  ]
+}

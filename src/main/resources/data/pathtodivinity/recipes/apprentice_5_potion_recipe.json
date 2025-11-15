@@ -1,0 +1,27 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "apprentice",
+  "sequence": 5,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "legendary_monsters:corrupted_soul"
+    },
+    {
+      "item": "macabre:rootofinfestation"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "deeperdarker:soul_crystal"
+    },
+    {
+      "item": "arphex:time_prism_shard"
+    },
+    {
+      "item": "arphex:mantis_machete"
+    }
+  ]
+}

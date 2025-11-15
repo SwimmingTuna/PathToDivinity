@@ -1,0 +1,27 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "monster",
+  "sequence": 5,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "soulsweapons:chaos_crown"
+    },
+    {
+      "item": "cataclysm:monstrous_horn"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "cataclysm:gauntlet_of_guard"
+    },
+    {
+      "item": "arphex:crusher_claw"
+    },
+    {
+      "item": "soulsweapons:darkin_blade"
+    }
+  ]
+}

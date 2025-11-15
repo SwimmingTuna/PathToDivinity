@@ -1,0 +1,27 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "monster",
+  "sequence": 6,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "lotm:shadowless_demonic_wolf_heart"
+    },
+    {
+      "item": "awakened_bosses:herobrine_nugget"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "minecraft:nether_star"
+    },
+    {
+      "item": "arphex:oversized_stinger"
+    },
+    {
+      "item": "bosses_of_mass_destruction:void_thorn"
+    }
+  ]
+}

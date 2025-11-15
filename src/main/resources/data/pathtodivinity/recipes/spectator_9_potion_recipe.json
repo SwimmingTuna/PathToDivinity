@@ -1,0 +1,27 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "spectator",
+  "sequence": 9,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "cataclysm:kobolediator_skull"
+    },
+    {
+      "item": "legendary_monsters:dinosaur_bone"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "born_in_chaos_v1:nightmare_claw"
+    },
+    {
+      "item": "macabre:eye"
+    },
+    {
+      "item": "arphex:venomous_appendage"
+    }
+  ]
+}

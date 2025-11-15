@@ -1,0 +1,27 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "sailor",
+  "sequence": 8,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "lotm:deep_sea_marlins_blood"
+    },
+    {
+      "item": "minecraft:netherite_scrap"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "minecraft:prismarine_shard"
+    },
+    {
+      "item": "mutantmonsters:endersoul_hand"
+    },
+    {
+      "item": "faded_conquest_2:summon_blocknight"
+    }
+  ]
+}

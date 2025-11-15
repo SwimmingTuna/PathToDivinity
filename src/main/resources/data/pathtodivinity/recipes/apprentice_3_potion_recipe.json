@@ -1,0 +1,21 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "apprentice",
+  "sequence": 3,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "terramity:perish_staff"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "arphex:void_geode"
+    },
+    {
+      "item": "cataclysm:cursium_ingot"
+    }
+  ]
+}
