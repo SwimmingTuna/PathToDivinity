@@ -1,14 +1,10 @@
 package net.swimmingtuna.pathtodivinity;
 
-import com.aetherteam.aether.entity.AetherEntityTypes;
 import com.bobmowzie.mowziesmobs.server.entity.EntityHandler;
-import com.curseforge.macabre.init.MacabreModEntities;
 import com.eeeab.eeeabsmobs.sever.init.EntityInit;
 import com.github.L_Ender.cataclysm.init.ModItems;
-import com.kyanite.deeperdarker.content.DDEntities;
 import com.obscuria.aquamirae.registry.AquamiraeEntities;
 import fuzs.mutantmonsters.init.ModRegistry;
-import net.arphex.init.ArphexModEntities;
 import net.cursedwarrior.awakenedbosses.init.AwakenedBossesModEntities;
 import net.mcreator.borninchaosv.init.BornInChaosV1ModEntities;
 import net.mcreator.terramity.init.TerramityModEntities;
@@ -48,12 +44,9 @@ public class PTDUtil {
         BEYONDER_ENTITY_TYPES.add(com.github.L_Ender.cataclysm.init.ModEntities.KOBOLEDIATOR.get());
         BEYONDER_ENTITY_TYPES.add(EntityHandler.UMVUTHI.get());
         BEYONDER_ENTITY_TYPES.add(AquamiraeEntities.MAW.get());
-        //BEYONDER_ENTITY_TYPES.add(ArphexModEntities.ROACH_RIVERSPAWN.get());
-        //BEYONDER_ENTITY_TYPES.add(ArphexModEntities.LONG_LEGS_FLY.get());
         BEYONDER_ENTITY_TYPES.add(ModEntities.Skeletosaurus.get());
         BEYONDER_ENTITY_TYPES.add(BornInChaosV1ModEntities.NIGHTMARE_STALKER.get());
         BEYONDER_ENTITY_TYPES.add(BornInChaosV1ModEntities.GLUTTON_FISH.get());
-        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.SCORPION_STRIKER.get());
         BEYONDER_ENTITY_TYPES.add(ZoniexModEntities.BRUTALISER.get());
         BEYONDER_ENTITY_TYPES.add(EntityHandler.WROUGHTNAUT.get());
         BEYONDER_ENTITY_TYPES.add(BornInChaosV1ModEntities.DIRE_HOUND_LEADER.get());
@@ -72,89 +65,65 @@ public class PTDUtil {
         BEYONDER_ENTITY_TYPES.add(BornInChaosV1ModEntities.MOTHER_SPIDER.get());
         BEYONDER_ENTITY_TYPES.add(TerramityModEntities.HELLROK.get());
         BEYONDER_ENTITY_TYPES.add(ModRegistry.MUTANT_ZOMBIE_ENTITY_TYPE.get());
-        BEYONDER_ENTITY_TYPES.add(AetherEntityTypes.VALKYRIE_QUEEN.get());
 
 
         // Sequence 7 entities
         BEYONDER_ENTITY_TYPES.add(ModEntities.Ancient_Guardian.get());
-        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.SPIDER_SNATCHER.get());
-        BEYONDER_ENTITY_TYPES.add(MacabreModEntities.CRAWLER.get());  //Monolith
         BEYONDER_ENTITY_TYPES.add(EntityInit.CORPSE_WARLOCK.get());
         BEYONDER_ENTITY_TYPES.add(EntityHandler.FROSTMAW.get());
         BEYONDER_ENTITY_TYPES.add(AquamiraeEntities.MAZE_MOTHER.get());
-        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.CENTIPEDE_EVICTOR.get());
-        BEYONDER_ENTITY_TYPES.add(DDEntities.STALKER.get());
         BEYONDER_ENTITY_TYPES.add(ModEntities.Withered_Abomination.get());
-        BEYONDER_ENTITY_TYPES.add(AetherEntityTypes.SUN_SPIRIT.get());
-        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.SOLIFUGE_SKULKER.get());
-        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.SPIDER_GOLIATH.get());
+        BEYONDER_ENTITY_TYPES.add(net.swimmingtuna.lotm.init.EntityInit.ASMANN.get());
 
 
         // Sequence 6 entities
         BEYONDER_ENTITY_TYPES.add(com.github.L_Ender.cataclysm.init.ModEntities.NETHERITE_MONSTROSITY.get());
         BEYONDER_ENTITY_TYPES.add(EntityType.WITHER);
-        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.WASP_NEMESIS.get());
-        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.SPIDER_LURKER.get());
         BEYONDER_ENTITY_TYPES.add(AwakenedBossesModEntities.HEROBRINE.get());
         BEYONDER_ENTITY_TYPES.add(BornInChaosV1ModEntities.LIFESTEALER.get());
         BEYONDER_ENTITY_TYPES.add(ModEntities.Lava_eater.get());
-        BEYONDER_ENTITY_TYPES.add(MacabreModEntities.THE_HOLLOW_MAN.get());
         BEYONDER_ENTITY_TYPES.add(BornInChaosV1ModEntities.SIR_PUMPKINHEAD.get());
+        BEYONDER_ENTITY_TYPES.add(net.swimmingtuna.lotm.init.EntityInit.SHADOWLESS_DEMONIC_WOLF.get());
 
         // Sequence 5 entities
         BEYONDER_ENTITY_TYPES.add(com.github.L_Ender.cataclysm.init.ModEntities.THE_HARBINGER.get());
-        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.CRAB_CONSTRICTOR.get());
-        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.SPIDER_REAPER.get());
         BEYONDER_ENTITY_TYPES.add(AquamiraeEntities.CAPTAIN_CORNELIA.get());
         BEYONDER_ENTITY_TYPES.add(ModEntities.Posessed_Paladin.get());
         BEYONDER_ENTITY_TYPES.add(EntityRegistry.ACCURSED_LORD_BOSS.get()); //Decaying King
         BEYONDER_ENTITY_TYPES.add(EntityRegistry.RETURNING_KNIGHT.get());
-        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.SPIDER_LUNGER.get());
-        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.MANTIS_MUTILATOR.get());
         BEYONDER_ENTITY_TYPES.add(com.github.L_Ender.cataclysm.init.ModEntities.ENDER_GUARDIAN.get());
         BEYONDER_ENTITY_TYPES.add(EntityRegistry.MOONKNIGHT.get()); //Fallen Icon
         BEYONDER_ENTITY_TYPES.add(EntityRegistry.CHAOS_MONARCH.get()); //Monarch of Chaos
         BEYONDER_ENTITY_TYPES.add(EntityRegistry.DRAUGR_BOSS.get()); //Old Champion's Remains
         BEYONDER_ENTITY_TYPES.add(EntityRegistry.NIGHT_SHADE.get()); //Frenzied Shade
+        BEYONDER_ENTITY_TYPES.add(net.swimmingtuna.lotm.init.EntityInit.DRAGON.get());
 
         // Sequence 4 entities
         BEYONDER_ENTITY_TYPES.add(ModEntities.Cloud_golem.get());
         //BEYONDER_ENTITY_TYPES.add(AMEntityRegistry.VOID_WORM.get());
-        BEYONDER_ENTITY_TYPES.add(MacabreModEntities.GOMORIA.get());
-        BEYONDER_ENTITY_TYPES.add(MacabreModEntities.GARGAMAW.get());
-        BEYONDER_ENTITY_TYPES.add(MacabreModEntities.MORPHEGOR.get());
         BEYONDER_ENTITY_TYPES.add(com.github.L_Ender.cataclysm.init.ModEntities.IGNIS.get());
-        BEYONDER_ENTITY_TYPES.add(MacabreModEntities.BAAL.get());
-        BEYONDER_ENTITY_TYPES.add(com.github.L_Ender.cataclysm.init.ModEntities.ANCIENT_ANCIENT_REMNANT.get());
 
         BEYONDER_ENTITY_TYPES.add(com.github.L_Ender.cataclysm.init.ModEntities.SCYLLA.get()); //ADD TO SEQUENCE 4
         BEYONDER_ENTITY_TYPES.add(com.github.L_Ender.cataclysm.init.ModEntities.MALEDICTUS.get()); //ADD TO SEQUENCE 4
 
         BEYONDER_ENTITY_TYPES.add(TerramityModEntities.GOB.get());
-        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.SPIDER_PROWLER.get());
-        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.SPIDER_MATRIARCH.get());
-        BEYONDER_ENTITY_TYPES.add(MacabreModEntities.VALAMON.get());
         BEYONDER_ENTITY_TYPES.add(com.github.L_Ender.cataclysm.init.ModEntities.THE_LEVIATHAN.get());
         BEYONDER_ENTITY_TYPES.add(EntityInit.NAMELESS_GUARDIAN.get());
 
         // Sequence 3 entities
         BEYONDER_ENTITY_TYPES.add(EntityRegistry.MOONKNIGHT.get()); //Fallen Icon
         BEYONDER_ENTITY_TYPES.add(BornInChaosV1ModEntities.LORD_PUMPKINHEAD.get());
-        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.SPIDER_MOTH.get());
         BEYONDER_ENTITY_TYPES.add(TerramityModEntities.TRIAL_GUARDIAN.get());
-        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.DRACONIC_VOIDLASHER.get());
-        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.SCORPIOID_BLOODLUSTER.get());
 
         // Sequence 2 entities
         BEYONDER_ENTITY_TYPES.add(TerramityModEntities.SUPER_SNIFFER.get());
         BEYONDER_ENTITY_TYPES.add(TerramityModEntities.GUNDALF.get());
         BEYONDER_ENTITY_TYPES.add(EntityRegistry.DAY_STALKER.get());
         BEYONDER_ENTITY_TYPES.add(EntityRegistry.NIGHT_PROWLER.get());
-        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.DRACONIC_VOIDLASHER.get());
-        BEYONDER_ENTITY_TYPES.add(ArphexModEntities.SCORPIOID_BLOODLUSTER.get());
 
         // Sequence 1 entities
         BEYONDER_ENTITY_TYPES.add(TerramityModEntities.ULTRA_SNIFFER.get());
+        BEYONDER_ENTITY_TYPES.add(net.swimmingtuna.lotm.init.EntityInit.INTERDIMENSIONAL_HUNTER.get());
     }
 
 

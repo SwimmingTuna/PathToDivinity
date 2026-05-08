@@ -20,9 +20,9 @@ public class PotionCauldronBlockEntityMixin {
     private void onTick(Level level, BlockPos pos, BlockState state, CallbackInfo ci) {
         lotm$tickCounter++;
 
-        if (lotm$tickCounter >= 20) {
-            lotm$tickCounter = 0;
-            ((PotionCauldronBlockEntity)(Object)this).debugPrintRecipes();
-        }
+        //if (lotm$tickCounter >= 20) {
+        //    lotm$tickCounter = 0;
+        //    ((PotionCauldronBlockEntity)(Object)this).debugPrintRecipes();
+        //}
     }
 }
