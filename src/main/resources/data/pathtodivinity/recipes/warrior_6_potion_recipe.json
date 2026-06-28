@@ -10,18 +10,18 @@
       "item": "awakened_bosses:herobrine_nugget"
     },
     {
-      "item": "faded_conquest_2:war_claymore"
+      "item": "legendary_monsters:chorus_crystal"
     }
   ],
   "supplementary": [
     {
-      "item": "born_in_chaos_v1:soul_cutlass"
-    },
-    {
       "item": "legendary_monsters:lava_eaters_skin"
     },
     {
-      "item": "lotm:adult_mind_dragon_brain"
+      "item": "born_in_chaos_v1:soul_saber"
+    },
+    {
+      "item": "minecraft:nether_star"
     }
   ]
 }

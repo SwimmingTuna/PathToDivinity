@@ -7,7 +7,7 @@
   },
   "main": [
     {
-      "item": "faded_conquest_2:stormclasher_katana"
+      "item": "legendary_monsters:crystal_of_sandstorm"
     },
     {
       "item": "lotm:spirit_eater_stomach_pouch"
@@ -21,7 +21,7 @@
       "item": "mutantmonsters:hulk_hammer"
     },
     {
-      "item": "macabre:blindbaloon_item"
+      "item": "legendary_monsters:large_shulker_shell"
     }
   ]
 }

@@ -10,18 +10,18 @@
       "item": "cataclysm:witherite_ingot"
     },
     {
-      "item": "macabre:rootofinfestation"
+      "item": "lotm:heartwood_of_a_flame_treant"
     }
   ],
   "supplementary": [
     {
-      "item": "deeperdarker:soul_crystal"
+      "item": "legendary_monsters:corrupted_soul"
     },
     {
-      "item": "arphex:time_prism_shard"
+      "item": "monsterexpansion:rakoth_tail"
     },
     {
-      "item": "arphex:mantis_machete"
+      "item": "soulsweapons:darkin_blade"
     }
   ]
 }

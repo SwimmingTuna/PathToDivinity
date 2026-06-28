@@ -7,7 +7,7 @@
   },
   "main": [
     {
-      "item": "macabre:gargamaw_heart"
+      "item": "terramity:music_sheet_of_the_gnome_king"
     },
     {
       "item": "cataclysm:ignitium_ingot"
@@ -15,13 +15,13 @@
   ],
   "supplementary": [
     {
-      "item": "legendary_monsters:air_rune"
+      "item": "cataclysm:essence_of_the_storm"
     },
     {
-      "item": "lotm:elderly_mind_dragon_brain"
+      "item": "monsterexpansion:duskrend"
     },
     {
-      "item": "cataclysm:remnant_skull"
+      "item": "eeeabsmobs:guardian_core"
     }
   ]
 }

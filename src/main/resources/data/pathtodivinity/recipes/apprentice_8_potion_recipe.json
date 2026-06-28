@@ -2,19 +2,26 @@
   "type": "lotm:potion_cauldron",
   "pathway": "apprentice",
   "sequence": 8,
-
   "flask": {
     "item": "minecraft:glass_bottle"
   },
-
   "main": [
-    { "item": "legendary_monsters:large_shulker_shell" },
-    { "item": "faded_conquest_2:summon_blocknight" }
+    {
+      "item": "lotm:spirit_eater_stomach_pouch"
+    },
+    {
+      "item": "lotm:deep_sea_marlins_blood"
+    }
   ],
-
   "supplementary": [
-    { "item": "born_in_chaos_v1:spider_mandible" },
-    { "item": "terramity:conjuror_helmet" },
-    { "item": "mutantmonsters:endersoul_hand" }
+    {
+      "item": "legendary_monsters:large_shulker_shell"
+    },
+    {
+      "item": "born_in_chaos_v1:spider_mandible"
+    },
+    {
+      "item": "mutantmonsters:endersoul_hand"
+    }
   ]
 }

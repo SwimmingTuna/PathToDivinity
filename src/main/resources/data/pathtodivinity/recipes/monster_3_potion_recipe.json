@@ -7,7 +7,7 @@
   },
   "main": [
     {
-      "item": "terramity:pocket_universe"
+      "item": "monsterexpansion:rakoth_horn"
     }
   ],
   "supplementary": [
@@ -15,7 +15,7 @@
       "item": "cataclysm:cursium_ingot"
     },
     {
-      "item": "arphex:void_geode"
+      "item": "soulsweapons:essence_of_luminescence"
     }
   ]
 }

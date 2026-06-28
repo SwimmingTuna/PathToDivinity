@@ -7,7 +7,7 @@
   },
   "main": [
     {
-      "item": "terramity:perish_staff"
+      "item": "born_in_chaos_v1:soulbane"
     }
   ],
   "supplementary": [
@@ -15,7 +15,7 @@
       "item": "lotm:dream_dragon_brain"
     },
     {
-      "item": "cataclysm:essence_of_the_storm"
+      "item": "cataclysm:cursium_ingot"
     }
   ]
 }

@@ -10,7 +10,7 @@
       "item": "lotm:deep_sea_marlins_blood"
     },
     {
-      "item": "faded_conquest_2:summon_blocknight"
+      "item": "mutantmonsters:endersoul_hand"
     }
   ],
   "supplementary": [
@@ -18,10 +18,10 @@
       "item": "minecraft:prismarine_shard"
     },
     {
-      "item": "mutantmonsters:endersoul_hand"
+      "item": "minecraft:netherite_scrap"
     },
     {
-      "item": "minecraft:netherite_scrap"
+      "item": "lotm:goat_beard_hydrosol"
     }
   ]
 }

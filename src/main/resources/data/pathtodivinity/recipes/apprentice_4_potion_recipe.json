@@ -10,18 +10,18 @@
       "item": "cataclysm:ignitium_ingot"
     },
     {
-      "item": "macabre:baal_heart"
+      "item": "lotm:phoenix_eye"
     }
   ],
   "supplementary": [
     {
-      "item": "lotm:elderly_mind_dragon_brain"
+      "item": "cataclysm:essence_of_the_storm"
     },
     {
-      "item": "terramity:music_sheet_of_the_gnome_king"
+      "item": "eeeabsmobs:guardian_core"
     },
     {
-      "item": "sleepy_hollows:lootbag"
+      "item": "monsterexpansion:duskrend"
     }
   ]
 }

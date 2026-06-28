@@ -10,7 +10,7 @@
       "item": "soulsweapons:essence_of_eventide"
     },
     {
-      "item": "macabre:rootofinfestation"
+      "item": "monsterexpansion:vocal_resonance_fold"
     }
   ],
   "supplementary": [
@@ -18,10 +18,10 @@
       "item": "aquamirae:frozen_key"
     },
     {
-      "item": "arphex:crusher_claw"
+      "item": "legendary_monsters:corrupted_soul"
     },
     {
-      "item": "arphex:void_geode_shard"
+      "item": "soulsweapons:darkin_blade"
     }
   ]
 }

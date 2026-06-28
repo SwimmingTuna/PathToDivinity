@@ -7,7 +7,7 @@
   },
   "main": [
     {
-      "item": "cataclysm:kobolediator_skull"
+      "item": "lotm:manhal_eyeball"
     },
     {
       "item": "legendary_monsters:dinosaur_bone"
@@ -18,10 +18,10 @@
       "item": "born_in_chaos_v1:nightmare_claw"
     },
     {
-      "item": "macabre:eye"
+      "item": "lotm:goat_beard_strand"
     },
     {
-      "item": "arphex:venomous_appendage"
+      "item": "lotm:spirit_world_soil"
     }
   ]
 }
