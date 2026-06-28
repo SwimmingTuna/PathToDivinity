@@ -14,11 +14,9 @@ import net.minecraft.world.entity.Mob;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.soulsweaponry.registry.EntityRegistry;
 import net.swimmingtuna.lotm.util.BeyonderUtil;
-import net.zoniex.init.ZoniexModEntities;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -57,7 +55,6 @@ public class BeyonderUtilMixin {
         ENTITY_SEQUENCE_MAP.put(ModEntities.Skeletosaurus.get(), 9);
         ENTITY_SEQUENCE_MAP.put(BornInChaosV1ModEntities.NIGHTMARE_STALKER.get(), 9);
         ENTITY_SEQUENCE_MAP.put(BornInChaosV1ModEntities.GLUTTON_FISH.get(), 9);
-        ENTITY_SEQUENCE_MAP.put(ZoniexModEntities.BRUTALISER.get(), 9);
         ENTITY_SEQUENCE_MAP.put(EntityHandler.WROUGHTNAUT.get(), 9);
         ENTITY_SEQUENCE_MAP.put(BornInChaosV1ModEntities.DIRE_HOUND_LEADER.get(), 9);
 

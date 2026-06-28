@@ -21,11 +21,9 @@ import org.thecelestialworkshop.celestisynth.common.entity.base.CSEffectEntity;
 import org.thecelestialworkshop.celestisynth.common.entity.helper.CSVisualType;
 import org.thecelestialworkshop.celestisynth.common.entity.skillcast.SkillCastFrostboundIceCast;
 import org.thecelestialworkshop.celestisynth.common.registry.CSEntityTypes;
-import org.thecelestialworkshop.celestisynth.common.registry.CSParticleTypes;
 import org.thecelestialworkshop.celestisynth.common.registry.CSSoundEvents;
 import org.thecelestialworkshop.celestisynth.common.registry.CSVisualTypes;
 import org.thecelestialworkshop.celestisynth.util.ParticleUtil;
-// Add this import - adjust the package path as needed for your project
 
 import java.util.Iterator;
 import java.util.List;

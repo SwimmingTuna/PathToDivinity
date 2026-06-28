@@ -21,7 +21,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.soulsweaponry.registry.EntityRegistry;
 import net.swimmingtuna.lotm.util.BeyonderUtil;
-import net.zoniex.init.ZoniexModEntities;
 import org.thecelestialworkshop.celestisynth.common.registry.CSItems;
 
 import java.util.HashSet;
@@ -47,7 +46,6 @@ public class PTDUtil {
         BEYONDER_ENTITY_TYPES.add(ModEntities.Skeletosaurus.get());
         BEYONDER_ENTITY_TYPES.add(BornInChaosV1ModEntities.NIGHTMARE_STALKER.get());
         BEYONDER_ENTITY_TYPES.add(BornInChaosV1ModEntities.GLUTTON_FISH.get());
-        BEYONDER_ENTITY_TYPES.add(ZoniexModEntities.BRUTALISER.get());
         BEYONDER_ENTITY_TYPES.add(EntityHandler.WROUGHTNAUT.get());
         BEYONDER_ENTITY_TYPES.add(BornInChaosV1ModEntities.DIRE_HOUND_LEADER.get());
         //Witness too but it shouldn't destroy blocks

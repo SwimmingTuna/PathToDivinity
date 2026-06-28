@@ -176,8 +176,6 @@ dependencies {
     implementation fg.deobf("curse.maven:bomd-438365:4993305")
     //Awakened Bosses
     implementation fg.deobf("curse.maven:awakenedbosses-548167:5057212")
-    //Zoniex
-    implementation fg.deobf("curse.maven:zoniex-1171163:6276844")
     //Jade
     implementation fg.deobf("curse.maven:jade-324717:6855440")
     //JEI

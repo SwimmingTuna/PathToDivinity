@@ -35,7 +35,10 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -56,7 +59,10 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.CommandEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
-import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -76,7 +82,6 @@ import net.swimmingtuna.lotm.util.BeyonderUtil;
 import net.swimmingtuna.pathtodivinity.PTD;
 import net.swimmingtuna.pathtodivinity.PTDConfig;
 import net.swimmingtuna.pathtodivinity.PTDUtil;
-import net.zoniex.init.ZoniexModEntities;
 import org.thecelestialworkshop.celestisynth.common.entity.projectile.CrescentiaDragon;
 import org.thecelestialworkshop.celestisynth.common.entity.projectile.FrostboundShard;
 import org.thecelestialworkshop.celestisynth.common.entity.projectile.SolarisBomb;
@@ -127,35 +132,35 @@ public class ModEvents {
 
             if (living.tickCount % 40 == 0) {
                 if (type == EntityRegistry.CHAOS_MONARCH.get()) {
-                    
-                    
+
+
                 } else if (type == EntityRegistry.DRAUGR_BOSS.get()) {
-                    
-                    
+
+
                 } else if (type == EntityRegistry.NIGHT_SHADE.get()) {
-                    
-                    
+
+
                 } else if (type == ModEntities.Cloud_golem.get()) {
-                    
-                    
+
+
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.THE_LEVIATHAN.get()) {
-                    
-                    
+
+
                 } else if (living.getName().getString().equalsIgnoreCase("horseman")) {
-                    
-                    
+
+
                 } else if (type == EntityInit.NAMELESS_GUARDIAN.get()) {
-                    
-                    
+
+
                 } else if (type == EntityRegistry.MOONKNIGHT.get()) {
-                    
-                    
+
+
                 } else if (type == BornInChaosV1ModEntities.LORD_PUMPKINHEAD.get()) {
-                    
-                    
+
+
                 } else if (type == TerramityModEntities.TRIAL_GUARDIAN.get()) {
-                    
-                    
+
+
                 } else if (type == EntityRegistry.DAY_STALKER.get()) {
                     if (living.tickCount % 4 == 0) {
                         for (Mob mob : living.level().getEntitiesOfClass(Mob.class, living.getBoundingBox().inflate(25))) {
@@ -172,8 +177,8 @@ public class ModEvents {
                         }
                         multiplyDamage(dayStalker, 2.6);
                     }
-                    
-                    
+
+
                 } else if (type == EntityRegistry.NIGHT_PROWLER.get()) {
                     if (living.tickCount % 4 == 0) {
                         for (Mob mob : living.level().getEntitiesOfClass(Mob.class, living.getBoundingBox().inflate(25))) {
@@ -190,8 +195,8 @@ public class ModEvents {
                             multiplyMaxHealth(living, 2);
                         }
                     }
-                    
-                    
+
+
                 } else if (type == TerramityModEntities.ULTRA_SNIFFER.get()) {
                     if (BeyonderUtil.getPathway(living) == null) {
                         BeyonderClass[] pathways = {BeyonderClassInit.MONSTER.get(), BeyonderClassInit.WARRIOR.get(), BeyonderClassInit.SPECTATOR.get(), BeyonderClassInit.SAILOR.get()};
@@ -203,8 +208,6 @@ public class ModEvents {
                     multiplyDamage(living, 1.2);
                 } else if (type == AquamiraeEntities.MAW.get()) {
                     multiplyDamage(living, 1.5);
-                } else if (type == ZoniexModEntities.BRUTALISER.get()) {
-                    multiplyDamage(living, 1.4);
                 } else if (type == EntityHandler.WROUGHTNAUT.get()) {
                     multiplyDamage(living, 1.2);
                 } else if (type == BornInChaosV1ModEntities.DIRE_HOUND_LEADER.get()) {
@@ -273,12 +276,12 @@ public class ModEvents {
                     multiplyMaxHealth(living, 1.3);
                 } else if (type == EntityRegistry.DRAUGR_BOSS.get()) {
                     multiplyDamage(living, 1.2);
-                    
-                    
+
+
                 } else if (type == EntityRegistry.NIGHT_SHADE.get()) {
                     multiplyDamage(living, 1.5);
-                    
-                    
+
+
                 } else if (type == EntityRegistry.ACCURSED_LORD_BOSS.get()) {
                     multiplyDamage(living, 2.0);
                 } else if (type == EntityRegistry.RETURNING_KNIGHT.get()) {
@@ -296,52 +299,53 @@ public class ModEvents {
 
                     // Sequence 4
                 } else if (type == ModEntities.Cloud_golem.get()) {
-                    
-                    
+
+
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.THE_LEVIATHAN.get()) {
-                    
-                    
+
+
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.SCYLLA.get()) {
-                    multiplyDamage(living, 2.0);
-                    
-                    
+                    multiplyDamage(living, 1);
+
+
                 } else if (type == TerramityModEntities.GOB.get()) {
                     multiplyDamage(living, 1.8);
                     living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 40, 1, false, false));
                 }else if (living.getName().getString().equalsIgnoreCase("horseman")) {
-                    
-                    
+
+
                 } else if (type == EntityInit.NAMELESS_GUARDIAN.get()) {
-                    
-                    
+
+
                 } else if (living.getName().getString().toLowerCase().contains("vessel")) {
-                    
-                    
+
+
                     multiplyDamage(living, 2.5);
                 } else if (type == EntityRegistry.MOONKNIGHT.get()) {
                     multiplyDamage(living, 2.0);
-                    
-                    
+
+
                 }else if (type == BornInChaosV1ModEntities.LORD_PUMPKINHEAD.get()) {
                     multiplyDamage(living, 1.2);
-                    
-                    
+
+
                 } else if (type == TerramityModEntities.TRIAL_GUARDIAN.get()) {
-                    
-                    
+
+
 
                     // Sequence 2
                 } else if (type == TerramityModEntities.SUPER_SNIFFER.get()) {
                     multiplyDamage(living, 1.2);
                 } else if (type == EntityRegistry.DAY_STALKER.get()) {
-                    
-                    
+
+
                 } else if (type == EntityRegistry.NIGHT_PROWLER.get()) {
-                    
-                    
+
+
                 } else if (type == TerramityModEntities.GUNDALF.get()) {
                     multiplyDamage(living, 1.5);
                 }
+
             }
 
 
@@ -610,9 +614,6 @@ public class ModEvents {
                     multiplyDamage(living, 1.2);
                 } else if (type == BornInChaosV1ModEntities.NIGHTMARE_STALKER.get()) {
                     multiplyMaxHealth(living, 1.2);
-                } else if (type == ZoniexModEntities.BRUTALISER.get()) {
-                    multiplyMaxHealth(living, 1.2);
-                    multiplyDamage(living, 1.4);
                 } else if (type == EntityHandler.WROUGHTNAUT.get()) {
                     multiplyMaxHealth(living, 1.0);
                     multiplyDamage(living, 1.2);
@@ -634,9 +635,9 @@ public class ModEvents {
                 } else if (living.getName().getString().toLowerCase().contains("terrible") || living.getName().getString().toLowerCase().contains("puny")) { //Terrible Ten
                     multiplyMaxHealth(living, 1.0);
                     multiplyDamage(living, 1.3);
-                //} else if (type == AMEntityRegistry.WARPED_MOSCO.get()) {
-                //    multiplyMaxHealth(living, 1.0);
-                //    multiplyDamage(living, 1.3);
+                    //} else if (type == AMEntityRegistry.WARPED_MOSCO.get()) {
+                    //    multiplyMaxHealth(living, 1.0);
+                    //    multiplyDamage(living, 1.3);
                 } else if (type == EntityType.ELDER_GUARDIAN) {
                     multiplyMaxHealth(living, 1.0);
                     multiplyDamage(living, 1.3);
@@ -726,8 +727,8 @@ public class ModEvents {
                 } else if (type == EntityRegistry.CHAOS_MONARCH.get()) {
                     multiplyMaxHealth(living, 1.8);
                     multiplyDamage(living, 4.5);
-                    
-                    
+
+
                     living.getPersistentData().putDouble("luck", 500);
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.NETHERITE_MONSTROSITY.get()) {
                     multiplyDamage(living, 1.5);
@@ -741,13 +742,13 @@ public class ModEvents {
                 } else if (type == EntityRegistry.DRAUGR_BOSS.get()) {
                     multiplyMaxHealth(living, 1.5);
                     multiplyDamage(living, 1.2);
-                    
-                    
+
+
                 } else if (type == EntityRegistry.NIGHT_SHADE.get()) {
                     multiplyMaxHealth(living, 2.5);
                     multiplyDamage(living, 1.5);
-                    
-                    
+
+
                 } else if (type == EntityRegistry.ACCURSED_LORD_BOSS.get()) {
                     multiplyMaxHealth(living, 2.0);
                     multiplyDamage(living, 1.7);
@@ -766,29 +767,29 @@ public class ModEvents {
                     multiplyMaxHealth(living, 1.2);
                 } else if (type == ModEntities.Cloud_golem.get()) {
                     multiplyMaxHealth(living, 2.0);
-                    
-                    
+
+
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.THE_LEVIATHAN.get()) {
                     multiplyMaxHealth(living, 1.0);
-                    
-                    
+
+
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.SCYLLA.get()) {
                     multiplyMaxHealth(living, 4.0);
                     multiplyDamage(living, 2.0);
-                    
-                    
+
+
                 } else if (type == TerramityModEntities.GOB.get()) {
                     multiplyMaxHealth(living, 3.0);
                     multiplyDamage(living, 1.8);
                 } else if (living.getName().getString().equalsIgnoreCase("horseman")) { //Pumpkin Horseman
                     multiplyMaxHealth(living, 1.5);
-                    
-                    
+
+
                 }else if (type == EntityInit.NAMELESS_GUARDIAN.get()) {
                     multiplyMaxHealth(living, 1.7);
                     multiplyDamage(living, 2.2);
-                    
-                    
+
+
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.MALEDICTUS.get()) {
                     multiplyMaxHealth(living, 4.0);
                     multiplyDamage(living, 2.5);
@@ -798,23 +799,23 @@ public class ModEvents {
                 }
 
 
-                    // Sequence 3
-                 else if (living.getName().getString().toLowerCase().contains("vessel")) { //Vessel of Calamity
+                // Sequence 3
+                else if (living.getName().getString().toLowerCase().contains("vessel")) { //Vessel of Calamity
                     multiplyMaxHealth(living, 4.0);
                     multiplyDamage(living, 2.5);
                 } else if (type == EntityRegistry.MOONKNIGHT.get()) {
                     multiplyMaxHealth(living, 4.0);
                     multiplyDamage(living, 2.0);
-                    
-                    
+
+
                 }  else if (type == BornInChaosV1ModEntities.LORD_PUMPKINHEAD.get()) {
                     multiplyMaxHealth(living, 5.0);
                     multiplyDamage(living, 1.2);
-                    
-                    
+
+
                 } else if (type == TerramityModEntities.TRIAL_GUARDIAN.get()) {
                     multiplyMaxHealth(living, 4.0);
-                    
+
 
                     // Sequence 2
                 } else if (type == TerramityModEntities.SUPER_SNIFFER.get()) {
@@ -823,11 +824,11 @@ public class ModEvents {
                 } else if (type == EntityRegistry.DAY_STALKER.get()) {
                     multiplyMaxHealth(living, 4.0);
                     multiplyDamage(living, 1.1);
-                    
+
                 } else if (type == EntityRegistry.NIGHT_PROWLER.get()) {
                     multiplyMaxHealth(living, 3.0);
                     multiplyDamage(living, 0.4);
-                    
+
                 } else if (type == TerramityModEntities.GUNDALF.get()) {
                     multiplyMaxHealth(living, 6.0);
                     multiplyDamage(living, 1.5);
@@ -837,6 +838,10 @@ public class ModEvents {
                     multiplyMaxHealthUltraSniffer(living, 10.0);
                 } else if (type == net.swimmingtuna.lotm.init.EntityInit.INTERDIMENSIONAL_HUNTER.get()) {
                     multiplyMaxHealth(living, 2.5);
+                    multiplyDamage(living, 1);
+                }  else if (type == net.swimmingtuna.lotm.init.EntityInit.WANDERING.get()) {
+                    multiplyMaxHealth(living, 1.5);
+                    multiplyDamage(living,0.8);
                 }
             }
         }
@@ -850,18 +855,11 @@ public class ModEvents {
         try {
             commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:chaos_monarch lotm:monster 7");
             commands.performPrefixedCommand(commandSource, "beyonderentity add legendary_monsters:cloud_golem lotm:sailor 6");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add faded_conquest_2:vessel_of_calamity lotm:warrior 5");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:day_stalker lotm:warrior 4");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:draugr_boss lotm:spectator 7");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:night_shade lotm:warrior 7");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:draugr_boss lotm:warrior 8");
             commands.performPrefixedCommand(commandSource, "beyonderentity add cataclysm:the_leviathan lotm:monster 6");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:moonknight lotm:warrior 5");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:night_prowler lotm:sailor 4");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:moonknight lotm:spectator 5");
             commands.performPrefixedCommand(commandSource, "beyonderentity add sleepy_hollows:horseman lotm:spectator 6");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add born_in_chaos_v1:lord_pumpkinhead lotm:spectator 5");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add eeeabsmobs:nameless_guardian lotm:warrior 6");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add terramity:trial_guardian lotm:sailor 5");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:chaos_monarch lotm:monster 7");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add born_in_chaos_v1:lord_pumpkinhead lotm:warrior 5");
             commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:chaos_monarch lotm:monster 7");
             int random = (int) BeyonderUtil.getPositiveRandomInRange(5);
             if (random == 0) {
@@ -896,27 +894,21 @@ public class ModEvents {
             Commands commands = server.getCommands();
             CommandSourceStack commandSource = server.createCommandSourceStack();
             commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:chaos_monarch lotm:monster 7");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add cataclysm:ender_guardian lotm:apprentice 8");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add cataclysm:ender_guardian lotm:apprentice 7"); //11111111
             commands.performPrefixedCommand(commandSource, "beyonderentity add legendary_monsters:cloud_golem lotm:sailor 6");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add cataclysm:ancient_ancient_remnant lotm:spectator 6");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add faded_conquest_2:vessel_of_calamity lotm:warrior 5");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:night_prowler lotm:sailor 4");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:returning_knight lotm:sailor 7");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add aquamirae:captain_cornelia lotm:warrior 7");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add cataclysm:the_leviathan lotm:monster 6");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add sleepy_hollows:horseman lotm:spectator 6");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add born_in_chaos_v1:lord_pumpkinhead lotm:spectator 5");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:day_stalker lotm:warrior 4");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:draugr_boss lotm:spectator 7");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add arphex:spider_matriarch lotm:apprentice 6");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add eeeabsmobs:nameless_guardian lotm:sailor 6");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:moonknight lotm:warrior 5");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add cataclysm:the_harbinger lotm:warrior 7");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add deeperdarker:stalker lotm:spectator 5");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add arphex:spider_matriarch lotm:apprentice 6");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add cataclysm:ancient_ancient_remnant lotm:apprentice 6");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:returning_knight lotm:sailor 7"); //11111111
+            commands.performPrefixedCommand(commandSource, "beyonderentity add aquamirae:captain_cornelia lotm:warrior 7"); //11111111
+            commands.performPrefixedCommand(commandSource, "beyonderentity add cataclysm:the_leviathan lotm:monster 6"); //11111111
+            commands.performPrefixedCommand(commandSource, "beyonderentity add sleepy_hollows:horseman lotm:spectator 6"); //11111111
+            commands.performPrefixedCommand(commandSource, "beyonderentity add born_in_chaos_v1:lord_pumpkinhead lotm:warrior 5"); //11111111
+            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:moonknight lotm:spectator 5");  //11111111
+            commands.performPrefixedCommand(commandSource, "beyonderentity add cataclysm:the_harbinger lotm:warrior 7");  //11111111
             commands.performPrefixedCommand(commandSource, "beyonderentity add terramity:gob lotm:monster 6");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add terramity:trial_guardian lotm:sailor 5");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add legendary_monsters:posessed_paladin lotm:apprentice 7");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:draugr_boss lotm:warrior 8");//11111111
+            commands.performPrefixedCommand(commandSource, "beyonderentity add legendary_monsters:posessed_paladin lotm:apprentice 7");  //11111111
+            commands.performPrefixedCommand(commandSource, "beyonderentity add monsterexpansion:leivekilth lotm:sailor 5");  //11111111
+            commands.performPrefixedCommand(commandSource, "beyonderentity add eeeabsmobs:realm_warden lotm:spectator 7");  //11111111
 
             if (foundSniffers == 0) {
                 int random = (int) BeyonderUtil.getPositiveRandomInRange(4);
