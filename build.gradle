@@ -186,6 +186,8 @@ dependencies {
     implementation fg.deobf("curse.maven:JER-240630:5057220")
     //Dreamcat LIB
     implementation fg.deobf("curse.maven:dreamcast-1323703:6869654")
+    //Monster Expansion
+    implementation fg.deobf("curse.maven:monsterexpansion-1336105:7388120")
 }
 
 tasks.named('processResources', ProcessResources).configure {
