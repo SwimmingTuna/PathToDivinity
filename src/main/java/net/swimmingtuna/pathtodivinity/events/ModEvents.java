@@ -854,13 +854,21 @@ public class ModEvents {
         CommandSourceStack commandSource = server.createCommandSourceStack();
         try {
             commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:chaos_monarch lotm:monster 7");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add cataclysm:ender_guardian lotm:apprentice 7"); //11111111
             commands.performPrefixedCommand(commandSource, "beyonderentity add legendary_monsters:cloud_golem lotm:sailor 6");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:draugr_boss lotm:warrior 8");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add cataclysm:the_leviathan lotm:monster 6");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:moonknight lotm:spectator 5");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add sleepy_hollows:horseman lotm:spectator 6");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add born_in_chaos_v1:lord_pumpkinhead lotm:warrior 5");
-            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:chaos_monarch lotm:monster 7");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add cataclysm:ancient_ancient_remnant lotm:apprentice 6");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:returning_knight lotm:sailor 7"); //11111111
+            commands.performPrefixedCommand(commandSource, "beyonderentity add aquamirae:captain_cornelia lotm:warrior 7"); //11111111
+            commands.performPrefixedCommand(commandSource, "beyonderentity add cataclysm:the_leviathan lotm:monster 6"); //11111111
+            commands.performPrefixedCommand(commandSource, "beyonderentity add sleepy_hollows:horseman lotm:spectator 6"); //11111111
+            commands.performPrefixedCommand(commandSource, "beyonderentity add born_in_chaos_v1:lord_pumpkinhead lotm:warrior 5"); //11111111
+            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:moonknight lotm:spectator 5");  //11111111
+            commands.performPrefixedCommand(commandSource, "beyonderentity add cataclysm:the_harbinger lotm:warrior 7");  //11111111
+            commands.performPrefixedCommand(commandSource, "beyonderentity add terramity:gob lotm:monster 6");
+            commands.performPrefixedCommand(commandSource, "beyonderentity add soulsweapons:draugr_boss lotm:warrior 8");//11111111
+            commands.performPrefixedCommand(commandSource, "beyonderentity add legendary_monsters:posessed_paladin lotm:apprentice 7");  //11111111
+            commands.performPrefixedCommand(commandSource, "beyonderentity add monsterexpansion:leivekilth lotm:sailor 5");  //11111111
+            commands.performPrefixedCommand(commandSource, "beyonderentity add eeeabsmobs:realm_warden lotm:spectator 7");  //11111111
             int random = (int) BeyonderUtil.getPositiveRandomInRange(5);
             if (random == 0) {
                 commands.performPrefixedCommand(commandSource, "beyonderentity add terramity:ultra_sniffer lotm:spectator 3");
