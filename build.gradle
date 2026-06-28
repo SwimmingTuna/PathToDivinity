@@ -135,13 +135,13 @@ dependencies {
     //Bosses of Mass Destruction
     implementation fg.deobf("curse.maven:bomd-438365:4993305")
     //Cataclysm
-    implementation fg.deobf("curse.maven:cataclysm-551586:7934870")
+    implementation fg.deobf("curse.maven:cataclysm-551586:8246047")
     //Celestisynth
     implementation fg.deobf("curse.maven:celestisynth-872712:7686018")
     //EEEAB's Mobs
-    implementation fg.deobf("curse.maven:eeeabmobs-921600:8021391")
+    implementation fg.deobf("curse.maven:eeeabmobs-921600:8073814")
     //Legendary Monsters
-    implementation fg.deobf("curse.maven:legendarymonsters-944035:7628159")
+    implementation fg.deobf("curse.maven:legendarymonsters-944035:8312236")
     //LOTMC
     implementation fg.deobf("curse.maven:lord-of-the-mysteries-craft-1095869:8336552")
     //Marium's Soulslike Weaponry
@@ -172,11 +172,11 @@ dependencies {
     //Jade
     implementation fg.deobf("curse.maven:jade-324717:6855440")
     //JEI
-    implementation fg.deobf("curse.maven:JEI-238222:7920915")
+    implementation fg.deobf("curse.maven:JEI-238222:8292131")
     //JER
     implementation fg.deobf("curse.maven:JER-240630:5057220")
     //Lionfish API
-    implementation fg.deobf("curse.maven:lionfishapi-1001614:7923140")
+    implementation fg.deobf("curse.maven:lionfishapi-1001614:8095554")
     //Obscure API
     implementation fg.deobf("curse.maven:obscureapi-638417:7171906")
     //Patchouli
