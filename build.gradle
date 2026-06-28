@@ -18,7 +18,11 @@ base {
 
 mixin {
     add sourceSets.main, "pathtodivinity.refmap.json"
-    config "pathtodivinity.mixins.json"
+    // NOTE: do NOT register the config here. `config "..."` makes ForgeGradle pass
+    // `--mixin.config` on the command line, which registers the config against the root
+    // container too early in bootstrap (before this mod's resources are on the classloader),
+    // causing "The specified resource '...mixins.json' was invalid or could not be read".
+    // The config is registered via mods.toml ([[mixins]]) instead, which works in dev and prod.
     debug.export = true
 }
 
@@ -139,7 +143,7 @@ dependencies {
     //Legendary Monsters
     implementation fg.deobf("curse.maven:legendarymonsters-944035:7628159")
     //LOTMC
-    implementation fg.deobf("curse.maven:lord-of-the-mysteries-craft-1095869:7941615")
+    implementation fg.deobf("curse.maven:lord-of-the-mysteries-craft-1095869:8336552")
     //Marium's Soulslike Weaponry
     implementation fg.deobf("curse.maven:soulsweapons-632066:7321885")
     //Monster Expansion
