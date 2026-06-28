@@ -163,7 +163,7 @@ public class PTDUtil {
                         itemStack.is(TerramityModItems.ULTRA_SNIFFER_FUR.get()) ||
 
                         itemStack.is(ModItems.CURSIUM_CHESTPLATE.get());
-                        //DyrolianSword
+        //DyrolianSword
 
     }
 

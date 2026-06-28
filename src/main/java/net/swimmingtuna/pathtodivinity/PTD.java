@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 
 import java.util.function.Supplier;
 
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod(PTD.MOD_ID)
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class PTD {
@@ -27,7 +26,6 @@ public class PTD {
 
 
     public PTD() {
-        MinecraftForge.EVENT_BUS.register(new PTDGameRules());
         MinecraftForge.EVENT_BUS.register(this);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, PTDConfig.COMMON_SPEC);
         MinecraftForge.EVENT_BUS.addListener(PTDCommands::onCommandRegistration);
