@@ -118,74 +118,73 @@ dependencies {
     //Brain Lib
     implementation fg.deobf("net.tslat.smartbrainlib:SmartBrainLib-forge-${project.minecraft_version}:${project.sbl_version}")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-    //LOTMC
-    implementation fg.deobf("curse.maven:lord-of-the-mysteries-craft-1095869:7941615")
-    //Legendary Monsters
-    implementation fg.deobf("curse.maven:legendarymonsters-944035:7628159")
-    //Terramity
-    implementation fg.deobf("curse.maven:terramity-1084134:6054971")
-    //Mutant Monsters
-    implementation fg.deobf("curse.maven:mutantmonsters-852665:7232503")
-    //Marium's Soulslike Weaponry
-    implementation fg.deobf("curse.maven:soulsweapons-632066:7321885")
-    //Cataclysm
-    implementation fg.deobf("curse.maven:cataclysm-551586:7934870")
-    //Mowzie's Mobs
-    implementation fg.deobf("curse.maven:mowziesmobs-250498:7815705")
 
 
     //Aquamirae
     implementation fg.deobf("curse.maven:aquamirae-536254:7985699")
-    //Born in Chaos
-    implementation fg.deobf("curse.maven:borninchaos-686437:7917933")
-    //EEEAB's Mobs
-    implementation fg.deobf("curse.maven:eeeabmobs-921600:8021391")
-    //Curios API
-    implementation fg.deobf("curse.maven:curiosapi-309927:6418456")
-    //Better Combat
-    implementation fg.deobf("curse.maven:bettercombat-639842:7287334")
-
-
-    //Obscure API
-    implementation fg.deobf("curse.maven:obscureapi-638417:7171906")
-    //Lionfish API
-    implementation fg.deobf("curse.maven:lionfishapi-1001614:7923140")
-    //AttributeFix
-    implementation fg.deobf("curse.maven:attributefix-280510:7612291")
-    //PuzzlesLib
-    implementation fg.deobf("curse.maven:puzzleslib-495476:6918565")
-    //Patchouli
-    implementation fg.deobf("curse.maven:patchouli-306770:7731017")
-    //Caelus API
-    implementation fg.deobf("curse.maven:caelusapi-308989:5281700")
-
-
-    //Cloth Config
-    implementation fg.deobf("curse.maven:clothconfig-348521:5729105")
-    //Citadel
-    implementation fg.deobf("curse.maven:citadel-331936:7476570")
-    //Projectile Damage
-    implementation fg.deobf("curse.maven:projectiledamage-643780:4597791")
-    //Player Animator
-    implementation fg.deobf("curse.maven:bettercombat-658587:4587214")
-    //Terrablender
-    implementation fg.deobf("curse.maven:terrablender-563928:6290448")
-    //Celestisynth
-    implementation fg.deobf("curse.maven:celestisynth-872712:7686018")
-    //Bosses of Mass Destruction
-    implementation fg.deobf("curse.maven:bomd-438365:4993305")
     //Awakened Bosses
     implementation fg.deobf("curse.maven:awakenedbosses-548167:5057212")
+    //Better Combat
+    implementation fg.deobf("curse.maven:bettercombat-639842:7287334")
+    //Born in Chaos
+    implementation fg.deobf("curse.maven:borninchaos-686437:7917933")
+    //Bosses of Mass Destruction
+    implementation fg.deobf("curse.maven:bomd-438365:4993305")
+    //Cataclysm
+    implementation fg.deobf("curse.maven:cataclysm-551586:7934870")
+    //Celestisynth
+    implementation fg.deobf("curse.maven:celestisynth-872712:7686018")
+    //EEEAB's Mobs
+    implementation fg.deobf("curse.maven:eeeabmobs-921600:8021391")
+    //Legendary Monsters
+    implementation fg.deobf("curse.maven:legendarymonsters-944035:7628159")
+    //LOTMC
+    implementation fg.deobf("curse.maven:lord-of-the-mysteries-craft-1095869:7941615")
+    //Marium's Soulslike Weaponry
+    implementation fg.deobf("curse.maven:soulsweapons-632066:7321885")
+    //Monster Expansion
+    implementation fg.deobf("curse.maven:monsterexpansion-1336105:7388120")
+    //Mowzie's Mobs
+    implementation fg.deobf("curse.maven:mowziesmobs-250498:7815705")
+    //Mutant Monsters
+    implementation fg.deobf("curse.maven:mutantmonsters-852665:7232503")
+    //Terramity
+    implementation fg.deobf("curse.maven:terramity-1084134:6054971")
+
+
+
+    //AttributeFix
+    implementation fg.deobf("curse.maven:attributefix-280510:7612291")
+    //Caelus API
+    implementation fg.deobf("curse.maven:caelusapi-308989:5281700")
+    //Citadel
+    implementation fg.deobf("curse.maven:citadel-331936:7476570")
+    //Cloth Config
+    implementation fg.deobf("curse.maven:clothconfig-348521:5729105")
+    //Curios API
+    implementation fg.deobf("curse.maven:curiosapi-309927:6418456")
+    //Dreamcat LIB
+    implementation fg.deobf("curse.maven:dreamcast-1323703:6869654")
     //Jade
     implementation fg.deobf("curse.maven:jade-324717:6855440")
     //JEI
     implementation fg.deobf("curse.maven:JEI-238222:7920915")
     //JER
     implementation fg.deobf("curse.maven:JER-240630:5057220")
-    //Dreamcat LIB
-    implementation fg.deobf("curse.maven:dreamcast-1323703:6869654")
-    //Monster Expansion
-    implementation fg.deobf("curse.maven:monsterexpansion-1336105:7388120")
+    //Lionfish API
+    implementation fg.deobf("curse.maven:lionfishapi-1001614:7923140")
+    //Obscure API
+    implementation fg.deobf("curse.maven:obscureapi-638417:7171906")
+    //Patchouli
+    implementation fg.deobf("curse.maven:patchouli-306770:7731017")
+    //Player Animator
+    implementation fg.deobf("curse.maven:bettercombat-658587:4587214")
+    //Projectile Damage
+    implementation fg.deobf("curse.maven:projectiledamage-643780:4597791")
+    //PuzzlesLib
+    implementation fg.deobf("curse.maven:puzzleslib-495476:6918565")
+    //Terrablender
+    implementation fg.deobf("curse.maven:terrablender-563928:6290448")
 }
 
 tasks.named('processResources', ProcessResources).configure {
