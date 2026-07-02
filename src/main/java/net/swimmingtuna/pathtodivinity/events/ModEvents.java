@@ -843,6 +843,10 @@ public class ModEvents {
                     multiplyMaxHealth(living, 1.5);
                     multiplyDamage(living,0.8);
                 }
+            } else if (entity instanceof ItemEntity item) {
+                if (item.getItem().is(TerramityModItems.MUSIC_SHEET_OF_UNTIMELY_DEATH.get())) {
+                    event.setCanceled(true);
+                }
             }
         }
     }
