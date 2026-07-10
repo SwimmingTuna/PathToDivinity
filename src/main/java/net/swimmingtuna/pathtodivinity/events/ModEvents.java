@@ -44,6 +44,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -69,11 +70,13 @@ import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.soulsweaponry.SoulsWeaponry;
 import net.soulsweaponry.entity.mobs.DayStalker;
 import net.soulsweaponry.entity.mobs.FreyrSwordEntity;
 import net.soulsweaponry.entity.mobs.NightProwler;
 import net.soulsweaponry.registry.EntityRegistry;
 import net.soulsweaponry.registry.ItemRegistry;
+import net.soulsweaponry.registry.WeaponRegistry;
 import net.swimmingtuna.lotm.LOTM;
 import net.swimmingtuna.lotm.beyonder.api.BeyonderClass;
 import net.swimmingtuna.lotm.entity.Mobs.PlayerMobEntity;
@@ -119,13 +122,24 @@ public class ModEvents {
             }
 
             int tickCount = living.tickCount;
-            if (tickCount % 200 == 0 && living instanceof Player) {
+            if (tickCount % 200 == 0 && living instanceof Player player) {
                 ItemStack mainHand = living.getMainHandItem();
                 if (mainHand.isEnchanted() && mainHand.getEnchantmentLevel(Enchantments.PIERCING) > 0) {
                     Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(mainHand);
                     enchantments.remove(Enchantments.PIERCING);
                     living.sendSystemMessage(Component.literal("Piercing is banned").withStyle(ChatFormatting.RED));
                     EnchantmentHelper.setEnchantments(enchantments, mainHand);
+                }
+                if (player.getInventory().contains(WeaponRegistry.MEHRUNES_RAZOR.get().getDefaultInstance())) {
+                    Item razor = WeaponRegistry.MEHRUNES_RAZOR.get();
+                    for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+                        ItemStack stack = player.getInventory().getItem(i);
+                        if (stack.is(razor)) {
+                            player.getInventory().setItem(i, ItemStack.EMPTY);
+                        }
+                    }
+                    player.containerMenu.broadcastChanges();
+                    player.sendSystemMessage(Component.literal("Mehrunes Razor cannot be used.").withStyle(ChatFormatting.RED));
                 }
                 PTDUtil.removeBannedItem(living);
             }

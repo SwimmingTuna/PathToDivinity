@@ -1,13 +1,13 @@
 {
   "type": "lotm:potion_cauldron",
-  "pathway": "monster",
+  "pathway": "corpse_collector",
   "sequence": 4,
   "flask": {
     "item": "minecraft:glass_bottle"
   },
   "main": [
     {
-      "item": "terramity:music_sheet_of_the_gnome_king"
+      "item": "monsterexpansion:2hoarfrost_shard"
     },
     {
       "item": "cataclysm:ignitium_ingot"
@@ -15,10 +15,10 @@
   ],
   "supplementary": [
     {
-      "item": "cataclysm:essence_of_the_storm"
+      "item": "cataclysm:abyssal_egg"
     },
     {
-      "item": "monsterexpansion:duskrend"
+      "item": "sleepy_hollows:lootbag"
     },
     {
       "item": "eeeabsmobs:guardian_cube"

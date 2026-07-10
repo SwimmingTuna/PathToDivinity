@@ -5,6 +5,7 @@
   "refmap": "pathtodivinity.refmap.json",
   "mixins": [
     "SurfaceRuleManagerMixin",
+    "Aquamirae.CaptainCorneliaMixin",
     "AwakenedBosses.HerobrineAxeMixin",
     "AwakenedBosses.HerobrineSwordMixin",
     "BornInChaos.SoulbaneMixin",
