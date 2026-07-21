@@ -15,19 +15,19 @@ public class PTDConfig {
     }
 
     public static class Common {
-        public ForgeConfigSpec.IntValue damageMultiplier;
-        public ForgeConfigSpec.IntValue healthMultiplier;
+        public ForgeConfigSpec.DoubleValue damageMultiplier;
+        public ForgeConfigSpec.DoubleValue healthMultiplier;
 
         public Common(ForgeConfigSpec.Builder builder) {
             builder.push("PTD Configs");
 
             damageMultiplier = builder
-                    .comment("Use to multiply the amount of damage that mobs that are part of recipes deal.")
-                    .defineInRange("Damage Multiplier", 1, 1, 10);
+                    .comment("Use to multiply the amount of damage that mobs that are part of recipes deal. 1.0 = normal damage, decimals allowed (e.g. 0.5 = half, 2.5 = 2.5x).")
+                    .defineInRange("Damage Multiplier", 0.85, 0.0, 10.0);
 
             healthMultiplier = builder
-                    .comment("Use to multiply the amount of health that mobs that are part of recipes have.")
-                    .defineInRange("Health Multiplier", 1, 1, 10);
+                    .comment("Use to multiply the amount of health that mobs that are part of recipes have. 1.0 = normal health, decimals allowed (e.g. 0.5 = half, 2.5 = 2.5x).")
+                    .defineInRange("Health Multiplier", 0.85, 0.0, 10.0);
 
             builder.pop();
         }

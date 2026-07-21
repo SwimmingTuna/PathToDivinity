@@ -13,6 +13,7 @@ import fuzs.mutantmonsters.init.ModRegistry;
 import net.cursedwarrior.awakenedbosses.init.AwakenedBossesModEntities;
 import net.mcreator.borninchaosv.entity.PumpkinPistolProjectileEntity;
 import net.mcreator.borninchaosv.init.BornInChaosV1ModEntities;
+import net.mcreator.borninchaosv.init.BornInChaosV1ModGameRules;
 import net.mcreator.terramity.entity.DuskrokEntity;
 import net.mcreator.terramity.entity.SuperSnifferEntity;
 import net.mcreator.terramity.entity.UltraSnifferEntity;
@@ -98,6 +99,25 @@ public class ModEvents {
     @SubscribeEvent
     public static void commandEvent(CommandEvent event) {
         if (event.getParseResults().getContext().getSource().getEntity() instanceof ServerPlayer player) {
+            // Disable FTB Teams party formation. FTB Quests shares quest progress across
+            // every member of a party, which lets one player's Sequence potion complete the
+            // quest for the whole team. Blocking party create/join/invite keeps every player
+            // as their own single-member team, so pathway progression stays per-player.
+            String fullCommand = event.getParseResults().getReader().getString()
+                    .toLowerCase().replaceAll("\\s+", " ").trim();
+            if (fullCommand.startsWith("/")) {
+                fullCommand = fullCommand.substring(1);
+            }
+            if (fullCommand.startsWith("ftbteams party create")
+                    || fullCommand.startsWith("ftbteams party join")
+                    || fullCommand.startsWith("ftbteams party invite")) {
+                event.setCanceled(true);
+                player.sendSystemMessage(Component.literal(
+                        "Teams are disabled on this pack — each player must progress their own pathway.")
+                        .withStyle(ChatFormatting.RED));
+                return;
+            }
+
             CompoundTag tag = player.getPersistentData();
             if (tag.getInt("PTDCombatTimer") > 0) {
                 String commandName = event.getParseResults().getReader().getString().split(" ")[0].toLowerCase();
@@ -328,9 +348,8 @@ public class ModEvents {
                 }else if (living.getName().getString().equalsIgnoreCase("horseman")) {
 
 
-                } else if (type == EntityInit.NAMELESS_GUARDIAN.get()) {
-
-
+                } else if (type == net.swimmingtuna.lotm.init.EntityInit.DRAGON.get()) {
+                    multiplyDamage(living, 0.75f);
                 } else if (living.getName().getString().toLowerCase().contains("vessel")) {
 
 
@@ -590,7 +609,7 @@ public class ModEvents {
 
 
             if (damageDealer != null) {
-                if (damageDealer.getPersistentData().getDouble("PTDDamageMultiplier") > 0) {
+                if (damageDealer.getPersistentData().contains("PTDDamageMultiplier")) {
                     event.setAmount((float) (event.getAmount() * damageDealer.getPersistentData().getDouble("PTDDamageMultiplier")));
                 }
             }
@@ -868,6 +887,7 @@ public class ModEvents {
     @SubscribeEvent
     public static void serverStartEvent(ServerStartingEvent event) {
         MinecraftServer server = event.getServer();
+        server.getGameRules().getRule(BornInChaosV1ModGameRules.KRAMPUS_SPAWN).set(false, server);
         Commands commands = server.getCommands();
         CommandSourceStack commandSource = server.createCommandSourceStack();
         try {
@@ -962,7 +982,7 @@ public class ModEvents {
 
     public static void multiplyMaxHealth(LivingEntity living, double multiplier) {
         if (!living.getPersistentData().getBoolean("maxHealthMultiplied")) {
-            float multiplierAmount = (float) multiplier * PTDConfig.COMMON.healthMultiplier.get();
+            float multiplierAmount = (float) (multiplier * PTDConfig.COMMON.healthMultiplier.get());
             float maxHealth = living.getMaxHealth();
             AttributeInstance maxHealthAttribute = living.getAttribute(Attributes.MAX_HEALTH);
             if (maxHealthAttribute != null) {
@@ -978,7 +998,7 @@ public class ModEvents {
 
     public static void multiplyMaxHealthUltraSniffer(LivingEntity living, double multiplier) {
         if (!living.getPersistentData().getBoolean("maxHealthMultiplied")) {
-            float multiplierAmount = (float) multiplier * PTDConfig.COMMON.healthMultiplier.get();
+            float multiplierAmount = (float) (multiplier * PTDConfig.COMMON.healthMultiplier.get());
             float maxHealth = living.getMaxHealth();
             AttributeInstance maxHealthAttribute = living.getAttribute(Attributes.MAX_HEALTH);
             if (maxHealthAttribute != null) {
