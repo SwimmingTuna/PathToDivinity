@@ -1,0 +1,27 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "bard",
+  "sequence": 6,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "awakened_bosses:herobrine_nugget"
+    },
+    {
+      "item": "eeeabsmobs:guardian_cube"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "legendary_monsters:lava_eaters_skin"
+    },
+    {
+      "item": "monsterexpansion:rhyza_gleam_core"
+    },
+    {
+      "item": "cataclysm:witherite_ingot"
+    }
+  ]
+}

@@ -11,6 +11,8 @@ import com.github.L_Ender.cataclysm.init.ModItems;
 import com.obscuria.aquamirae.registry.AquamiraeEntities;
 import fuzs.mutantmonsters.init.ModRegistry;
 import net.cursedwarrior.awakenedbosses.init.AwakenedBossesModEntities;
+import net.mcreator.borninchaosv.entity.KrampusEntity;
+import net.mcreator.borninchaosv.entity.KrampusHenchmanEntity;
 import net.mcreator.borninchaosv.entity.PumpkinPistolProjectileEntity;
 import net.mcreator.borninchaosv.init.BornInChaosV1ModEntities;
 import net.mcreator.borninchaosv.init.BornInChaosV1ModGameRules;
@@ -622,8 +624,13 @@ public class ModEvents {
         if (!event.getEntity().level().isClientSide()) {
             Entity entity = event.getEntity();
             if (entity instanceof LivingEntity living) {
+                if (living instanceof KrampusEntity) {
+                    event.setCanceled(true);
+                }
+                if (living instanceof KrampusHenchmanEntity) {
+                    event.setCanceled(true);
+                }
                 EntityType<?> type = living.getType();
-
                 // Sequence 9
                 if (type == ModEntities.Overgrown_colossus.get()) {
                     multiplyMaxHealth(living, 1.5);
@@ -767,7 +774,7 @@ public class ModEvents {
                     multiplyDamage(living, 1.5);
                     multiplyMaxHealth(living, 1.2);
                 } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.THE_HARBINGER.get()) {
-                    multiplyMaxHealth(living, 2.0);
+                    multiplyMaxHealth(living, 1.6);
                     multiplyDamage(living, 1.8);
                 }  else if (type == AquamiraeEntities.CAPTAIN_CORNELIA.get()) {
                     multiplyMaxHealth(living, 1.3);
@@ -796,8 +803,9 @@ public class ModEvents {
                     multiplyDamage(living, 1.2);
 
                     // Sequence 4
-                }else if (type == com.github.L_Ender.cataclysm.init.ModEntities.IGNIS.get()) {
+                } else if (type == com.github.L_Ender.cataclysm.init.ModEntities.IGNIS.get()) {
                     multiplyMaxHealth(living, 1.2);
+                    multiplyDamage(living, 0.9);
                 } else if (type == ModEntities.Cloud_golem.get()) {
                     multiplyMaxHealth(living, 2.0);
 

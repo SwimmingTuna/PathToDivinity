@@ -144,7 +144,7 @@ dependencies {
     //Legendary Monsters
     implementation fg.deobf("curse.maven:legendarymonsters-944035:8312236")
     //LOTMC
-    implementation fg.deobf("curse.maven:lord-of-the-mysteries-craft-1095869:8370961")
+    implementation fg.deobf("curse.maven:lord-of-the-mysteries-craft-1095869:8680807")
     //Marium's Soulslike Weaponry
     implementation fg.deobf("curse.maven:soulsweapons-632066:7321885")
     //Monster Expansion

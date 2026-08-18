@@ -1,0 +1,27 @@
+{
+  "type": "lotm:potion_cauldron",
+  "pathway": "bard",
+  "sequence": 7,
+  "flask": {
+    "item": "minecraft:glass_bottle"
+  },
+  "main": [
+    {
+      "item": "eeeabsmobs:heart_of_pagan"
+    },
+    {
+      "item": "bosses_of_mass_destruction:blazing_eye"
+    }
+  ],
+  "supplementary": [
+    {
+      "item": "celestisynth:solar_crystal"
+    },
+    {
+      "item": "lotm:lavos_squid_blood"
+    },
+    {
+      "item": "cataclysm:burning_ashes"
+    }
+  ]
+}

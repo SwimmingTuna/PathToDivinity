@@ -33,6 +33,7 @@
     "Celestisynth.SkillCastKeresSmashAttackMixin",
     "Celestisynth.SolarisFullRoundAttackMixin",
     "Celestisynth.SolarisSoulDashAttackMixin",
+    "LOTMC.BeyonderEntityDataMixin",
     "LOTMC.BeyonderHolderRespawnGuardMixin",
     "LOTMC.BeyonderUtilMixin",
     "LOTMC.PotionCauldronBlockEntityMixin",

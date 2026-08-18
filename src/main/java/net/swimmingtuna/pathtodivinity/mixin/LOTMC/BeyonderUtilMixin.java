@@ -14,6 +14,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.soulsweaponry.registry.EntityRegistry;
 import net.swimmingtuna.lotm.util.BeyonderUtil;
+import net.swimmingtuna.pathtodivinity.MobAbilitySequenceContext;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -126,6 +127,12 @@ public class BeyonderUtilMixin {
     private static void injectCustomSequences(LivingEntity living, CallbackInfoReturnable<Integer> cir) {
         if (living == null) {
             cir.setReturnValue(10);
+            return;
+        }
+        // While BeyonderEntityData is picking which abilities a mob may use, let LOTM resolve the
+        // sequence itself so it comes from the /beyonderentity registration rather than the map
+        // below. See BeyonderEntityDataMixin.
+        if (MobAbilitySequenceContext.isSelectingAbilitiesFor(living)) {
             return;
         }
         Integer customSequence = ENTITY_SEQUENCE_MAP.get(living.getType());
