@@ -15,13 +15,13 @@
   ],
   "supplementary": [
     {
+      "item": "aquamirae:frozen_key"
+    },
+    {
       "item": "soulsweapons:darkin_blade"
     },
     {
-      "item": "monsterexpansion:skrythe_tail"
-    },
-    {
-      "item": "aquamirae:frozen_key"
+      "item": "born_in_chaos_v1:orbofthe_summoner"
     }
   ]
 }

@@ -57,6 +57,16 @@ minecraft {
             property 'forge.enabledGameTestNamespaces', mod_id
         }
 
+        // A second dev client, for testing anything that needs two players in the world at once —
+        // profile regression and the characteristic drop, which both return early on a self-kill.
+        // Needs its own username (two 'Dev' players cannot share a world) and its own working
+        // directory, so the two instances do not fight over run/logs and run/options.txt.
+        client2 {
+            parent runs.client
+            workingDirectory project.file('run2')
+            args '--username', 'Dev2'
+        }
+
         server {
             property 'forge.enabledGameTestNamespaces', mod_id
             args '--nogui'
@@ -144,11 +154,9 @@ dependencies {
     //Legendary Monsters
     implementation fg.deobf("curse.maven:legendarymonsters-944035:8312236")
     //LOTMC
-    implementation fg.deobf("curse.maven:lord-of-the-mysteries-craft-1095869:8680807")
+    implementation fg.deobf("curse.maven:lord-of-the-mysteries-craft-1095869:8612406")
     //Marium's Soulslike Weaponry
     implementation fg.deobf("curse.maven:soulsweapons-632066:7321885")
-    //Monster Expansion
-    implementation fg.deobf("curse.maven:monsterexpansion-1336105:7388120")
     //Mowzie's Mobs
     implementation fg.deobf("curse.maven:mowziesmobs-250498:7815705")
     //Mutant Monsters
