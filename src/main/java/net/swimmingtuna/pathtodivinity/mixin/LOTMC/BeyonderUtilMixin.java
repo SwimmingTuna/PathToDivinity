@@ -14,7 +14,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.soulsweaponry.registry.EntityRegistry;
 import net.swimmingtuna.lotm.util.BeyonderUtil;
-import net.swimmingtuna.pathtodivinity.MobAbilitySequenceContext;
+import net.swimmingtuna.pathtodivinity.PTDUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -129,59 +129,54 @@ public class BeyonderUtilMixin {
             cir.setReturnValue(10);
             return;
         }
-        // While BeyonderEntityData is picking which abilities a mob may use, let LOTM resolve the
-        // sequence itself so it comes from the /beyonderentity registration rather than the map
-        // below. See BeyonderEntityDataMixin.
-        if (MobAbilitySequenceContext.isSelectingAbilitiesFor(living)) {
-            return;
-        }
         Integer customSequence = ENTITY_SEQUENCE_MAP.get(living.getType());
         if (customSequence != null) {
             cir.setReturnValue(customSequence);
             return;
         }
-        String entityName = living.getName().getString().toLowerCase();
-        String className = living.getClass().getSimpleName();
+        // LOTM calls getSequence constantly, so the name checks below go through PTDUtil's
+        // cached trait bitmask rather than decomposing the display name Component every call.
+        int traits = PTDUtil.nameTraits(living);
 
         if (living instanceof Mob) {
-            if (entityName.contains("vessel")) {
+            if ((traits & PTDUtil.TRAIT_VESSEL) != 0) {
                 cir.setReturnValue(3);
                 return;
             }
-            if (entityName.equalsIgnoreCase("horseman")) {
+            if ((traits & PTDUtil.TRAIT_HORSEMAN) != 0) {
                 cir.setReturnValue(4);
                 return;
             }
-            if (entityName.contains("doomharbor")) {
+            if ((traits & PTDUtil.TRAIT_DOOMHARBOR) != 0) {
                 cir.setReturnValue(7);
                 return;
             }
-            if (entityName.contains("terrible") || entityName.contains("puny")) {
+            if ((traits & (PTDUtil.TRAIT_TERRIBLE | PTDUtil.TRAIT_PUNY)) != 0) {
                 cir.setReturnValue(8);
                 return;
             }
-            if (entityName.contains("plague_bringer")) {
+            if ((traits & PTDUtil.TRAIT_PLAGUE_BRINGER) != 0) {
                 cir.setReturnValue(7);
                 return;
             }
-            if (entityName.contains("aero_guardian")) {
+            if ((traits & PTDUtil.TRAIT_AERO_GUARDIAN) != 0) {
                 cir.setReturnValue(8);
                 return;
             }
-            if (entityName.contains("dyrolian")) {
+            if ((traits & PTDUtil.TRAIT_DYROLIAN) != 0) {
                 cir.setReturnValue(6);
                 return;
             }
         }
-        if (className.equals("VoidBlossomEntity")) {
+        if ((traits & PTDUtil.TRAIT_VOID_BLOSSOM) != 0) {
             cir.setReturnValue(6);
             return;
         }
-        if (className.equals("LichEntity")) {
+        if ((traits & PTDUtil.TRAIT_LICH) != 0) {
             cir.setReturnValue(7);
             return;
         }
-        if (className.equals("GauntletEntity")) {
+        if ((traits & PTDUtil.TRAIT_GAUNTLET) != 0) {
             cir.setReturnValue(7);
             return;
         }

@@ -20,5 +20,7 @@ public class PTDCommands {
 
     public static void onCommandRegistration(RegisterCommandsEvent event) {
         HealthValidateCommand.register(event.getDispatcher());
+        SequenceLockCommand.register(event.getDispatcher());
+        BeyonderProfileCommand.register(event.getDispatcher());
     }
 }

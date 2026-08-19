@@ -24,7 +24,10 @@ import net.swimmingtuna.lotm.util.BeyonderUtil;
 import org.thecelestialworkshop.celestisynth.common.registry.CSItems;
 
 import java.util.HashSet;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class PTDUtil {
 
@@ -125,19 +128,78 @@ public class PTDUtil {
     }
 
 
+    // Some mobs are identified by their display name or class name rather than by EntityType,
+    // because the mods they come from either register several bosses under one type or expose no
+    // usable registry object. Deriving that from Component#getString every time is expensive:
+    // for a mob without a custom name it decomposes a TranslatableContents into a fresh
+    // StringBuilder and String, and toLowerCase allocates another. Doing that per entity per tick
+    // was the mod's single largest source of garbage on the server, so the answer is cached below
+    // as a bitmask. Comments are equal to sequence.
+    public static final int TRAIT_VESSEL = 1;               //3
+    public static final int TRAIT_HORSEMAN = 1 << 1;        //4
+    public static final int TRAIT_DOOMHARBOR = 1 << 2;      //7
+    public static final int TRAIT_TERRIBLE = 1 << 3;        //8
+    public static final int TRAIT_PUNY = 1 << 4;            //8
+    public static final int TRAIT_TERRIBLE_TEN = 1 << 5;
+    public static final int TRAIT_PLAGUE_BRINGER = 1 << 6;  //7
+    public static final int TRAIT_AERO_GUARDIAN = 1 << 7;   //8
+    public static final int TRAIT_DYROLIAN = 1 << 8;        //6
+    public static final int TRAIT_VOID_BLOSSOM = 1 << 9;    //6
+    public static final int TRAIT_LICH = 1 << 10;           //7
+    public static final int TRAIT_GAUNTLET = 1 << 11;       //7
+    public static final int TRAIT_OBSIDILITH = 1 << 12;
+
+    /** Traits that on their own qualify an entity as a Beyonder entity. */
+    private static final int BEYONDER_NAME_TRAITS =
+            TRAIT_VESSEL | TRAIT_HORSEMAN | TRAIT_DOOMHARBOR | TRAIT_TERRIBLE | TRAIT_PUNY
+                    | TRAIT_PLAGUE_BRINGER | TRAIT_AERO_GUARDIAN | TRAIT_DYROLIAN
+                    | TRAIT_VOID_BLOSSOM | TRAIT_LICH | TRAIT_GAUNTLET;
+
+    // ConcurrentHashMap rather than HashMap: BeyonderUtil#getSequence reaches nameTraits from the
+    // client thread as well as the server thread.
+    private static final Map<EntityType<?>, Integer> TYPE_NAME_TRAITS = new ConcurrentHashMap<>();
+
+    /**
+     * Name- and class-based traits of an entity, as a bitmask of the TRAIT_* constants.
+     *
+     * <p>For an entity without a custom name the traits are a pure function of its EntityType, so
+     * the name is decomposed once per type for the lifetime of the server. Custom-named entities
+     * are re-evaluated every call, so renaming a mob with a name tag is still picked up.
+     */
+    public static int nameTraits(Entity entity) {
+        if (entity.hasCustomName()) {
+            return computeNameTraits(entity);
+        }
+        return TYPE_NAME_TRAITS.computeIfAbsent(entity.getType(), type -> computeNameTraits(entity));
+    }
+
+    /** True when the entity has any of the traits in {@code mask}. */
+    public static boolean hasTrait(Entity entity, int mask) {
+        return (nameTraits(entity) & mask) != 0;
+    }
+
+    private static int computeNameTraits(Entity entity) {
+        String entityName = entity.getName().getString().toLowerCase(Locale.ROOT);
+        String className = entity.getClass().getSimpleName();
+        int traits = 0;
+        if (entityName.contains("vessel")) traits |= TRAIT_VESSEL;
+        if (entityName.equals("horseman")) traits |= TRAIT_HORSEMAN;
+        if (entityName.contains("doomharbor")) traits |= TRAIT_DOOMHARBOR;
+        if (entityName.contains("terrible")) traits |= TRAIT_TERRIBLE;
+        if (entityName.contains("puny")) traits |= TRAIT_PUNY;
+        if (entityName.contains("terrible_ten")) traits |= TRAIT_TERRIBLE_TEN;
+        if (entityName.contains("plague_bringer")) traits |= TRAIT_PLAGUE_BRINGER;
+        if (entityName.contains("aero_guardian")) traits |= TRAIT_AERO_GUARDIAN;
+        if (entityName.contains("dyrolian")) traits |= TRAIT_DYROLIAN;
+        if (className.equals("VoidBlossomEntity")) traits |= TRAIT_VOID_BLOSSOM;
+        if (className.equals("LichEntity")) traits |= TRAIT_LICH;
+        if (className.equals("GauntletEntity")) traits |= TRAIT_GAUNTLET;
+        if (className.equals("ObsidilithEntity")) traits |= TRAIT_OBSIDILITH;
+        return traits;
+    }
+
     private static boolean matchesNameBasedConditions(Entity entity) {
-        String entityName = entity.getName().getString().toLowerCase();
-        String className = entity.getClass().getSimpleName(); //Comments are equal to sequence
-        if (entityName.contains("vessel")) return true; //3
-        if (entityName.equalsIgnoreCase("horseman")) return true;  //4
-        if (entityName.contains("doomharbor")) return true; //7
-        if (entityName.contains("terrible") || entityName.contains("puny")) return true; //8
-        if (entityName.contains("plague_bringer")) return true; //7
-        if (entityName.contains("aero_guardian")) return true; //8
-        if (entityName.contains("dyrolian")) return true; //6
-        if (className.equals("VoidBlossomEntity")) return true; //6
-        if (className.equals("LichEntity")) return true; //7
-        return className.equals("GauntletEntity"); //7
+        return (nameTraits(entity) & BEYONDER_NAME_TRAITS) != 0;
     }
 
     // Main method that checks both Set and name-based conditions
